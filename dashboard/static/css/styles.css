@@ -1,0 +1,168 @@
+#sidenav {
+background: #181725;
+/* max-width: 16em; */
+position: -webkit-sticky;
+position: sticky;
+top: 0;
+height: 100vh;
+}
+
+body{
+  color: white;
+}
+
+@media only screen and (max-width: 768px) {
+  #sidenav {
+    height: 48vh;
+    position:relative;
+  }
+}
+
+.menu {
+color: white;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+opacity: 80%;
+}
+
+.menutext {
+color: white;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+transition: all 0.25s;
+text-decoration: none;
+color: #fff;
+margin-top: 0.5em;
+}
+
+.menutext:hover {
+background: #11e497;
+border-radius: 0.3em;
+box-shadow: 0 0.5em 0.5em -0.4em rgb(29, 136, 8);
+cursor: pointer;
+color: #181725;
+}
+
+.menutext a {
+text-decoration: none;
+font-size: 0.8em;
+color: #818181;
+display: block;
+transition: 0.1s;
+}
+
+.menutext a:hover {
+color: #181725;
+text-decoration: none;
+}
+
+.dashtext {
+background: #11e497;
+border-radius: 0.3em;
+box-shadow: 0 0.5em 0.5em -0.4em rgb(29, 136, 8);
+}
+
+.dashtext a {
+color: #181725;
+}
+
+.accountconfig {
+color: white;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.accountconfig a {
+text-decoration: none;
+font-size: 1em;
+color: #818181;
+display: block;
+transition: 0.1s;
+}
+
+.accountconfig a:hover {
+color: #11e497;
+text-decoration: none;
+}
+
+.accountconfig2 {
+color: white;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.accountconfig2 a {
+text-decoration: none;
+font-size: 16px;
+color: #818181;
+display: block;
+transition: 0.1s;
+}
+
+.accountconfig2 a:hover {
+color: #11e497;
+text-decoration: none;
+}
+
+/* #dashsec1 {
+height: 50%;
+} */
+
+/* #biggraph {
+background: red;
+} */
+
+.biggraph {
+border-radius: 5px;
+border: solid #2d2d38 0.05px;
+}
+
+/* #focusimprovement {
+background: greenyellow;
+} */
+
+.improvementcontent {
+display: flex;
+flex-direction: column;
+align-items: start;
+background: #27272d;
+border-radius: 5px;
+color: white;
+border: solid #2d2d38 0.05px;
+}
+
+.improvementdata {
+/* border-top: #818181 solid 1px; */
+}
+
+.improvementdescription {
+/* border-top: #818181 solid 1px; */
+}
+
+/* #dashsec2 {
+height: 50%;
+} */
+
+/* #subjectbw {
+background: brown;
+} */
+
+.subcontent {
+color: white;
+border-radius: 5px;
+background: #27272d;
+}
+
+/* #blankfn {
+background: #818181;
+} */
+
+.mainbody{
+  background: #1A1A23;
+  color: white;
+}
+
+.recentperf{
+  background: #27272d;
+  border-radius: 5px;
+}
+
+.bestsubdescription{
+  padding-top: 1em;
+}
