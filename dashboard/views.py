@@ -6,6 +6,6 @@ from .models import *
 
 
 def index(request):
-    usernames = Username.objects.all()
-    context = {'usernames': usernames}
+    userinfo = User.objects.all()
+    context = {'userinfo': userinfo}
     return render(request, 'dashboard/index.html', context)
