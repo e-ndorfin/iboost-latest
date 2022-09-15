@@ -16,13 +16,22 @@ from django.db import models
 #         return self.username
 
 # Actual Code:
+class Subject(models.Model):
+    #Database fields
+    subjectname = models.CharField(max_length=30)
+    score = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.subjectname+" Score: "+str(self.score)
 
 class User(models.Model):
-    # Attributes of User:
+    # Database Fields
     username = models.CharField(max_length=30)
     grade = models.IntegerField(default=0)
-    # subject (ignore for now)
+    subjects = models.ManyToManyField(Subject)
+    # # subject (ignore for now)
 
     def __str__(self):
         return self.username+" "+str(self.grade)
+
+
