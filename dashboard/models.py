@@ -17,21 +17,19 @@ from django.db import models
 
 # Actual Code:
 class Subject(models.Model):
-    #Database fields
-    subjectname = models.CharField(max_length=30)
-    score = models.IntegerField(default=0)
+    # Database fields
+    subjectname = models.CharField(max_length=30, null=True)
+    score = models.IntegerField(default=0, null=True)
 
     def __str__(self):
-        return self.subjectname+" Score: "+str(self.score)
+        return self.subjectname
+
 
 class User(models.Model):
     # Database Fields
-    username = models.CharField(max_length=30)
-    grade = models.IntegerField(default=0)
+    username = models.CharField(max_length=30, null=True)
+    grade = models.IntegerField(default=0, null=True)
     subjects = models.ManyToManyField(Subject)
-    # # subject (ignore for now)
 
     def __str__(self):
-        return self.username+" "+str(self.grade)
-
-
+        return self.username
