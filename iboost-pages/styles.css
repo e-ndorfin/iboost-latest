@@ -26,10 +26,6 @@ body {
 	}
 }
 
-.close-button {
-	/* position: absolute;  */
-}
-
 .menu {
 	color: white;
 	font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva,
@@ -141,14 +137,6 @@ background: greenyellow;
 	border-radius: 5px;
 	color: white;
 	border: solid #2d2d38 0.05px;
-}
-
-.improvementdata {
-	/* border-top: #818181 solid 1px; */
-}
-
-.improvementdescription {
-	/* border-top: #818181 solid 1px; */
 }
 
 /* #dashsec2 {
