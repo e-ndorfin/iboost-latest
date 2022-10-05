@@ -5,6 +5,10 @@
 	height: 100vh;
 }
 
+.mainbody {
+	height: 100vh;
+}
+
 .bg-main {
 	background: #181725;
 	color: #181725;
@@ -19,10 +23,10 @@ body {
 		display: none;
 	}
 
-	body::before {
+	.mainbody::before {
 		display: block;
 		content: "";
-		height: 60px;
+		height: 80px;
 	}
 }
 
@@ -156,11 +160,6 @@ background: brown;
 /* #blankfn {
 background: #818181;
 } */
-
-.mainbody {
-	background: #1a1a23;
-	color: white;
-}
 
 .recentperf {
 	background: #27272d;
