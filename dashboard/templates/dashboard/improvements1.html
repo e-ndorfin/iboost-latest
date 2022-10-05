@@ -1,4 +1,4 @@
-{% extends 'C:\Users\w1nter\Documents\GitHub\iboost-latest\dashboard\templates\dashboard\base.html' %}
+{% extends 'dashboard/base.html' %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -88,7 +88,7 @@
                         </div>
                     </div>
                 </div> --> 
-    {% content block %}
+    {% block content %}
             <!--Content section starts here-->
             <div id="improvementscontent" class="mainbody col-md-10 pt-3">
                 <h1>Your Improvement Areas</h1>
@@ -131,7 +131,7 @@
                 </div>
             </div>
 
-    {% endblock %}
+    {% endblock content %}
         <!-- </div>
     </div>
 </body> -->
