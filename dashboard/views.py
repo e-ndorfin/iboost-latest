@@ -9,3 +9,9 @@ def index(request):
     userinfo = User.objects.all()
     context = {'userinfo': userinfo}
     return render(request, 'dashboard/index.html', context)
+
+def improvements(request):
+    return render(request,  'dashboard/improvements1.html',{})
+
+def base(request):
+    return render(request, 'dashboard/base.html', )
