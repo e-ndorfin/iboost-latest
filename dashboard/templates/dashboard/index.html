@@ -1,8 +1,9 @@
+{% extends 'dashboard/base.html' %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<!-- <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,21 +18,21 @@
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
-</head>
+</head> -->
 
 <body>
-    <div id="mastercontainer" class="container-fluid">
-        <div class="row">
+    <!-- <div id="mastercontainer" class="container-fluid">
+        <div class="row"> -->
             <!-- TOP nav -->
-            <nav class="navbar navbar-expand-md bg-main navbar-dark py-3 fixed-top d-md-none">
+            <!-- <nav class="navbar navbar-expand-md bg-main navbar-dark py-3 fixed-top d-md-none">
                 <div class="container navbar-container">
                     <a href="#" class="navbar-brand"><img src="{% static 'img/logo.png' %}" alt="IBOOST"
                             class="img-fluid w-50" style="max-width:10em"></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
                         <span class="navbar-toggler-icon"></span>
-                    </button>
+                    </button> -->
 
-                    <div class="collapse navbar-collapse" id="navmenu">
+                    <!-- <div class="collapse navbar-collapse" id="navmenu">
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
                                 <a href="index.html" class="nav-link">Dashboard</a>
@@ -48,9 +49,9 @@
                         </ul>
                     </div>
                 </div>
-            </nav>
+            </nav> -->
             <!-- SIDE nav -->
-            <div id="sidenav" class="col-md-2 invisible-md px-3 md-4 d-sticky bg-main">
+            <!-- <div id="sidenav" class="col-md-2 invisible-md px-3 md-4 d-sticky bg-main">
                 <div class="d-flex flex-column">
                     <div class="p-2"></div>
                     <div class="p-2">
@@ -87,8 +88,9 @@
                         <a href="#">Log out</a>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- Content starts here -->
+            {% block content %}
             <div class="mainbody container-fluid col-md-10 px-3">
                 <div id="dashsec1" class="row">
                     <div id="biggraph" class="col-12 col-lg-7 p-2 mt-3">
@@ -155,7 +157,8 @@
                     </div>
                 </div>
             </div>
-        </div>
+            {% endblock content %}
+        <!-- </div> -->
 </body>
 
 </html>
