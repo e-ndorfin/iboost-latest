@@ -170,3 +170,18 @@ background: #818181;
 .bestsubdescription {
   padding-top: 1em;
 }
+
+#improvement{
+  color: white;
+  border-radius: 10px;
+}
+
+.improvementdata{
+  border-radius: 10px;
+}
+
+.improvement{
+  background: #27272d;
+  border-radius: 5px;
+  padding: 1em;
+}
