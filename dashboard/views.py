@@ -15,3 +15,6 @@ def improvements(request):
 
 def base(request):
     return render(request, 'dashboard/base.html', )
+
+def grades(request): 
+    return render(request, 'dashboard/grades.html')

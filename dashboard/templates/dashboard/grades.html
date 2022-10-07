@@ -1,0 +1,72 @@
+{% extends 'dashboard/base.html' %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+	</head>
+	<body>
+		{% block content %}
+		<div class="mainbody col-md-10 pt-3">
+			<div class="container">
+				<div class="col-md-3 p-4 bg-form" style="border-radius: 2rem">
+					<form>
+						<div class="form-group mb-4">
+							<label class="text-light lead" for="subject">Subject</label>
+							<input
+								type="text"
+								class="form-control bg-form-box"
+								id="subject"
+								placeholder="Select"
+							/>
+						</div>
+
+						<div class="form-group my-4">
+							<label class="text-light lead" for="overall-achievement">Overall achievement</label>
+							<input
+								type="number"
+								class="form-control bg-form-box"
+								id="overall-achievement"
+								placeholder="eg. 6, 7, 8"
+							/>
+						</div>
+
+						<div class="form-group my-4">
+							<label class="text-light lead" for="criterions">Individual criterions</label>
+							<input
+								type="number"
+								class="form-control my-2 bg-form-box"
+								id="criterion-a"
+								placeholder="Criterion A"
+							/>
+							<input
+								type="number"
+								class="form-control my-2 bg-form-box"
+								id="criterion-b"
+								placeholder="Criterion B"
+							/>
+							<input
+								type="number"
+								class="form-control my-2 bg-form-box"
+								id="criterion-c"
+								placeholder="Criterion C"
+							/>
+							<input
+								type="number"
+								class="form-control my-2 bg-form-box"
+								id="criterion-d"
+								placeholder="Criterion D"
+							/>
+						</div>
+
+						<div class="form-check my-3">
+							<input type="checkbox" class="form-check-input" id="exampleCheck1" />
+							<label class="form-check-label" for="exampleCheck1">I hereby agree to...</label>
+						</div>
+						<button type="submit" class="btn btn-warning">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		{% endblock content %}
+	</body>
+</html>
