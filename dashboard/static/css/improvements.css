@@ -1,0 +1,9 @@
+.improvact {
+	background: #11e497;
+	border-radius: 0.3em;
+	box-shadow: 0 0.5em 0.5em -0.4em rgb(29, 136, 8);
+}
+
+.improvact a {
+	color: #181725;
+}

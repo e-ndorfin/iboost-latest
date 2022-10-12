@@ -2,7 +2,6 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <!-- <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -91,6 +90,9 @@
             </div> -->
             <!-- Content starts here -->
             {% block content %}
+            <head>
+                <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+            </head>
             <div class="mainbody container-fluid col-md-10 px-3">
                 <div id="dashsec1" class="row">
                     <div id="biggraph" class="col-12 col-lg-7 p-2 mt-3">
