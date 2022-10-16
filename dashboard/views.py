@@ -24,3 +24,6 @@ def improvements2(request):
 
 def improvements3(request):
     return render(request, 'dashboard/improvements3.html')
+
+def profile(request):
+    return render(request, 'dashboard/profile.html',)
