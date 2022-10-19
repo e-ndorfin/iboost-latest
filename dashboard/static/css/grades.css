@@ -7,3 +7,10 @@
 .gradeact a {
 	color: #181725;
 }
+
+.body{
+	background: rgba(0, 0, 0, 0.9);
+	margin: 0;
+	color: #fff;
+}
+
