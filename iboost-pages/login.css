@@ -1,0 +1,84 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+@media only screen and (max-width: 580px) {
+	.side-image {
+		/* display: none; */
+		width: 20%;
+		max-width: 20%;
+	}
+
+	.main-login {
+		width: 80% !important;
+		max-width: 80% !important;
+	}
+}
+
+#signupBox {
+	background: white;
+	width: 50px;
+	height: 50px;
+}
+
+.side-image {
+	width: 50%;
+	max-width: 50%;
+	/* border: 5px solid black; */
+	background-size: cover;
+	background-position: center;
+	background-image: url("https://cdn.discordapp.com/attachments/828968006980730962/994893190857502750/2869886.webp");
+}
+
+@media only screen and (max-width: 600px) {
+	.side-image {
+		display: none;
+	}
+
+	.main-login {
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+}
+
+body {
+	font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode",
+		"Geneva", "Verdana", "sans-serif";
+}
+
+.main-page {
+	height: 100vh;
+	border: 3px solid #11e497;
+	display: flex;
+}
+
+.main-login {
+	background-color: black;
+	/* border: 5px solid red; */
+	width: 50%;
+	max-width: 50%;
+	padding-left: 30px;
+	color: white;
+	/* display: flex; */
+}
+
+.main-text {
+	font-size: 5em;
+	font-weight: 600;
+	/* position: relative; */
+	/* width: 1em; */
+}
+
+.subtitle {
+	font-size: 2em;
+	/* position: relative; */
+}
+
+/* 
+/* .side-image{ 
+    height: 100%; 
+    width: 50%; 
+    border: 5px solid black; 
+} */
