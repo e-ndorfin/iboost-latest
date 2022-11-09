@@ -21,7 +21,7 @@
     </head>
     
     
-    <div id="mastercontainer blur" class="container-fluid">
+    <div id="mastercontainer blur" class="container-fluid fr">
             <div class="row">
                 <!-- TOP nav -->
                 <nav class="navbar navbar-expand-md bg-main navbar-dark py-3 fixed-top d-md-none">
@@ -63,12 +63,13 @@
                                     class="img-fluid"
                                     style="max-width:3em; max-height: 2em; padding: 0em 0.5em 0.2em 0em;">Dashboard</a>
                         </div>
-                        <div class="p-2 menutext gradeact"><a href="/grades"><img src="{% static 'img/grades.png' %}" alt="d"
-                                    class="img-fluid"
+                        <div class="p-2 menutext gradeact"><a href="/grades" onclick="toggle()"><img src="{% static 'img/grades.png' %}" alt="d"
+                                    class="img-fluid" 
                                     style="max-width:3em; max-height: 2em; padding: 0em 0.5em 0.2em 0em;">Grades</a></div>
                         <script type="text/javascript">
                             function toggle(){
-                                var blur = document.getElementById ('blur')
+                                var blur = document.getElementById ('blur');
+                                blur.classList.toggle('active')
                             }
                         </script>
                         <div class="p-2 menutext improvact"><a href="/improvements"><img

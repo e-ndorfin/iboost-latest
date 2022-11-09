@@ -196,3 +196,9 @@ background: #818181;
 	border-radius: 5px;
 	padding: 1em;
 }
+
+.fr{}
+
+.fr#blur.active{
+	filter: blur(20px);
+}  
