@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="login.css" />
+		<title>Sign-Up</title>
+	</head>
+
+	<body>
+		<div class="main-page">
+			<div class="side-image"></div>
+			<div class="main-login">
+				<div class="d-flex flex-column justify-content-center" style="height: 100%">
+					<img src="img/logo_icon.png" class="pb-4" style="width: 100px;">
+					<div class="main-text p-2">iBoost.</div>
+					<div class="subtitle p-2">Improvements for you.</div>
+					<div class="container-fluid mt-3 mb-5">
+						<div class="row">
+							<div class="login-form col-12 col-md-8">
+								<form>
+									<div class="form-group">
+										<label>Email</label>
+										<input id="email" type="email" class="form-control" placeholder="Email" />
+									</div>
+									<div class="form-group">
+										<label>Password</label>
+										<input
+											id="password"
+											type="password"
+											class="form-control"
+											placeholder="Password"
+										/>
+									</div>
+									<button onclick="login()" type="button" class="btn btn-secondary" id="login">
+										Login
+									</button>
+									<div
+										class="btn main-color"
+										data-toggle="modal"
+										data-target="#signupBox"
+										onclick="signup()"
+									>
+										Register
+									</div>
+								</form>
+							</div>
+						</div>
+						<!-- Modal -->
+						<div
+							class="modal fade"
+							id="signupBox"
+							tabindex="-1"
+							role="dialog"
+							aria-labelledby="exampleModalCenterTitle"
+							aria-hidden="true"
+						>
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content bg-dark">
+									<div class="modal-header" style="border: 0; padding: 0">
+										<button
+											type="button"
+											class="close p-4"
+											data-dismiss="modal"
+											aria-label="Close"
+											style="color: white"
+										>
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<div class="container">
+											<form class="justify-content-center">
+												<div class="row">
+													<div class="col-sm form-group">
+														<label>Username</label>
+														<input type="text" id='username' class="form-control" placeholder="Username">
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-sm form-group">
+														<label>Email</label>
+														<input id="email" type="email" class="form-control" placeholder="Email"/>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-sm form-group">
+														<label>Password</label>
+														<input
+															id="password"
+															type="password"
+															class="form-control"
+															placeholder="Password"
+														/>
+													</div>
+												</div>
+											</form>
+												
+											</form>
+											<div class="row justify-content-center">
+												<div
+													class="btn main-color"
+													data-toggle="modal"
+													data-target="#signupBox"
+													onclick="signup()"
+												>
+													Signup
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- <div class="modal-footer"> -->
+									<!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+									<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+									<!-- </div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- <div id="signupBox" class="bg-light"></div> -->
+		</div>
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+			crossorigin="anonymous"
+		></script>
+		<script src="login.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/9.9.1/firebase-app-compat.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/9.9.1/firebase-firestore-compat.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/9.9.1/firebase-auth-compat.js"></script>
+		<script type="" src="register.js"></script>
+		<script type="module" src="auth_state_listener.js"></script>
+	</body>
+</html>
