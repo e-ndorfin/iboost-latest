@@ -137,7 +137,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 SITE_ID = 3
-LOGIN_REDIRECT_URL = '/dashboard/index.html'
+LOGIN_REDIRECT_URL = '/index.html'
 LOGOUT_REDIRECT_URL = '/'
 
 # Default primary key field type
