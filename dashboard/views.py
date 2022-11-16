@@ -27,3 +27,10 @@ def improvements3(request):
 
 def profile(request):
     return render(request, 'dashboard/profile.html',)
+
+def testing(request):
+    grades = Grade.objects.all()
+    return render(request, 'dashboard/testing.html', {'grades':grades})
+    subjectname = Subject.objects.all()
+    return render(request, 'dashboard/testing.html', {'subjectname':subjectname})
+    
