@@ -30,7 +30,6 @@ def profile(request):
 
 def testing(request):
     grades = Grade.objects.all()
-    return render(request, 'dashboard/testing.html', {'grades':grades})
     subjectname = Subject.objects.all()
-    return render(request, 'dashboard/testing.html', {'subjectname':subjectname})
+    return render(request, 'dashboard/testing.html', {'grades':grades,'subjectname':subjectname},)
     
