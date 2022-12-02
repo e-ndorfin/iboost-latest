@@ -1,8 +1,30 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.views.generic import TemplateView
+from chartjs.views.lines import BaseLineChartView
 
 from .models import *
 # Create your views here.
+
+class LineChartJSONView(BaseLineChartView):
+    def get_labels(self):
+        """Return 7 labels for the x-axis."""
+        return ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+    def get_providers(self):
+        """Return names of datasets."""
+        return ["English", "Chinese", "Chemistry"]
+
+    def get_data(self):
+        """Return 3 datasets to plot."""
+
+        return [[0,0,0,4,6,5,7,4,4,4,6,7],
+            [0,0,0,4,5,6,7,4,7,4,7,8,8],
+            [0,0,0,5,7,4,6,7,8,8,8,8,8]]
+
+
+line_chart = TemplateView.as_view(template_name='line_chart.html')
+line_chart_json = LineChartJSONView.as_view()  
 
 
 def index(request):
@@ -43,3 +65,4 @@ def testing(request):
     grades = Grade.objects.all()
     subjectname = Subject.objects.all()
     return render(request, 'dashboard/testing.html', {'grades': grades, 'subjectname': subjectname},)
+
