@@ -1,0 +1,221 @@
+{% extends 'dashboard/grbase.html' %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+	</head>
+
+	<body>
+		{% block content %}
+		<div class="container-fluid mainbody col-md-10 p-5">
+			<div class="row">
+				<div class="col-8">
+					<h1> Your <strong>Chinese</strong> Grades.</h1>
+				</div>
+				<div class="d-flex mb-2 col-4 justify-content-end align-items-center">
+					<div class="btn bg-primary text-light" data-toggle="modal" data-target="#signupBox">
+						ADD GRADES
+					</div>
+				</div>
+			</div>
+
+
+			<div class="row mt-4">
+				<div class="px-4 py-3 col-5 border border-primary rounded">
+					<p class="font-weight-bold lead d-block" style=>YOUR Performance</p>
+					<canvas id="myChart"></canvas>
+
+					<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+					<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+					<script type="text/javascript">
+						$.get('{% url "line_chart_json" %}', function (data) {
+							var ctx = $("#myChart").get(0).getContext("2d");
+							new Chart(ctx, {
+								type: "line",
+								data: data,
+							});
+						});
+					</script>
+					{% comment %}
+					<img src="{% static 'img/empty.png' %}" class="border border-danger img-fluid" alt="" />
+					{% endcomment %}
+				</div>
+				
+				<div class="col-2 px-1 py-1 ms-auto me-1 border border-primary rounded">
+					<p class="lead text-light">Pie Chart</p>
+				</div>
+
+				<div class="col-4 px-4 py-3 ms-auto me-1 border border-primary rounded overflow-auto" style="max-height: 25em;">
+					<p class="lead text-light">Todo</p>
+					<div class="px-3 py-3 border border-primary rounded">
+						<p class="lead text-light">Write essay</p>
+					</div>
+					<div class="pt-md-3"></div>
+					<div class="px-3 py-3 border border-primary rounded">
+						<p class="lead text-light">Send email</p>
+					</div>
+					<div class="pt-md-3"></div>
+					<div class="px-3 py-3 border border-primary rounded">
+						<p class="lead text-light">Titus works on backend</p>
+					</div>
+					<div class="pt-md-3"></div>
+					<div class="px-3 py-3 border border-primary rounded">
+						<p class="lead text-light">Goblin</p>
+					</div>
+					<div class="pt-md-3"></div>
+					<div class="px-3 py-3 border border-primary rounded">
+						<p class="lead text-light">I want to eat some popeyes	</p>
+					</div>
+
+				</div>	
+
+				
+
+			</div>
+
+
+
+			<div class="row mt-4">
+				<div class="col-4 px-4 py-3 border border-primary rounded overflow-auto" style="max-height: 20em;">
+					<p class="lead font-weight-bold d-block">Upcoming Tests</p>
+					<div class="px-3 py-3 border border-primary rounded">
+						<p class="lead text-light">Write essay</p>
+					</div>
+					<div class="pt-md-3"></div>
+					<div class="px-3 py-3 border border-primary rounded">
+						<p class="lead text-light">Send email</p>
+					</div>
+					<div class="pt-md-3"></div>
+					<div class="px-3 py-3 border border-primary rounded">
+						<p class="lead text-light">Titus works on backend</p>
+					</div>
+					<div class="pt-md-3"></div>
+					<div class="px-3 py-3 border border-primary rounded">
+						<p class="lead text-light">Goblin</p>
+					</div>
+					<div class="pt-md-3"></div>
+					<div class="px-3 py-3 border border-primary rounded">
+						<p class="lead text-light">I want to eat some popeyes	</p>
+					</div>
+				</div>
+				<div class="col-7 ms-auto me-1 px-4 py-3 border border-primary rounded">
+					<p class="lead font-weight-bold d-block">Recent Test</p>
+					<div class="row">
+						<div class="col-5">
+							<h6>Grades</h6>
+							<div class="border border-primary rounded" style="height: 100px"></div>
+						</div>
+						<div class="col-7">
+							<h6>Student Reflection Record</h6>
+							<div id="carouselExampleControls" class="carousel slide border border-primary rounded px-5 py-5" data-ride="carousel">
+								<div class="carousel-inner">
+								  <div class="carousel-item active px-4 py-4">
+									  <h4 style="color: #fff;">I hate chinese.</h4>
+									  <p>TEXT</p>
+								  </div>
+								  <div class="carousel-item  px-4 py-4">
+									<h4 style="color: #fff;">I dislike chinese.</h4>
+									  <p>TEXT</p>
+								  </div>
+								  <div class="carousel-item px-4 py-4">
+									<h4 style="color: #fff;">Chinese is alright.</h4>
+									  <p>TEXT</p>
+								  </div>
+								  <div class="carousel-item px-4 py-4">
+									<h4 style="color: #fff;">I enjoy chinese.</h4>
+									  <p>TEXT</p>
+								  </div>
+								  <div class="carousel-item px-4 py-4">
+									<h4 style="color: #fff;">I love Chinese.</h4>
+									  <p>TEXT</p>
+								  </div>
+								</div>
+								<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev" >
+								  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								</a>
+								<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+								  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+								</a>
+							  </div>
+							  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+							  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{% comment %}
+		<div class="mainbody container-fluid col-md-10 px-3 containerfr" id="blur">
+			<div id="dashsec1" class="row">
+				<div id="biggraph" class="col-12 col-lg-7 p-2 mt-3">
+					<div class="container">
+						<div class="pt-lg-5"></div>
+						<div class="recentperf p-3">
+							<h1>Recent Performance</h1>
+							<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
+						</div>
+					</div>
+				</div>
+				<div id="focusimprovement" class="col-lg-5 p-3 align-items-center">
+					<h1>Improvement Area</h1>
+					<div class="improvementcontent p-4">
+						<h3 class="improvementtitle">Focus Area Title</h3>
+						<div class="improvementdata">
+							<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
+						</div>
+						<div class="improvementdescription pt-1">
+							Focus area description Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius,
+							distinctio qui. Architecto quidem doloremque dolorem rem eos alias sapiente quaerat
+							atque repudiandae, distinctio officia non veritatis provident iste ducimus rerum?
+						</div>
+					</div>
+				</div>
+				<div id="dashsec2" class="row pt-5">
+					<div id="subjectbw" class="col-12">
+						<div class="container-fluid p-0">
+							<div class="row m-1">
+								<div class="col-4 bestsub mb-3">
+									<div class="subcontent p-3">
+										<h3 class="subtitle">Best Subject</h3>
+										<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
+										<div class="bestsubdescription">
+											Best subject description Lorem, ipsum dolor sit amet consectetur adipisicing
+											elit. Nisi quam laudantium, libero deserunt possimus
+										</div>
+									</div>
+								</div>
+								<div class="col-4 worstsub mb-3">
+									<div class="subcontent p-3">
+										<h3 class="subtitle">Worst Subject</h3>
+										<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
+										<div class="bestsubdescription">
+											Worst subject description Lorem, ipsum dolor sit amet consectetur adipisicing
+											elit. Nisi quam laudantium, libero deserunt possimus
+										</div>
+									</div>
+								</div>
+								<div class="col-4 worstsub">
+									<div class="subcontent p-3">
+										<h4 class="subtitle">Most Improved Subject</h4>
+										<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
+										<div class="bestsubdescription">
+											Improved subject description Lorem, ipsum dolor sit amet consectetur
+											adipisicing elit. Nisi quam laudantium, libero deserunt possimus
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endcomment %} {% endblock content %}
+		<!-- </div> -->
+	</body>
+</html>

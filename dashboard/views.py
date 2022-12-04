@@ -66,3 +66,6 @@ def testing(request):
     subjectname = Subject.objects.all()
     return render(request, 'dashboard/testing.html', {'grades': grades, 'subjectname': subjectname},)
 
+
+def chineseg(request):
+    return render(request, 'dashboard/chinese.html')

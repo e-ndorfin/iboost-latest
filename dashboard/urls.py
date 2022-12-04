@@ -14,4 +14,5 @@ urlpatterns = [
     path('testing/', views.testing, name='testing'),
     path('chart', line_chart, name='line_chart'), 
     path('chartJSON', line_chart_json, name='line_chart_json'),
+    path('chineseg/', views.chineseg, name="chineseg")
 ]

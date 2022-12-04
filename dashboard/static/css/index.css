@@ -7,3 +7,14 @@
 .indexact a {
 	color: #181725;
 }
+
+
+  .carousel{
+	margin-top: 50px;
+  }
+  .carousel-inner{
+	height: 100px;
+  }
+  .carousel-caption{
+	color: #fff;
+  }
