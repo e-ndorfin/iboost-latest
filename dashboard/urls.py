@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import line_chart, line_chart_json 
+from .views import line_chart, line_chart_json
 
 urlpatterns = [
     path('index/', views.index, name="index"),
@@ -12,7 +12,8 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('login/', views.login, name='login'),
     path('testing/', views.testing, name='testing'),
-    path('chart', line_chart, name='line_chart'), 
+    path('chart', line_chart, name='line_chart'),
     path('chartJSON', line_chart_json, name='line_chart_json'),
-    path('chineseg/', views.chineseg, name="chineseg")
+    path('chineseg/', views.chineseg, name="chineseg"),
+    path('register/', views.registerUserForm, name="register"),
 ]
