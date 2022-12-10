@@ -140,7 +140,81 @@
 					</div>
 				</div>
 			</div>
-			{% block content %} {% endblock content %}
+			<div class="container-fluid mainbody col-md-10 p-5">
+				<div class="row">
+					<div class="col-8">
+						{% block content %}
+						{% endblock content %}
+					</div>
+					<div class="d-flex mb-2 col-4 justify-content-end align-items-center">
+						<div class="btn bg-primary text-light" data-toggle="modal" data-target="#signupBox">
+							ADD GRADES
+						</div>
+					</div>
+				</div>
+	
+	
+				<div class="row mt-4">
+					<div class="px-4 py-3 col-5 border border-primary rounded">
+						<p class="font-weight-bold lead d-block" style=>YOUR Performance</p>
+						<canvas id="myChart"></canvas>
+	<!-- Grades graph -->
+						{% block content2 %}
+
+						{% endblock content2 %}
+						{% comment %}
+						<img src="{% static 'img/empty.png' %}" class="border border-danger img-fluid" alt="" />
+						{% endcomment %}
+					</div>
+					
+					<div class="col-2 px-1 py-1 ms-auto me-1 border border-primary rounded">
+						{% block content3 %}
+
+						{% endblock content3 %}
+					</div>
+	
+					<div class="col-4 px-4 py-3 ms-auto me-1 border border-primary rounded overflow-auto" style="max-height: 25em;">
+						<!-- To do list -->
+						{% block content4 %}
+		
+						{% endblock content4 %}
+	
+					</div>	
+	
+					
+	
+				</div>
+	
+	
+	
+				<div class="row mt-4">
+					<div class="col-4 px-4 py-3 border border-primary rounded overflow-auto" style="max-height: 20em;">
+						<!-- upcoming tests -->
+						{% block content5 %}
+						{% endblock content5 %}
+					</div>
+					<div class="col-7 ms-auto me-1 px-4 py-3 border border-primary rounded">
+						<p class="lead font-weight-bold d-block">Recent Test</p>
+						<div class="row">
+							<div class="col-5">
+								<h6>Grades</h6>
+								<!-- grades from recent tests -->
+								{% block content6 %}
+
+								{% endblock content6 %}
+							</div>
+							<div class="col-7">
+								<h6>Student Reflection Record</h6>
+								{% block content7 %}
+		
+								{% endblock content7 %}
+						</div>
+					</div>
+				</div>
+			</div>
+	
+			
+			
 		</div>
 	</div>
 </html>
