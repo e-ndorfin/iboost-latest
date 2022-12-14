@@ -6,8 +6,9 @@ from django.contrib import messages
 from django.views.generic import TemplateView
 from chartjs.views.lines import BaseLineChartView
 
-from .models import *
 # Create your views here.
+from .models import *
+from .forms import RegisterUserForm
 
 
 class LineChartJSONView(BaseLineChartView):
@@ -32,19 +33,20 @@ line_chart_json = LineChartJSONView.as_view()
 
 
 def index(request):
-    userinfo = User.objects.all()
+    userinfo = Profile.objects.all()
     context = {'userinfo': userinfo}
     return render(request, 'dashboard/index.html', context)
 
 
-# Register Request (3 Fields: username, password1, password2)
+# Register Request (4 Fields: username, email, password1, password2)
 def registerUserForm(request):
-    form = UserCreationForm()
+    form = RegisterUserForm()
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegisterUserForm(request.POST)
         if form.is_valid():  # If the password is valid, save
             form.save()
-            print("saved")
+            username = form.cleaned_data.get('username')
+            messages.success(request, 'Account was created for ' + username)
     context = {'form': form}
     return render(request, 'dashboard/register.html', context)
 

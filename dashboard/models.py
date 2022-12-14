@@ -56,7 +56,7 @@ class Subject(models.Model):
         return self.subjectname
 
 
-class User(models.Model):
+class Profile(models.Model):
     # Database Fields
     username = models.CharField(max_length=30, null=True)
     userid = models.IntegerField(default=0, null=True)
