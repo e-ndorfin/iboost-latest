@@ -51,6 +51,7 @@ class Subject(models.Model):
     # User has a "One to Many" relationship with Subject, as one User can have multiple subjects,while the opposite is not the case
     subjectname = models.CharField(max_length=30, null=True)
     grades = models.ForeignKey(Grade, null=True, on_delete=models.CASCADE)
+    srr = models.TextField(max_length=1000, null=True)
 
     def __str__(self):
         return self.subjectname
@@ -60,7 +61,7 @@ class Profile(models.Model):
     # Database Fields
     username = models.CharField(max_length=30, null=True)
     userid = models.IntegerField(default=0, null=True)
-    subject = models.ForeignKey(Subject, null=True, on_delete=models.CASCADE)
+    subjects = models.ForeignKey(Subject, null=True, on_delete=models.CASCADE)
     # subjects = models.ManyToManyField(Subject)
 
     def __str__(self):
