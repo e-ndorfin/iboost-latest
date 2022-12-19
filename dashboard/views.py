@@ -111,3 +111,6 @@ def testing(request):
 @login_required(login_url='register')
 def chineseg(request):
     return render(request, 'dashboard/chinese.html')
+
+def modaltest(request):
+    return render(request, 'dashboard/modaltest.html',)
