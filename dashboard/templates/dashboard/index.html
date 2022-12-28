@@ -1,141 +1,139 @@
 {% extends 'dashboard/base.html' %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+	</head>
 
-<head>
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<link rel="stylesheet" href="{% static 'css/index.css' %}" />
-</head>
-
-<body>
-	{% block content %}
-	<div class="container-fluid mainbody col-md-10 p-5">
-		<div class="row">
-			<div class="col-8">
-				<h1>Welcome, <strong>{{request.user}}</strong>.</h1>
-			</div>
-			<div class="d-flex mb-2 col-4 justify-content-end align-items-center">
-				<div class="btn text-light addgrades" data-toggle="modal" data-target="#signupBox">
-					ADD GRADES
+	<body>
+		{% block content %}
+		<div class="container-fluid mainbody col-md-10 p-5">
+			<div class="row">
+				<div class="col-8">
+					<h1>Welcome, <strong>{{request.user}}</strong>.</h1>
+				</div>
+				<div class="d-flex mb-2 col-4 justify-content-end align-items-center">
+					<div class="btn text-light addgrades" data-toggle="modal" data-target="#signupBox">
+						ADD GRADES
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row mt-4">
-			<div class="px-4 py-3 col-8 border bordcol-overrides rounded">
-				<p class="font-weight-bold lead d-block">YOUR Performance</p>
-				<canvas id="myChart"></canvas>
+			<div class="row mt-4">
+				<div class="px-4 py-3 col-8 border rounded">
+					<p class="font-weight-bold lead d-block">YOUR Performance</p>
+					<canvas id="myChart"></canvas>
 
-				<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
-				<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
-				<script type="text/javascript">
-					$.get('{% url "line_chart_json" %}', function (data) {
-						var ctx = $("#myChart").get(0).getContext("2d");
-						new Chart(ctx, {
-							type: "line",
-							data: data,
+					<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+					<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+					<script type="text/javascript">
+						$.get('{% url "line_chart_json" %}', function (data) {
+							var ctx = $("#myChart").get(0).getContext("2d");
+							new Chart(ctx, {
+								type: "line",
+								data: data,
+							});
 						});
-					});
-				</script>
-				{% comment %}
-				<img src="{% static 'img/empty.png' %}" class="border border-danger img-fluid" alt="" />
-				{% endcomment %}
+					</script>
+					{% comment %}
+					<img src="{% static 'img/empty.png' %}" class="border border-danger img-fluid" alt="" />
+					{% endcomment %}
+				</div>
+				<div class="col-3 px-4 py-3 ms-auto me-1 border rounded">
+					<p class="lead text-light">Todo</p>
+				</div>
 			</div>
-			<div class="col-3 px-4 py-3 ms-auto me-1 border bordcol-overrides rounded">
-				<p class="lead text-light">Todo</p>
-			</div>
-		</div>
 
-		<div class="row mt-4">
-			<div class="col-4 px-4 py-3 border bordcol-overrides rounded">
-				<p class="lead font-weight-bold d-block">Leaderboard</p>
-			</div>
-			<div class="col-7 ms-auto me-1 px-4 py-3 border bordcol-overrides rounded">
-				<p class="lead font-weight-bold d-block">Recent Test</p>
-				<div class="row">
-					<div class="col-5">
-						<h6>Subject</h6>
-						<div class="border bordcol-overrides rounded" style="height: 100px"></div>
-					</div>
-					<div class="col-7">
-						<div class="border bordcol-overrides rounded">
-							<p style="font-size: 12px">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							</p>
+			<div class="row mt-4">
+				<div class="col-4 px-4 py-3 border rounded">
+					<p class="lead font-weight-bold d-block">Leaderboard</p>
+				</div>
+				<div class="col-7 ms-auto me-1 px-4 py-3 border rounded">
+					<p class="lead font-weight-bold d-block">Recent Test</p>
+					<div class="row">
+						<div class="col-5">
+							<h6>Subject</h6>
+							<div class="border rounded" style="height: 100px"></div>
 						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	{% comment %}
-	<div class="mainbody container-fluid col-md-10 px-3 containerfr" id="blur">
-		<div id="dashsec1" class="row">
-			<div id="biggraph" class="col-12 col-lg-7 p-2 mt-3">
-				<div class="container">
-					<div class="pt-lg-5"></div>
-					<div class="recentperf p-3">
-						<h1>Recent Performance</h1>
-						<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
-					</div>
-				</div>
-			</div>
-			<div id="focusimprovement" class="col-lg-5 p-3 align-items-center">
-				<h1>Improvement Area</h1>
-				<div class="improvementcontent p-4">
-					<h3 class="improvementtitle">Focus Area Title</h3>
-					<div class="improvementdata">
-						<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
-					</div>
-					<div class="improvementdescription pt-1">
-						Focus area description Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius,
-						distinctio qui. Architecto quidem doloremque dolorem rem eos alias sapiente quaerat
-						atque repudiandae, distinctio officia non veritatis provident iste ducimus rerum?
-					</div>
-				</div>
-			</div>
-			<div id="dashsec2" class="row pt-5">
-				<div id="subjectbw" class="col-12">
-					<div class="container-fluid p-0">
-						<div class="row m-1">
-							<div class="col-4 bestsub mb-3">
-								<div class="subcontent p-3">
-									<h3 class="subtitle">Best Subject</h3>
-									<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
-									<div class="bestsubdescription">
-										Best subject description Lorem, ipsum dolor sit amet consectetur adipisicing
-										elit. Nisi quam laudantium, libero deserunt possimus
-									</div>
-								</div>
-							</div>
-							<div class="col-4 worstsub mb-3">
-								<div class="subcontent p-3">
-									<h3 class="subtitle">Worst Subject</h3>
-									<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
-									<div class="bestsubdescription">
-										Worst subject description Lorem, ipsum dolor sit amet consectetur adipisicing
-										elit. Nisi quam laudantium, libero deserunt possimus
-									</div>
-								</div>
-							</div>
-							<div class="col-4 worstsub">
-								<div class="subcontent p-3">
-									<h4 class="subtitle">Most Improved Subject</h4>
-									<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
-									<div class="bestsubdescription">
-										Improved subject description Lorem, ipsum dolor sit amet consectetur
-										adipisicing elit. Nisi quam laudantium, libero deserunt possimus
-									</div>
-								</div>
+						<div class="col-7">
+							<div class="border rounded">
+								<p style="font-size: 12px">
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+								</p>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	{% endcomment %} {% endblock content %}
-	<!-- </div> -->
-</body>
 
+		{% comment %}
+		<div class="mainbody container-fluid col-md-10 px-3 containerfr" id="blur">
+			<div id="dashsec1" class="row">
+				<div id="biggraph" class="col-12 col-lg-7 p-2 mt-3">
+					<div class="container">
+						<div class="pt-lg-5"></div>
+						<div class="recentperf p-3">
+							<h1>Recent Performance</h1>
+							<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
+						</div>
+					</div>
+				</div>
+				<div id="focusimprovement" class="col-lg-5 p-3 align-items-center">
+					<h1>Improvement Area</h1>
+					<div class="improvementcontent p-4">
+						<h3 class="improvementtitle">Focus Area Title</h3>
+						<div class="improvementdata">
+							<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
+						</div>
+						<div class="improvementdescription pt-1">
+							Focus area description Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius,
+							distinctio qui. Architecto quidem doloremque dolorem rem eos alias sapiente quaerat
+							atque repudiandae, distinctio officia non veritatis provident iste ducimus rerum?
+						</div>
+					</div>
+				</div>
+				<div id="dashsec2" class="row pt-5">
+					<div id="subjectbw" class="col-12">
+						<div class="container-fluid p-0">
+							<div class="row m-1">
+								<div class="col-4 bestsub mb-3">
+									<div class="subcontent p-3">
+										<h3 class="subtitle">Best Subject</h3>
+										<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
+										<div class="bestsubdescription">
+											Best subject description Lorem, ipsum dolor sit amet consectetur adipisicing
+											elit. Nisi quam laudantium, libero deserunt possimus
+										</div>
+									</div>
+								</div>
+								<div class="col-4 worstsub mb-3">
+									<div class="subcontent p-3">
+										<h3 class="subtitle">Worst Subject</h3>
+										<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
+										<div class="bestsubdescription">
+											Worst subject description Lorem, ipsum dolor sit amet consectetur adipisicing
+											elit. Nisi quam laudantium, libero deserunt possimus
+										</div>
+									</div>
+								</div>
+								<div class="col-4 worstsub">
+									<div class="subcontent p-3">
+										<h4 class="subtitle">Most Improved Subject</h4>
+										<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
+										<div class="bestsubdescription">
+											Improved subject description Lorem, ipsum dolor sit amet consectetur
+											adipisicing elit. Nisi quam laudantium, libero deserunt possimus
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endcomment %} {% endblock content %}
+		<!-- </div> -->
+	</body>
 </html>

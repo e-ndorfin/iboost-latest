@@ -114,3 +114,6 @@ def chineseg(request):
 
 def modaltest(request):
     return render(request, 'dashboard/modaltest.html',)
+
+def accountcreation (request): 
+    return render(request, 'dashboard/accountcreation.html',)
