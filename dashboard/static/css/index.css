@@ -8,22 +8,21 @@
 	color: #181725;
 }
 
-.carousel {
+
+.carousel{
 	margin-top: 50px;
 }
-
-.carousel-inner {
+.carousel-inner{
 	height: 100px;
 }
-
-.carousel-caption {
+.carousel-caption{
 	color: #fff;
 }
 
-.addgrades {
+.addgrades{
 	background-color: #11e497;
 }
 
-body .border {
-	border-right-color: #11e497 !important;
+.bordcol-overrides{
+	border-color:#11e497;
 }
