@@ -20,8 +20,8 @@ function next() {
 
 function prev() {
 	let registercontainer = document.getElementById("regcontainer");
-	current_fs = event.target.parentNode;
-	previous_fs = event.target.parentNode.previousElementSibling;
+	current_fs = event.target.parentNode.parentNode;
+	previous_fs = event.target.parentNode.parentNode.previousElementSibling;
 	console.log(current_fs);
 	console.log(previous_fs);
 
@@ -31,7 +31,8 @@ function prev() {
 	//If the page before is the register page, center the divs.
 	console.log(previous_fs.id);
 	if (previous_fs.id == "regpage") {
-		registercontainer.className = "d-flex container login-form align-items-center justify-content-center";
+		registercontainer.className =
+			"d-flex container login-form align-items-center justify-content-center";
 	}
 }
 
