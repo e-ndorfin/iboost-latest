@@ -114,3 +114,6 @@ def chineseg(request):
 
 def modaltest(request):
     return render(request, 'dashboard/modaltest.html',)
+
+def radialtest(request):
+    return render(request, 'dashboard/gradestest.html',)

@@ -17,4 +17,5 @@ urlpatterns = [
     path('chineseg/', views.chineseg, name="chineseg"),
     path('register/', views.userauth, name="register"),
     path('modaltest/', views.modaltest, name="modaltest"),
+    path('radialtest/', views.radialtest, name="radialtest"),
 ]
