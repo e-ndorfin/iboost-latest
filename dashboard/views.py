@@ -13,6 +13,7 @@ from django.urls import reverse
 # Create your views here.
 from .models import *
 from .forms import RegisterUserForm
+from .decorators import unauthenticated_user, allowed_users
 
 
 class LineChartJSONView(BaseLineChartView):
@@ -37,14 +38,18 @@ line_chart_json = LineChartJSONView.as_view()
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['students'])
 def index(request):
-    userinfo = Profile.objects.all()
-    context = {'userinfo': userinfo}
+    profiles = Profile.objects.all()
+    subjects = Subject.objects.all()
+
+    context = {'profiles': profile, 'subjects': subjects}
     return render(request, 'dashboard/index.html', context)
 
 # Login and Register Function
 
 
+@unauthenticated_user
 def registerPage(request):
     form = RegisterUserForm()
     # If the user is registering an account
@@ -52,8 +57,10 @@ def registerPage(request):
         if request.POST.get('submit') == 'Register Account':
             form = RegisterUserForm(request.POST)
             if form.is_valid():  # If the password is valid, save
-                form.save()
+                user = form.save()
                 username = form.cleaned_data.get('username')
+                group = Group.objects.get(name="students")
+                user.group.add(group)
                 messages.success(
                     request, 'Account was created for ' + username)
                 return redirect('login')
@@ -61,6 +68,7 @@ def registerPage(request):
     return render(request, 'dashboard/accountcreation.html', context)
 
 
+@unauthenticated_user
 def loginPage(request):
     if request.method == "POST":
         usernamereq = request.POST.get('username')
@@ -86,6 +94,7 @@ def logoutUser(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['students'])
 def improvements(request):
     return render(request,  'dashboard/improvements1.html', {})
 
@@ -96,31 +105,37 @@ def base(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['students'])
 def grades(request):
     return render(request, 'dashboard/grades.html')
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['students'])
 def improvements2(request):
     return render(request, 'dashboard/improvements2.html')
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['students'])
 def improvements3(request):
     return render(request, 'dashboard/improvements3.html')
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['students'])
 def profile(request):
     return render(request, 'dashboard/profile.html',)
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['students'])
 def login(request):
     return render(request, 'dashboard/login.html')
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['students'])
 def testing(request):
     grades = Grade.objects.all()
     subjectname = Subject.objects.all()
