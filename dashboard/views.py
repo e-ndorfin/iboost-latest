@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.contrib.auth.models import Group
 
 # Create your views here.
 from .models import *
@@ -40,10 +41,9 @@ line_chart_json = LineChartJSONView.as_view()
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['students'])
 def index(request):
-    profiles = Profile.objects.all()
-    subjects = Subject.objects.all()
-
-    context = {'profiles': profile, 'subjects': subjects}
+    subjects = request.user.profile.subjects
+    print(subjects)
+    context = {'subjects': subjects}
     return render(request, 'dashboard/index.html', context)
 
 # Login and Register Function
@@ -59,8 +59,12 @@ def registerPage(request):
             if form.is_valid():  # If the password is valid, save
                 user = form.save()
                 username = form.cleaned_data.get('username')
+                email = form.cleaned_data.get('email')
                 group = Group.objects.get(name="students")
-                user.group.add(group)
+                user.groups.add(group)
+                Profile.objects.create(
+                    user=user, username=username, email=email, subjects=None
+                )
                 messages.success(
                     request, 'Account was created for ' + username)
                 return redirect('login')
