@@ -105,7 +105,7 @@
 								</div>
 							</fieldset>
 
-							<fieldset class="p-3">
+							<fieldset class="p-3" id="submitset">
 								<div class="h2 mt-2" style="font-weight: 600">Step 2.</div>
 								<div class="lead mb-4">Set Your Goals</div>
 								<div class="subject-set container mb-4">
@@ -124,8 +124,9 @@
 								</div>
 								<input type="button" value="Previous" name="previous" onclick="prev()"
 									class="btn btn-primary rounded-pill btn-block btn-sm" />
-								<input type="submit" value="Register Account" name="submit"
-									class="btn btn-info rounded-pill btn-block btn-sm continue mt-4 p-2" />
+								<input type="submit" value="Register Account" name="submit" id="submit"
+									class="btn btn-info rounded-pill btn-block btn-sm continue mt-4 p-2"
+									onsubmit="return false;" />
 							</fieldset>
 						</form>
 						<!-- {% comment %}

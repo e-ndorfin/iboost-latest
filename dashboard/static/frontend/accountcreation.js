@@ -5,6 +5,7 @@ var animating; //flag to prevent quick multi-click glitches
 
 function next() {
 	let registercontainer = document.getElementById("regcontainer");
+	let submitbutton = document.getElementById("submit");
 	current_fs = event.target.parentNode.parentNode;
 	next_fs = event.target.parentNode.parentNode.nextElementSibling;
 
@@ -13,10 +14,13 @@ function next() {
 
 	if (current_fs.id == "regpage") {
 		registercontainer.className = "d-flex container login-form";
+	} else if (next_fs.id == "submitset") {
+		submitbutton.setAttribute("onsubmit", "");
 	}
 }
 
 function prev() {
+	let submitbutton = document.getElementById("submit");
 	let registercontainer = document.getElementById("regcontainer");
 	current_fs = event.target.parentNode;
 	previous_fs = event.target.parentNode.previousElementSibling;
@@ -29,6 +33,7 @@ function prev() {
 		registercontainer.className =
 			"d-flex container login-form align-items-center justify-content-center";
 	}
+	submitbutton.setAttribute("onsubmit", "return false");
 }
 
 // $(".previous").click(function () {

@@ -63,8 +63,7 @@ def registerPage(request):
                 group = Group.objects.get(name="students")
                 user.groups.add(group)
                 Profile.objects.create(
-                    user=user, username=username, email=email, subjects=None
-                )
+                    user=user, username=username, email=email)
                 messages.success(
                     request, 'Account was created for ' + username)
                 return redirect('login')
@@ -72,7 +71,7 @@ def registerPage(request):
     return render(request, 'dashboard/accountcreation.html', context)
 
 
-@unauthenticated_user
+@ unauthenticated_user
 def loginPage(request):
     if request.method == "POST":
         usernamereq = request.POST.get('username')
@@ -91,62 +90,62 @@ def loginPage(request):
     return render(request, 'dashboard/login.html', context)
 
 
-@login_required(login_url='login')
+@ login_required(login_url='login')
 def logoutUser(request):
     logout(request)
     return redirect(reverse('login'))
 
 
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['students'])
+@ login_required(login_url='login')
+@ allowed_users(allowed_roles=['students'])
 def improvements(request):
     return render(request,  'dashboard/improvements1.html', {})
 
 
-@login_required(login_url='login')
+@ login_required(login_url='login')
 def base(request):
     return render(request, 'dashboard/base.html', )
 
 
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['students'])
+@ login_required(login_url='login')
+@ allowed_users(allowed_roles=['students'])
 def grades(request):
     return render(request, 'dashboard/grades.html')
 
 
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['students'])
+@ login_required(login_url='login')
+@ allowed_users(allowed_roles=['students'])
 def improvements2(request):
     return render(request, 'dashboard/improvements2.html')
 
 
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['students'])
+@ login_required(login_url='login')
+@ allowed_users(allowed_roles=['students'])
 def improvements3(request):
     return render(request, 'dashboard/improvements3.html')
 
 
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['students'])
+@ login_required(login_url='login')
+@ allowed_users(allowed_roles=['students'])
 def profile(request):
     return render(request, 'dashboard/profile.html',)
 
 
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['students'])
+@ login_required(login_url='login')
+@ allowed_users(allowed_roles=['students'])
 def login(request):
     return render(request, 'dashboard/login.html')
 
 
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['students'])
+@ login_required(login_url='login')
+@ allowed_users(allowed_roles=['students'])
 def testing(request):
     grades = Grade.objects.all()
     subjectname = Subject.objects.all()
     return render(request, 'dashboard/testing.html', {'grades': grades, 'subjectname': subjectname},)
 
 
-@login_required(login_url='login')
+@ login_required(login_url='login')
 def chineseg(request):
     return render(request, 'dashboard/chinese.html')
 
