@@ -41,9 +41,9 @@ line_chart_json = LineChartJSONView.as_view()
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['students'])
 def index(request):
-    subjects = request.user.profile.subjects
-    print(subjects)
-    context = {'subjects': subjects}
+    profile = request.user.profile.subject_set.all()
+    print(profile)
+    context = {"profile": profile}
     return render(request, 'dashboard/index.html', context)
 
 # Login and Register Function

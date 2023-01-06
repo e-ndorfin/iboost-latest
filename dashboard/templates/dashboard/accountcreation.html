@@ -10,6 +10,9 @@
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
@@ -59,9 +62,6 @@
 									{{form.password2}}
 								</div>
 								<div class="d-flex justify-content-center">
-									<!-- <input type="submit" value="Register Account" name="submit" onsubmit="next()"
-										style="max-width: 50%"
-										class="btn btn-primary rounded-pill btn-block btn-sm continue mt-4 p-2" /> -->
 									<input type="button" value="Continue" name="button" onclick="next()"
 										style="max-width: 50%"
 										class="btn btn-primary rounded-pill btn-block btn-sm continue mt-4 p-2" />
@@ -74,32 +74,50 @@
 								<div class="subject-set container mb-4">
 									<div class="row g-2">
 										<div class="col-6">
-											<input id="password" type="password" name="password"
-												class="form-control p-4 my-3" placeholder="Subject 1"
-												style="border-radius: 20px" />
-											<input id="password" type="password" name="password"
-												class="form-control p-4 my-3" placeholder="Subject 2"
-												style="border-radius: 20px" />
-											<input id="password" type="password" name="password"
-												class="form-control p-4 my-3" placeholder="Subject 3"
-												style="border-radius: 20px" />
+											<select class="form-select p-3 my-3" style="border-radius:20px;" id="sub1">
+												<option selected>Subject 1</option>
+												<option value="1">One</option>
+												<option value="2">Two</option>
+												<option value="3">Three</option>
+											</select>
+											<select class="form-select p-3 my-3" style="border-radius:20px;" id="sub2">
+												<option selected>Subject 2</option>
+												<option value="1">One</option>
+												<option value="2">Two</option>
+												<option value="3">Three</option>
+											</select>
+											<select class="form-select p-3 my-3" style="border-radius:20px;" id="sub3">
+												<option selected>Subject 3</option>
+												<option value="1">One</option>
+												<option value="2">Two</option>
+												<option value="3">Three</option>
+											</select>
 										</div>
 										<div class="col-6">
-											<input id="password" type="password" name="password"
-												class="form-control p-4 my-3" placeholder="Subject 4"
-												style="border-radius: 20px" />
-											<input id="password" type="password" name="password"
-												class="form-control p-4 my-3" placeholder="Subject 5"
-												style="border-radius: 20px" />
-											<input id="password" type="password" name="password"
-												class="form-control p-4 my-3" placeholder="Subject 6"
-												style="border-radius: 20px" />
+											<select class="form-select p-3 my-3" style="border-radius:20px;" id="sub4">
+												<option selected>Subject 4</option>
+												<option value="1">One</option>
+												<option value="2">Two</option>
+												<option value="3">Three</option>
+											</select>
+											<select class="form-select p-3 my-3" style="border-radius:20px;" id="sub5">
+												<option selected>Subject 5</option>
+												<option value="1">One</option>
+												<option value="2">Two</option>
+												<option value="3">Three</option>
+											</select>
+											<select class="form-select p-3 my-3" style="border-radius:20px;" id="sub6">
+												<option selected>Subject 6</option>
+												<option value="1">One</option>
+												<option value="2">Two</option>
+												<option value="3">Three</option>
+											</select>
 										</div>
 									</div>
 								</div>
 								<input type="button" value="Previous" name="previous" onclick="prev()"
 									class="btn btn-primary rounded-pill btn-block btn-sm mb-3" />
-								<div class="div">
+								<div>
 									<input type="button" value="Continue" name="continue" onclick="next()"
 										class="btn btn-primary rounded-pill btn-block btn-sm" />
 								</div>
