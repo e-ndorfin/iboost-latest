@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib.auth.models import Group
 from django.forms import inlineformset_factory
+from django import forms
 
 # Create your views here.
 from .models import *
@@ -47,14 +48,19 @@ def index(request):
     context = {"profile": profile}
     return render(request, 'dashboard/index.html', context)
 
+
 # Login and Register Function
+SUBJECT_CHOICES = [
+    ('chinese', "Chinese"), ('english', "English"), ('math', "Math"), ('science', "Science"), ('ins', "Individuals and Societies"), ('music',
+                                                                                                                                     "Music"), ('drama', "Drama"), ('art', "Art"), ('PE', "MYP Physical Education"), ('DT', "Design"), ('CS', "Computer Science")
+]
 
 
 @unauthenticated_user
 def registerPage(request):
     form = RegisterUserForm()
     SubjectFormSet = inlineformset_factory(
-        Profile, Subject, fields=('subjectname',))
+        Profile, Subject, fields=('subjectname',), extra=6, widgets={'subjectname': forms.Select(choices=SUBJECT_CHOICES)})
     formset = SubjectFormSet()
     # If the user is registering an account
     if request.method == "POST":
@@ -72,7 +78,8 @@ def registerPage(request):
                 profile = Profile.objects.get(username=username)
 
                 # Add subjects
-                formset = SubjectFormSet(request.POST, instance=profile)
+                formset = SubjectFormSet(
+                    request.POST, instance=profile)
                 if formset.is_valid():
                     formset.save()
                 messages.success(
