@@ -10,6 +10,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib.auth.models import Group
+from django.forms import inlineformset_factory
 
 # Create your views here.
 from .models import *
@@ -52,8 +53,12 @@ def index(request):
 @unauthenticated_user
 def registerPage(request):
     form = RegisterUserForm()
+    SubjectFormSet = inlineformset_factory(
+        Profile, Subject, fields=('subjectname',))
+    formset = SubjectFormSet()
     # If the user is registering an account
     if request.method == "POST":
+        # For registering the account
         if request.POST.get('submit') == 'Register Account':
             form = RegisterUserForm(request.POST)
             if form.is_valid():  # If the password is valid, save
@@ -64,10 +69,16 @@ def registerPage(request):
                 user.groups.add(group)
                 Profile.objects.create(
                     user=user, username=username, email=email)
+                profile = Profile.objects.get(username=username)
+
+                # Add subjects
+                formset = SubjectFormSet(request.POST, instance=profile)
+                if formset.is_valid():
+                    formset.save()
                 messages.success(
                     request, 'Account was created for ' + username)
                 return redirect('login')
-    context = {'form': form}
+    context = {'form': form, 'formset': formset}
     return render(request, 'dashboard/accountcreation.html', context)
 
 

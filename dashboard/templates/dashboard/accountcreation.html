@@ -1,224 +1,161 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link
-			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-			crossorigin="anonymous"
-		/>
-		<link
-			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-			crossorigin="anonymous"
-		/>
-		<link
-			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-			rel="stylesheet"
-			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-			crossorigin="anonymous"
-		/>
 
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-			crossorigin="anonymous"
-		></script>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
 
-		<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-		<link rel="stylesheet" href="{% static 'css/accountcreation.css' %}" />
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
 
-		<script src="{% static 'frontend/accountcreation.js' %}"></script>
-		<title>Sign-Up</title>
-		<style>
-			#fieldset-group fieldset:not(:first-of-type) {
-				display: none;
-			}
+	<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/accountcreation.css' %}" />
 
-			fieldset {
-				position: relative;
-				width: 100%;
-			}
+	<script src="{% static 'frontend/accountcreation.js' %}"></script>
+	<title>Sign-Up</title>
+	<style>
+		#fieldset-group fieldset:not(:first-of-type) {
+			display: none;
+		}
 
-			#register-btns {
-				max-width: 50%;
-			}
-		</style>
-	</head>
+		fieldset {
+			position: relative;
+			width: 100%;
+		}
 
-	<body>
-		{% block content %}
-		<div class="d-flex bg-main justify-content-center align-items-center" style="height: 100vh">
-			<div
-				class="bg-light col-lg-4 col-md-5 col-sm-6 p-4"
-				style="max-height: 80%; border-radius: 50px"
-			>
-				<div
-					class="d-flex container login-form align-items-center justify-content-center"
-					id="regcontainer"
-				>
-					<div style="width: 100%">
-						<div id="fieldset-group">
-							<form method="POST">
-								{% csrf_token %}
-								<fieldset id="regpage">
-									<div class="my-4 d-flex justify-content-center">
-										<img
-											src="{% static 'img/logo.png' %}"
-											alt="IBOOST"
-											class="img-fluid p-4 align-self-center"
-											style="max-width: 15em; filter: invert(100%)"
-										/>
-									</div>
-									<h6 class="" id="login-text">
-										Have an account? <a href="{% url 'login' %}">Log in.</a>
-									</h6>
-									<div class="form-group rounded-pill">
-										{{form.username}}
-										<!-- <input id="email" type="text" name="email" class="form-control p-4"
+		#register-btns {
+			max-width: 50%;
+		}
+	</style>
+</head>
+
+<body>
+	{% block content %}
+	<div class="d-flex bg-main justify-content-center align-items-center" style="height: 100vh">
+		<div class="bg-light col-lg-4 col-md-5 col-sm-6 p-4" style="max-height: 80%; border-radius: 50px">
+			<div class="d-flex container login-form align-items-center justify-content-center" id="regcontainer">
+				<div style="width: 100%">
+					<div id="fieldset-group">
+						<form method="POST">
+							{% csrf_token %}
+							<fieldset id="regpage">
+								<div class="my-4 d-flex justify-content-center">
+									<img src="{% static 'img/logo.png' %}" alt="IBOOST"
+										class="img-fluid p-4 align-self-center"
+										style="max-width: 15em; filter: invert(100%)" />
+								</div>
+								<h6 class="" id="login-text">
+									Have an account? <a href="{% url 'login' %}">Log in.</a>
+								</h6>
+								<div class="form-group rounded-pill">
+									{{form.username}}
+									<!-- <input id="email" type="text" name="email" class="form-control p-4"
 											placeholder="Email" style="border-radius: 20px" /> -->
-									</div>
-									<div class="form-group rounded-pill">{{form.email}}</div>
-									<div class="form-group rounded-pill">{{form.password1}}</div>
-									<div class="form-group rounded-pill">{{form.password2}}</div>
-									<div class="d-flex justify-content-center">
-										<input
-											type="button"
-											id="register-btns"
-											value="Continue"
-											name="button"
-											onclick="next()"
-											class="btn btn-primary rounded-pill btn-block btn-sm continue mt-4 p-2"
-										/>
-									</div>
-								</fieldset>
-								{% comment %} Second page {% endcomment %}
-								<fieldset class="p-3">
-									<div class="h2 mt-2" style="font-weight: 600">Step 1.</div>
-									<div class="lead mb-4">Select Subjects</div>
-									<div class="subject-set container mb-4">
-										<div class="row g-2">
-											<div class="col-6">
-												<select class="form-select p-3 my-3" style="border-radius: 20px" id="sub1">
-													<option selected>Subject 1</option>
-													<option value="1">One</option>
-													<option value="2">Two</option>
-													<option value="3">Three</option>
-												</select>
-												<select class="form-select p-3 my-3" style="border-radius: 20px" id="sub2">
-													<option selected>Subject 2</option>
-													<option value="1">One</option>
-													<option value="2">Two</option>
-													<option value="3">Three</option>
-												</select>
-												<select class="form-select p-3 my-3" style="border-radius: 20px" id="sub3">
-													<option selected>Subject 3</option>
-													<option value="1">One</option>
-													<option value="2">Two</option>
-													<option value="3">Three</option>
-												</select>
-											</div>
-											<div class="col-6">
-												<select class="form-select p-3 my-3" style="border-radius: 20px" id="sub4">
-													<option selected>Subject 4</option>
-													<option value="1">One</option>
-													<option value="2">Two</option>
-													<option value="3">Three</option>
-												</select>
-												<select class="form-select p-3 my-3" style="border-radius: 20px" id="sub5">
-													<option selected>Subject 5</option>
-													<option value="1">One</option>
-													<option value="2">Two</option>
-													<option value="3">Three</option>
-												</select>
-												<select class="form-select p-3 my-3" style="border-radius: 20px" id="sub6">
-													<option selected>Subject 6</option>
-													<option value="1">One</option>
-													<option value="2">Two</option>
-													<option value="3">Three</option>
-												</select>
-											</div>
+								</div>
+								<div class="form-group rounded-pill">{{form.email}}</div>
+								<div class="form-group rounded-pill">{{form.password1}}</div>
+								<div class="form-group rounded-pill">{{form.password2}}</div>
+								<div class="d-flex justify-content-center">
+									<input type="button" id="register-btns" value="Continue" name="button"
+										onclick="next()"
+										class="btn btn-primary rounded-pill btn-block btn-sm continue mt-4 p-2" />
+								</div>
+							</fieldset>
+							{% comment %} Second page {% endcomment %}
+							<fieldset class="p-3">
+								<div class="h2 mt-2" style="font-weight: 600">Step 1.</div>
+								<div class="lead mb-4">Select Subjects</div>
+								<div class="subject-set container mb-4">
+									<div class="row g-2">
+										{{formset.management_form}}
+										{% for form in formset %}
+										{{form}}
+										{% endfor %}
+										<!-- <div class="col-6">
+											<select class="form-select p-3 my-3" style="border-radius: 20px" id="sub1">
+												<option selected>Subject 1</option>
+												<option value="1">One</option>
+												<option value="2">Two</option>
+												<option value="3">Three</option>
+											</select>
+											<select class="form-select p-3 my-3" style="border-radius: 20px" id="sub2">
+												<option selected>Subject 2</option>
+												<option value="1">One</option>
+												<option value="2">Two</option>
+												<option value="3">Three</option>
+											</select>
+											<select class="form-select p-3 my-3" style="border-radius: 20px" id="sub3">
+												<option selected>Subject 3</option>
+												<option value="1">One</option>
+												<option value="2">Two</option>
+												<option value="3">Three</option>
+											</select>
 										</div>
+										<div class="col-6">
+											<select class="form-select p-3 my-3" style="border-radius: 20px" id="sub4">
+												<option selected>Subject 4</option>
+												<option value="1">One</option>
+												<option value="2">Two</option>
+												<option value="3">Three</option>
+											</select>
+											<select class="form-select p-3 my-3" style="border-radius: 20px" id="sub5">
+												<option selected>Subject 5</option>
+												<option value="1">One</option>
+												<option value="2">Two</option>
+												<option value="3">Three</option>
+											</select>
+											<select class="form-select p-3 my-3" style="border-radius: 20px" id="sub6">
+												<option selected>Subject 6</option>
+												<option value="1">One</option>
+												<option value="2">Two</option>
+												<option value="3">Three</option>
+											</select>
+										</div> -->
 									</div>
-									<input
-										type="button"
-										value="Previous"
-										name="previous"
-										id="register-btns"
-										onclick="prev()"
-										class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2"
-									/>
-									<div>
-										<input
-											type="button"
-											value="Continue"
-											name="continue"
-											id="register-btns"
-											onclick="next()"
-											class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2"
-										/>
-									</div>
-								</fieldset>
+								</div>
+								<input type="button" value="Previous" name="previous" id="register-btns"
+									onclick="prev()" class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2" />
+								<div>
+									<input type="button" value="Continue" name="continue" id="register-btns"
+										onclick="next()"
+										class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2" />
+								</div>
+							</fieldset>
 
-								<fieldset class="p-3" id="submitset">
-									<div class="h2 mt-2" style="font-weight: 600">Step 2.</div>
-									<div class="lead mb-4">Set Your Goals</div>
-									<div class="subject-set container mb-4">
-										<div class="row">
-											<input
-												id="goal-one"
-												type="text"
-												name="password"
-												class="form-control p-4 my-3"
-												placeholder="I would like to improve..."
-												style="border-radius: 20px"
-											/>
-										</div>
-										<div class="row">
-											<input
-												id="goal-two"
-												type="text"
-												name="password"
-												class="form-control p-4 my-3"
-												placeholder="I will do this through..."
-												style="border-radius: 20px"
-											/>
-										</div>
-										<div class="row">
-											<input
-												id="goal-three"
-												type="text"
-												name="password"
-												class="form-control p-4 my-3"
-												placeholder="I hope to achieve this by..."
-												style="border-radius: 20px"
-											/>
-										</div>
+							<fieldset class="p-3" id="submitset">
+								<div class="h2 mt-2" style="font-weight: 600">Step 2.</div>
+								<div class="lead mb-4">Set Your Goals</div>
+								<div class="subject-set container mb-4">
+									<div class="row">
+										<input id="goal-one" type="text" name="password" class="form-control p-4 my-3"
+											placeholder="I would like to improve..." style="border-radius: 20px" />
 									</div>
-									<input
-										type="button"
-										value="Previous"
-										name="previous"
-										onclick="prev()"
-										id="register-btns"
-										class="btn btn-primary rounded-pill btn-block btn-sm p-2"
-									/>
-									<input
-										type="submit"
-										value="Register Account"
-										name="submit"
-										id="submit register-btns"
-										class="btn btn-info rounded-pill btn-block btn-sm continue mt-4 p-2"
-										onsubmit="return false;"
-									/>
-								</fieldset>
-							</form>
-							<!-- {% comment %}
+									<div class="row">
+										<input id="goal-two" type="text" name="password" class="form-control p-4 my-3"
+											placeholder="I will do this through..." style="border-radius: 20px" />
+									</div>
+									<div class="row">
+										<input id="goal-three" type="text" name="password" class="form-control p-4 my-3"
+											placeholder="I hope to achieve this by..." style="border-radius: 20px" />
+									</div>
+								</div>
+								<input type="button" value="Previous" name="previous" onclick="prev()"
+									id="register-btns" class="btn btn-primary rounded-pill btn-block btn-sm p-2" />
+								<input type="submit" value="Register Account" name="submit" id="submit register-btns"
+									class="btn btn-info rounded-pill btn-block btn-sm continue mt-4 p-2"
+									onsubmit="return false;" />
+							</fieldset>
+						</form>
+						<!-- {% comment %}
 						<div class="btn btn-secondary p-0">
 							<input type="submit" name="submit" class="btn btn-secondary" value="Login" />
 						</div>
@@ -227,55 +164,48 @@
 							Register
 						</div>
 						{% endcomment %} -->
-						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-			crossorigin="anonymous"
-		></script>
-		<script
-			src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-			crossorigin="anonymous"
-		></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-			crossorigin="anonymous"
-		></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-			crossorigin="anonymous"
-		></script>
-		<script src="https://www.gstatic.com/firebasejs/9.9.1/firebase-app-compat.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/9.9.1/firebase-firestore-compat.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/9.9.1/firebase-auth-compat.js"></script>
-		<script>
-			//Query All input fields
-			var form_fields = document.getElementsByTagName("input"); //Find input fields and put placeholders on them
-			form_fields[1].placeholder = "Username..";
-			form_fields[2].placeholder = "Email..";
-			form_fields[3].placeholder = "Enter password...";
-			form_fields[4].placeholder = "Re-enter Password...";
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.9.1/firebase-app-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.9.1/firebase-firestore-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.9.1/firebase-auth-compat.js"></script>
+	<script>
+		//Query All input fields
+		var form_fields = document.getElementsByTagName("input"); //Find input fields and put placeholders on them
+		form_fields[1].placeholder = "Username..";
+		form_fields[2].placeholder = "Email..";
+		form_fields[3].placeholder = "Enter password...";
+		form_fields[4].placeholder = "Re-enter Password...";
 
-			for (var field in form_fields) {
-				if (
-					form_fields[field].type != "submit" &&
-					form_fields[field].type != "button" &&
-					field < 5
-				) {
-					console.log(form_fields[field]);
-					form_fields[field].className += "form-control p-4";
-					form_fields[field].style.borderRadius = "20px";
-				}
+		for (var field in form_fields) {
+			if (
+				form_fields[field].type != "submit" &&
+				form_fields[field].type != "button" &&
+				field < 5
+			) {
+				console.log(form_fields[field]);
+				form_fields[field].className += "form-control p-4";
+				form_fields[field].style.borderRadius = "20px";
 			}
-		</script>
-		{% endblock content %}
-	</body>
+		}
+	</script>
+	{% endblock content %}
+</body>
+
 </html>
