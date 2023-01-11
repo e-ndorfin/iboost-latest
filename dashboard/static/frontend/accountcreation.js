@@ -18,8 +18,10 @@ function next() {
 
 function prev() {
 	let registercontainer = document.getElementById("regcontainer");
-	current_fs = event.target.parentNode;
-	previous_fs = event.target.parentNode.previousElementSibling;
+	current_fs = event.target.parentNode.parentNode.parentNode.parentNode.parentNode;
+	previous_fs = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.previousElementSibling;
+	console.log(current_fs);
+	console.log(previous_fs);
 
 	current_fs.style.display = "none";
 	previous_fs.style.display = "block";

@@ -53,17 +53,15 @@
 										class="img-fluid p-4 align-self-center"
 										style="max-width: 15em; filter: invert(100%)" />
 								</div>
-								<h6 class="" id="login-text">
-									Have an account? <a href="{% url 'login' %}">Log in.</a>
-								</h6>
 								<div class="form-group rounded-pill">
 									{{form.username}}
-									<!-- <input id="email" type="text" name="email" class="form-control p-4"
-											placeholder="Email" style="border-radius: 20px" /> -->
 								</div>
 								<div class="form-group rounded-pill">{{form.email}}</div>
 								<div class="form-group rounded-pill">{{form.password1}}</div>
 								<div class="form-group rounded-pill">{{form.password2}}</div>
+								<h6 class="" id="login-text">
+									Have an account? <a href="{% url 'login' %}">Log in.</a>
+								</h6>
 								<div class="d-flex justify-content-center">
 									<input type="button" id="register-btns" value="Continue" name="button"
 										onclick="next()"
@@ -71,60 +69,40 @@
 								</div>
 							</fieldset>
 							{% comment %} Second page {% endcomment %}
-							<fieldset class="p-3">
-								<div class="h2 mt-2" style="font-weight: 600">Step 1.</div>
-								<div class="lead mb-4">Select Subjects</div>
-								<div class="subject-set container mb-4">
-									<div class="row g-2">
-										{{formset.management_form}}
-										<div class="col-6">
-											{% for form in formset %}
-											{{form.subjectname}}
-											{% endfor %}
-											<select class="form-select p-3 my-3" style="border-radius: 20px" id="sub1">
-												<option selected>Subject 1</option>
-												<option value="1">One</option>
-												<option value="2">Two</option>
-												<option value="3">Three</option>
-											</select>
-											<select class="form-select p-3 my-3" style="border-radius: 20px" id="sub2">
-												<option selected>Subject 2</option>
-												<option value="1">One</option>
-												<option value="2">Two</option>
-												<option value="3">Three</option>
-											</select>
-											<select class="form-select p-3 my-3" style="border-radius: 20px" id="sub3">
-												<option selected>Subject 3</option>
-												<option value="1">One</option>
-												<option value="2">Two</option>
-												<option value="3">Three</option>
-											</select>
+							<fieldset class="p-3" id="subjectselect">
+								<div class="container-fluid m-0 p-0">
+									<div class="row">
+										<div class="col-10">
+											<div class="h2 mt-2" style="font-weight: 600">Step 1.</div>
+											<div class="lead mb-4">Select Subjects</div>
 										</div>
-										<div class="col-6">
-											<select class="form-select p-3 my-3" style="border-radius: 20px" id="sub4">
-												<option selected>Subject 4</option>
-												<option value="1">One</option>
-												<option value="2">Two</option>
-												<option value="3">Three</option>
-											</select>
-											<select class="form-select p-3 my-3" style="border-radius: 20px" id="sub5">
-												<option selected>Subject 5</option>
-												<option value="1">One</option>
-												<option value="2">Two</option>
-												<option value="3">Three</option>
-											</select>
-											<select class="form-select p-3 my-3" style="border-radius: 20px" id="sub6">
-												<option selected>Subject 6</option>
-												<option value="1">One</option>
-												<option value="2">Two</option>
-												<option value="3">Three</option>
-											</select>
+										<div class="col-2">
+											<button class="btn rounded-pill btn-block btn-sm" onclick="prev()">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+													fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+													<path fill-rule="evenodd"
+														d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+												</svg>
+											</button>
 										</div>
 									</div>
 								</div>
-								<input type="button" value="Previous" name="previous" id="register-btns"
-									onclick="prev()" class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2" />
-								<div>
+								<div class="subject-set container mb-4">
+									<div class="row g-2">
+										{{formset.management_form}}
+										<div class="col-md-6">
+											{% for form in formset|slice:":3" %}
+											{{form.subjectname}}
+											{% endfor %}
+										</div>
+										<div class="col-md-6">
+											{% for form in formset|slice:"3:" %}
+											{{form.subjectname}}
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+								<div class="d-flex justify-content-center">
 									<input type="button" value="Continue" name="continue" id="register-btns"
 										onclick="next()"
 										class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2" />
@@ -132,8 +110,23 @@
 							</fieldset>
 
 							<fieldset class="p-3" id="submitset">
-								<div class="h2 mt-2" style="font-weight: 600">Step 2.</div>
-								<div class="lead mb-4">Set Your Goals</div>
+								<div class="container-fluid m-0 p-0">
+									<div class="row">
+										<div class="col-10">
+											<div class="h2 mt-2" style="font-weight: 600">Step 2.</div>
+											<div class="lead mb-4">Set Your Goals</div>
+										</div>
+										<div class="col-2">
+											<button class="btn rounded-pill btn-block btn-sm" onclick="prev()">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+													fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+													<path fill-rule="evenodd"
+														d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+												</svg>
+											</button>
+										</div>
+									</div>
+								</div>
 								<div class="subject-set container mb-4">
 									<div class="row">
 										<input id="goal-one" type="text" name="password" class="form-control p-4 my-3"
@@ -148,22 +141,11 @@
 											placeholder="I hope to achieve this by..." style="border-radius: 20px" />
 									</div>
 								</div>
-								<input type="button" value="Previous" name="previous" onclick="prev()"
-									id="register-btns" class="btn btn-primary rounded-pill btn-block btn-sm p-2" />
 								<input type="submit" value="Register Account" name="submit" id="submit register-btns"
-									class="btn btn-info rounded-pill btn-block btn-sm continue mt-4 p-2"
+									class="btn btn-info rounded-pill btn-block btn-sm continue p-2"
 									onsubmit="return false;" />
 							</fieldset>
 						</form>
-						<!-- {% comment %}
-						<div class="btn btn-secondary p-0">
-							<input type="submit" name="submit" class="btn btn-secondary" value="Login" />
-						</div>
-						<div class="btn main-color reg-btn" data-toggle="modal" data-target="#signupBox"
-							onclick="signup()">
-							Register
-						</div>
-						{% endcomment %} -->
 					</div>
 				</div>
 			</div>
@@ -193,16 +175,22 @@
 		form_fields[3].placeholder = "Enter password...";
 		form_fields[4].placeholder = "Re-enter Password...";
 
+		var subject_fields = document.getElementsByTagName("select");
+
 		for (var field in form_fields) {
 			if (
 				form_fields[field].type != "submit" &&
 				form_fields[field].type != "button" &&
 				field < 5
 			) {
-				console.log(form_fields[field]);
 				form_fields[field].className += "form-control p-4";
 				form_fields[field].style.borderRadius = "20px";
 			}
+		}
+
+		for (var field in subject_fields) {
+			subject_fields[field].className += "form-select p-3 my-3";
+			subject_fields[field].style.borderRadius = "20px";
 		}
 	</script>
 	{% endblock content %}
