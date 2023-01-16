@@ -9,20 +9,28 @@
 }
 
 
-.carousel{
+.carousel {
 	margin-top: 50px;
 }
-.carousel-inner{
+
+.carousel-inner {
 	height: 100px;
 }
-.carousel-caption{
+
+.carousel-caption {
 	color: #fff;
 }
 
-.addgrades{
-	background-color: #11e497;
+.bordcol-overrides {
+	border-color: #11e497;
 }
 
-.bordcol-overrides{
-	border-color:#11e497;
+.addgrades {
+	position: static;
+	background: #1a1a23;
+}
+
+.gradeforms {
+	border-radius: 50px;
+	width: 100%;
 }

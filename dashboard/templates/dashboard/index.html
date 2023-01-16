@@ -4,23 +4,67 @@
 
 <head>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<link rel="stylesheet" href="{% static 'css/index.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+	<script src="{% static 'frontend/addgrades.js' %}"></script>
 </head>
 
 <body>
 	{% block content %}
-	<div class="container-fluid mainbody col-md-10 p-5">
+	<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+	<div class="container-fluid col-md-10 p-4 addgrades" id="addgrades" style="display: none;">
 		<div class="row">
+			<div class="col"></div>
+			<div class="col-10 p-3">
+				<div class="row">
+					<div class="col-6 d-flex justify-content-center">
+						<div class="bg-light col-lg-4 col-md-5 col-sm-6 p-4 gradeforms">
+							<div class="row">
+								<div class="col-6" style="color: black;">
+									<h1>Grades</h1>
+									<h4>Use the boxes to input scores for each criterion</h4>
+								</div>
+								<div class="col-6">
+									<input type="number" name="Criterion A">
+									<input type="number" name="Criterion B">
+									<input type="number" name="Criterion C">
+									<input type="number" name="Criterion D">
+									<input type="button" value="Continue" name="continue"
+										class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-6 d-flex justify-content-center">
+						<div class="bg-light col-lg-4 col-md-5 col-sm-6 p-4 gradeforms">
+							<div style="color: black;">
+								<h1>Input Student Reflection Record</h1>
+								<h4>In the space provided</h4>
+								<input type="text" name="SRR">
+								<input type="submit" value="Submit" name="submit"
+									class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col"></div>
+		</div>
+	</div>
+	<div class=" container-fluid mainbody col-md-10 p-5" id="mainbody">
+		<div class=" row">
 			<div class="col-8">
 				<h1>Welcome, <strong>{{request.user}}</strong>.</h1>
 			</div>
 			<div class="d-flex mb-2 col-4 justify-content-end align-items-center">
-				<div class="btn text-light addgrades" data-toggle="modal" data-target="#signupBox">
-					ADD GRADES
+				<div class="addgrades">
+					<script src="{% static 'frontend/addgrades.js' %}"></script>
+					<button class="btn btn-light text-dark" type="button"
+						onclick="addgrades('mainbody','addgrades');">ADD
+						GRADES</button>
 				</div>
 			</div>
 		</div>
-		<div class="row mt-4">
+		<div class=" row mt-4">
 			<div class="px-4 py-3 col-8 border bordcol-overrides rounded">
 				<p class="font-weight-bold lead d-block">YOUR Performance</p>
 				<canvas id="myChart"></canvas>
@@ -103,7 +147,8 @@
 									<h3 class="subtitle">Best Subject</h3>
 									<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
 									<div class="bestsubdescription">
-										Best subject description Lorem, ipsum dolor sit amet consectetur adipisicing
+										Best subject description Lorem, ipsum dolor sit amet consectetur
+										adipisicing
 										elit. Nisi quam laudantium, libero deserunt possimus
 									</div>
 								</div>
@@ -113,7 +158,8 @@
 									<h3 class="subtitle">Worst Subject</h3>
 									<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
 									<div class="bestsubdescription">
-										Worst subject description Lorem, ipsum dolor sit amet consectetur adipisicing
+										Worst subject description Lorem, ipsum dolor sit amet consectetur
+										adipisicing
 										elit. Nisi quam laudantium, libero deserunt possimus
 									</div>
 								</div>
