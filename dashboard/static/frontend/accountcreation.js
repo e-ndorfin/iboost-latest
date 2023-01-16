@@ -4,6 +4,7 @@ var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
 
 function next() {
+	console.log("test")
 	let registercontainer = document.getElementById("regcontainer");
 	current_fs = event.target.parentNode.parentNode;
 	next_fs = event.target.parentNode.parentNode.nextElementSibling;
@@ -16,21 +17,12 @@ function next() {
 	}
 }
 
-function prev() {
-	let registercontainer = document.getElementById("regcontainer");
-	current_fs = event.target.parentNode.parentNode.parentNode.parentNode.parentNode;
-	previous_fs = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.previousElementSibling;
-	console.log(current_fs);
-	console.log(previous_fs);
+function prev(id) {
+	let currentElement = document.getElementById(id);
+	let previousElement = currentElement.previousElementSibling;
 
-	current_fs.style.display = "none";
-	previous_fs.style.display = "block";
-
-	//If the page before is the register page, center the divs.
-	if (previous_fs.id == "regpage") {
-		registercontainer.className =
-			"d-flex container login-form align-items-center justify-content-center";
-	}
+	currentElement.style.display = "none";
+	previousElement.style.display = "block";
 }
 
 // $(".previous").click(function () {
