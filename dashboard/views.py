@@ -15,7 +15,7 @@ from django import forms
 
 # Create your views here.
 from .models import *
-from .forms import RegisterUserForm
+from .forms import *
 from .decorators import unauthenticated_user, allowed_users
 
 
@@ -43,16 +43,23 @@ line_chart_json = LineChartJSONView.as_view()
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['students'])
 def index(request):
-    profile = request.user.profile.subject_set.all()
-    print(profile)
-    context = {"profile": profile}
+    subjects = request.user.profile.subject_set.all()
+    print(subjects)
+    gradeform = GradesForm()
+    srrform = SRRForm()
+    if request.method == 'POST':
+        # Add grades
+        gradeform = GradesForm(request.POST)
+        srrform = SRRForm(request.POST)
+    context = {"subjects": subjects,
+               "gradeform": gradeform, "srrform": srrform}
     return render(request, 'dashboard/index.html', context)
 
 
 # Login and Register Function
 SUBJECT_CHOICES = [
-    ('', 'Subject '), ('chinese', "Chinese"), ('english', "English"), ('math', "Math"), ('science', "Science"), ('ins', "Individuals and Societies"), ('music',
-                                                                                                                                                       "Music"), ('drama', "Drama"), ('art', "Art"), ('PE', "MYP Physical Education"), ('DT', "Design"), ('CS', "Computer Science")
+    ('', 'Subject '), ('Chinese', "Chinese"), ('English', "English"), ('Math', "Math"), ('Science', "Science"), ('Individuals and Societies', "Individuals and Societies"), ('Music',
+                                                                                                                                                                             "Music"), ('Drama', "Drama"), ('Art', "Art"), ('MYP Physical Education', "MYP Physical Education"), ('Design', "Design"), ('Computer Science', "Computer Science")
 ]
 
 

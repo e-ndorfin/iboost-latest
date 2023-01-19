@@ -12,42 +12,40 @@
 	{% block content %}
 	<link rel="stylesheet" href="{% static 'css/index.css' %}" />
 	<div class="container-fluid col-md-10 p-4 addgrades" id="addgrades" style="display: none;">
-		<div class="row">
-			<div class="col"></div>
-			<div class="col-10 p-3">
-				<div class="row">
-					<div class="col-6 d-flex justify-content-center">
-						<div class="bg-light col-lg-4 col-md-5 col-sm-6 p-4 gradeforms">
-							<div class="row">
-								<div class="col-6" style="color: black;">
-									<h1>Grades</h1>
-									<h4>Use the boxes to input scores for each criterion</h4>
-								</div>
-								<div class="col-6">
-									<input type="number" name="Criterion A">
-									<input type="number" name="Criterion B">
-									<input type="number" name="Criterion C">
-									<input type="number" name="Criterion D">
-									<input type="button" value="Continue" name="continue"
-										class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2" />
-								</div>
+		<div class="p-5 d-flex justify-content-center" style="height: 80%;">
+			<div class="row">
+				<div class="col-6 p-4 d-flex justify-content-center">
+					<div class="bg-light col-lg-4 col-md-5 col-sm-6 p-5 gradeforms">
+						<div class="row">
+							<div class="col-6" style="color: black;">
+								<p class="h2 strong">Grades</p>
+								<p class="h5 strong">Use the boxes to input scores for each criterion</p>
 							</div>
-						</div>
-					</div>
-					<div class="col-6 d-flex justify-content-center">
-						<div class="bg-light col-lg-4 col-md-5 col-sm-6 p-4 gradeforms">
-							<div style="color: black;">
-								<h1>Input Student Reflection Record</h1>
-								<h4>In the space provided</h4>
-								<input type="text" name="SRR">
-								<input type="submit" value="Submit" name="submit"
-									class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2" />
+							<div class="col-6 p-3">
+								{{gradeform.subject}}
+								{{gradeform.criterionA}}
+								{{gradeform.criterionB}}
+								{{gradeform.criterionC}}
+								{{gradeform.criterionD}}
+								<input type="button" value="Continue" name="continue"
+									class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2"
+									style="width: 100%;" />
 							</div>
 						</div>
 					</div>
 				</div>
+				<div class="col-6 p-4 d-flex justify-content-center">
+					<div class="bg-light col-lg-4 col-md-5 col-sm-6 p-5 gradeforms">
+						<div style="color: black;">
+							<p class="h2">Input Student Reflection Record</p>
+							<p class="h5">In the space provided</p>
+							{{srrform.srr}}
+							<input type="button" value="Continue" name="continue"
+								class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2" style="width: 100%;" />
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="col"></div>
 		</div>
 	</div>
 	<div class=" container-fluid mainbody col-md-10 p-5" id="mainbody">
@@ -111,6 +109,24 @@
 			</div>
 		</div>
 	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+		crossorigin="anonymous"></script>
+	<script>
+		var form_fields = document.getElementsByTagName("input"); //Find input fields and put placeholders on them
+		var subjectselect = document.getElementsByTagName("select");
+		var srr = document.getElementsByTagName("textarea")
+
+		subjectselect[0].className += "form-select p-2 my-3";
+		subjectselect[0].style.borderRadius = "20px";
+
+		srr[0].className += "form-control p-2"
+
+		for (var field in form_fields) {
+			form_fields[field].className += "form-control p-2 my-3";
+			form_fields[field].style.borderRadius = "20px";
+		}
+	</script>
 
 	{% comment %}
 	<div class="mainbody container-fluid col-md-10 px-3 containerfr" id="blur">
