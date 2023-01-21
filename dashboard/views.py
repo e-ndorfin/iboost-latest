@@ -46,13 +46,13 @@ def index(request):
     subjects = request.user.profile.subject_set.all()
     print(subjects)
     gradeform = GradesForm()
-    srrform = SRRForm()
     if request.method == 'POST':
         # Add grades
         gradeform = GradesForm(request.POST)
-        srrform = SRRForm(request.POST)
+        if gradeform.is_valid():
+            gradeform.save()
     context = {"subjects": subjects,
-               "gradeform": gradeform, "srrform": srrform}
+               "gradeform": gradeform}
     return render(request, 'dashboard/index.html', context)
 
 

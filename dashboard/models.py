@@ -15,8 +15,7 @@ class Profile(models.Model):
 class Subject(models.Model):
     # Database fields
     # User has a "One to Many" relationship with Subject, as one User can have multiple subjects,while the opposite is not the case
-    subjectname = models.CharField(max_length=30, null=True)
-    srr = models.TextField(max_length=1000, null=True)
+    subjectname = models.CharField(max_length=100, null=True)
     profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -26,6 +25,7 @@ class Subject(models.Model):
 class Grade(models.Model):
     # Database fields
     # Subject has a "One to Many" relationship with Grade, as one User can have multiple subjects,while the opposite is not the case
+    srr = models.TextField(max_length=1000, null=True)
     criterionA = models.IntegerField(default=0, null=True)
     criterionB = models.IntegerField(default=0, null=True)
     criterionC = models.IntegerField(default=0, null=True)

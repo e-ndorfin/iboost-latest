@@ -13,39 +13,40 @@
 	<link rel="stylesheet" href="{% static 'css/index.css' %}" />
 	<div class="container-fluid col-md-10 p-4 addgrades" id="addgrades" style="display: none;">
 		<div class="p-5 d-flex justify-content-center" style="height: 80%;">
-			<div class="row">
-				<div class="col-6 p-4 d-flex justify-content-center">
-					<div class="bg-light col-lg-4 col-md-5 col-sm-6 p-5 gradeforms">
-						<div class="row">
-							<div class="col-6" style="color: black;">
-								<p class="h2 strong">Grades</p>
-								<p class="h5 strong">Use the boxes to input scores for each criterion</p>
+			<form method="POST">
+				{% csrf_token %}
+				<div class="row">
+					<div class="col-6 p-4 d-flex justify-content-center">
+						<div class="bg-light col-lg-4 col-md-5 col-sm-6 p-5 gradeforms">
+							<div class="row">
+								<div class="col-6" style="color: black;">
+									<p class="h2 strong">Grades</p>
+									<p class="h5 strong">Use the boxes to input scores for each criterion</p>
+								</div>
+								<div class="col-6 p-3">
+									{{gradeform.subject}}
+									{{gradeform.criterionA}}
+									{{gradeform.criterionB}}
+									{{gradeform.criterionC}}
+									{{gradeform.criterionD}}
+								</div>
 							</div>
-							<div class="col-6 p-3">
-								{{gradeform.subject}}
-								{{gradeform.criterionA}}
-								{{gradeform.criterionB}}
-								{{gradeform.criterionC}}
-								{{gradeform.criterionD}}
-								<input type="button" value="Continue" name="continue"
+						</div>
+					</div>
+					<div class="col-6 p-4 d-flex justify-content-center">
+						<div class="bg-light col-lg-4 col-md-5 col-sm-6 p-5 gradeforms">
+							<div style="color: black;">
+								<p class="h2">Input Student Reflection Record</p>
+								<p class="h5">In the space provided</p>
+								{{gradeform.srr}}
+								<input type="submit" value="Continue" name="continue"
 									class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2"
 									style="width: 100%;" />
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-6 p-4 d-flex justify-content-center">
-					<div class="bg-light col-lg-4 col-md-5 col-sm-6 p-5 gradeforms">
-						<div style="color: black;">
-							<p class="h2">Input Student Reflection Record</p>
-							<p class="h5">In the space provided</p>
-							{{srrform.srr}}
-							<input type="button" value="Continue" name="continue"
-								class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2" style="width: 100%;" />
-						</div>
-					</div>
-				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 	<div class=" container-fluid mainbody col-md-10 p-5" id="mainbody">

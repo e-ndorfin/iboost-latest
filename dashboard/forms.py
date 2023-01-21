@@ -16,10 +16,10 @@ class GradesForm(ModelForm):
     class Meta:
         model = Grade
         fields = ['subject', 'criterionA',
-                  'criterionB', 'criterionC', 'criterionD']
+                  'criterionB', 'criterionC', 'criterionD', 'srr']
 
 
-class SRRForm(ModelForm):
-    class Meta:
-        model = Subject
-        fields = ['srr']
+# class SRRForm(ModelForm):
+#     class Meta:
+#         model = Grade
+#         fields = ['srr']
