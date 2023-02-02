@@ -32,6 +32,7 @@ body {
   -webkit-transform-origin: bottom center;
   text-decoration:none;
 }
+
 .list__home:after, .list__about:after, .list__clients:after, .list__clients .list__clientsItems li:after, .list__strauss:after, .list__strauss .list__straussItem li:after, .list__contact:after, .list__chinese:after {
   top: 100px;
   width: 1px;
@@ -40,6 +41,7 @@ body {
   z-index: -1;
   text-decoration:none;
 }
+
 .list__home a, .list__about a, .list__clients a, .list__clients .list__clientsItems li a, .list__strauss a, .list__strauss .list__straussItem li a, .list__contact a, .list__chinese a {
   display: flex;
   width: 100px;
@@ -58,12 +60,15 @@ body {
   color: #e2eff1;
   text-decoration:none;
 }
+
 .list__home a:visited, .list__about a:visited, .list__clients a:visited, .list__strauss a:visited, .list__contact a:visited, .list__chinese a:visited, .list__home a:active, .list__about a:active, .list__clients a:active, .list__strauss a:active, .list__contact a:active, .list__chinese a:active {
   color: #e2eff1;
 }
+
 .list__home a:hover, .list__about a:hover, .list__clients a:hover, .list__strauss a:hover, .list__contact a:hover, .list__chinese a:hover {
   color: #11e497;
 }
+
 
 .toggle:checked + .label .list__home, .toggle:checked + .label .list__about, .toggle:checked + .label .list__clients, .toggle:checked + .label .list__strauss, .toggle:checked + .label .list__contact, .toggle:checked + .label .list__chinese {
   opacity: 1;

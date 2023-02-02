@@ -185,3 +185,6 @@ def accountcreation(request):
 
 def radialtest(request):
     return render(request, 'dashboard/gradestest.html',)
+    
+def accountcreation (request): 
+    return render(request, 'dashboard/accountcreation.html',)
