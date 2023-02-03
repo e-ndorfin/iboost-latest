@@ -22,12 +22,14 @@
 			integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
 			crossorigin="anonymous"
 		></script>
+
 		<link
 			rel="stylesheet"
 			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
 		/>
 		<link rel="stylesheet" href="../../../static/css/styles.css" />
 		<link rel="icon" href="{% static 'img/logo_icon.ico' %}" />
+		<link rel="stylesheet" href="{% static 'css/login.css' %}" />
 	</head>
 
 	<div id="mastercontainer blur" class="container-fluid fr">
@@ -147,15 +149,128 @@
 						{% endblock content %}
 					</div>
 					<div class="d-flex mb-2 col-4 justify-content-end align-items-center">
-						<div class="btn bg-primary text-light" data-toggle="modal" data-target="#signupBox">
+						<div class="btn main-color reg-btn text-dark" data-toggle="modal" data-target="#signupBox">
 							ADD GRADES
 						</div>
 					</div>
+				<!-- modal -->
+				<!-- Button trigger modal -->
+
+				<!-- Modal -->
+				<div class="modal fade" id="signupBox" tabindex="-1" role="dialog"
+					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content bg-light rounded-5">
+							<div class="modal-header" style="border: 0; padding: 0">
+								<button type="button" class="close p-4" data-dismiss="modal" aria-label="Close"
+									style="color: black">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="container">
+									<form method="POST">
+										{% csrf_token %}
+										<h3>Register Account</h3>
+										<div class="row">
+											<div class="col-sm form-group">
+												<label>Username</label>
+												<br>
+												{{form.username}}
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm form-group">
+												<label>Email</label>
+												<br>
+												{{form.email}}
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm form-group">
+												<label>Password</label>
+												<br>
+												{{form.password1}}
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-2"></div>
+											<div class="col-sm-8">
+												<input type="submit" name="submit" class="btn login_btn main-color"
+													value="Register Account" data-toggle="modal" data-target="#signupBox2" data-dismiss="modal">
+											</div>
+											<div class="col-sm-2"></div>
+										</div>
+										{{form.errors}}
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-	
+
+				<div class="modal fade" id="signupBox2" tabindex="-1" role="dialog"
+					aria-labelledby="exampleModalCenterTitle" aria-hidden="false">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content bg-light">
+							<div class="modal-header" style="border: 0; padding: 0">
+							<button type="button" class="close p-4" data-dismiss="modal" aria-label="Close"
+								style="color: black">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							</div>
+							<div class="modal-body">
+								<div class="container">
+									<form method="POST">
+										{% csrf_token %}
+										<h3>Profile Settings</h3>
+										<div class="row">
+											<div class="col-sm form-group">
+												<label>Classes</label>
+												<br>
+												{{form.username}}
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm form-group">
+												<label>Goblin</label>
+												<br>
+												{{form.email}}
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm form-group">
+												<label>popeyes</label>
+												<br>
+												{{form.password1}}
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm form-group">
+												<label>popeyes</label>
+												<br>
+												{{form.password2}}
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-2"></div>
+											<div class="col-sm-8">
+												<input type="submit" name="submit" class="btn login_btn main-color"
+													value="Register Account" data-bs-toggle="modal" data-bs-target="modal2" data-bs-dismiss="modal">
+											</div>
+											<div class="col-sm-2"></div>
+										</div>
+										{{form.errors}}
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
 	
 				<div class="row mt-4">
-					<div class="px-4 py-3 col-5 border border-primary rounded">
+					<div class="px-4 py-3 col-5 border bordcol rounded">
 						<p class="font-weight-bold lead d-block" style=>YOUR Performance</p>
 						<canvas id="myChart"></canvas>
 	<!-- Grades graph -->
@@ -167,13 +282,13 @@
 						{% endcomment %}
 					</div>
 					
-					<div class="col-2 px-1 py-1 ms-auto me-1 border border-primary rounded">
+					<div class="col-2 px-1 py-1 ms-auto me-1 border bordcol rounded">
 						{% block content3 %}
 
 						{% endblock content3 %}
 					</div>
 	
-					<div class="col-4 px-4 py-3 ms-auto me-1 border border-primary rounded overflow-auto" style="max-height: 25em;">
+					<div class="col-4 px-4 py-3 ms-auto me-1 border bordcol rounded overflow-auto" style="max-height: 25em;">
 						<!-- To do list -->
 						{% block content4 %}
 		
@@ -188,12 +303,12 @@
 	
 	
 				<div class="row mt-4">
-					<div class="col-4 px-4 py-3 border border-primary rounded overflow-auto" style="max-height: 20em;">
+					<div class="col-4 px-4 py-3 border bordcol rounded overflow-auto" style="max-height: 20em;">
 						<!-- upcoming tests -->
 						{% block content5 %}
 						{% endblock content5 %}
 					</div>
-					<div class="col-7 ms-auto me-1 px-4 py-3 border border-primary rounded">
+					<div class="col-7 ms-auto me-1 px-4 py-3 border bordcol rounded">
 						<p class="lead font-weight-bold d-block">Recent Test</p>
 						<div class="row">
 							<div class="col-5">
@@ -217,4 +332,7 @@
 			
 		</div>
 	</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </html>

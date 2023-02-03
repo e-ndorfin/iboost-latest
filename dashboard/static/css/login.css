@@ -23,6 +23,10 @@
 	color: black;
 }
 
+.bordcol {
+	border-color:#11e497;
+}
+
 .side-image {
 	width: 50%;
 	max-width: 50%;
