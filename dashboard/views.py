@@ -33,7 +33,7 @@ class LineChartJSONView(BaseLineChartView):
 
         return [[0, 0, 0, 4, 6, 5, 7, 4, 4, 4, 6, 7],
                 [0, 0, 0, 4, 5, 6, 7, 4, 7, 4, 7, 8, 8],
-                [0, 0, 0, 5, 7, 4, 6, 7, 8, 8, 8, 8, 8]]
+                [2, 0, 0, 5, 7, 4, 6, 7, 8, 8, 8, 8, 6]]
 
 
 line_chart = TemplateView.as_view(template_name='line_chart.html')
@@ -45,6 +45,10 @@ line_chart_json = LineChartJSONView.as_view()
 def index(request):
     subjects = request.user.profile.subject_set.all()
     print(subjects)
+    grades = request.user.profile.subject_set.all()[1].grade_set.all()[
+        0].created
+    print(grades)
+    # Grade form
     gradeform = GradesForm()
     if request.method == 'POST':
         # Add grades

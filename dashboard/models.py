@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 class Profile(models.Model):
@@ -30,6 +31,7 @@ class Grade(models.Model):
     criterionB = models.IntegerField(default=0, null=True)
     criterionC = models.IntegerField(default=0, null=True)
     criterionD = models.IntegerField(default=0, null=True)
+    created = models.DateTimeField(default=timezone.now)
     subject = models.ForeignKey(Subject, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
