@@ -21,4 +21,5 @@ urlpatterns = [
     path('accountcreation/', views.accountcreation, name="accountcreation"), 
     path('login/', views.loginPage, name='login'),
     path('logout/', views.logoutUser, name="logout"),
+    path('mainchart/', views.main_chart, name="main_chart"),
 ]

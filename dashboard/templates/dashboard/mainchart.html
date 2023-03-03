@@ -1,0 +1,39 @@
+{% load static %}
+
+<div class="container">
+    <canvas id="mainchart"></canvas>
+</div>
+
+<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+<script>
+    var config = {
+        type: 'bar',              //s define chart type
+        data: {
+            datasets: [{
+                data: {{ data|safe }},    // data defined in views.py         
+            }],
+            labels: {{ labels|safe }}          // labels defined in views.py
+        },
+        options: {                            // optional parameters - more can be found in the chart.js documentation 
+            scales: {
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        beginAtZero: true   // minimum y axes will be 0.
+                    }
+                }]
+            },
+            responsive: true,               // ensures the chart adjusts with window size 
+                
+            // title: {                        // sets chart title
+            //     display: true,
+            //     text: {{ title| safe }}
+            // }
+        }
+    };
+  
+    window.onload = function() {
+      var ctx = document.getElementById('mainchart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+</script>

@@ -20,6 +20,10 @@ from .decorators import unauthenticated_user, allowed_users
 
 
 class LineChartJSONView(BaseLineChartView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
     def get_labels(self):
         """Return 7 labels for the x-axis."""
         return ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -45,8 +49,7 @@ line_chart_json = LineChartJSONView.as_view()
 def index(request):
     subjects = request.user.profile.subject_set.all()
     print(subjects)
-    grades = request.user.profile.subject_set.all()[1].grade_set.all()[
-        0].created
+    grades = request.user.profile.subject_set.all()[1].grade_set.all()
     print(grades)
     # Grade form
     gradeform = GradesForm()
@@ -65,6 +68,21 @@ SUBJECT_CHOICES = [
     ('', 'Subject '), ('Chinese', "Chinese"), ('English', "English"), ('Math', "Math"), ('Science', "Science"), ('Individuals and Societies', "Individuals and Societies"), ('Music',
                                                                                                                                                                              "Music"), ('Drama', "Drama"), ('Art', "Art"), ('MYP Physical Education', "MYP Physical Education"), ('Design', "Design"), ('Computer Science', "Computer Science")
 ]
+
+
+def main_chart(request):
+    labels = ["January", "Febuary", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"]
+    data = []
+    for grade in request.user.profile.subject_set.all()[1].grade_set.all():
+        avg = (grade.criterionA+grade.criterionB +
+               grade.criterionC+grade.criterionD)/4
+        data.append(avg)
+
+    return render(request, 'dashboard/mainchart.html', {
+        'labels': labels, 
+        'data': data
+    })
 
 
 @unauthenticated_user
@@ -189,6 +207,7 @@ def accountcreation(request):
 
 def radialtest(request):
     return render(request, 'dashboard/gradestest.html',)
-    
-def accountcreation (request): 
+
+
+def accountcreation(request):
     return render(request, 'dashboard/accountcreation.html',)
