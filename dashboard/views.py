@@ -58,9 +58,25 @@ def index(request):
         gradeform = GradesForm(request.POST)
         if gradeform.is_valid():
             gradeform.save()
-    context = {"subjects": subjects,
-               "gradeform": gradeform}
-    return render(request, 'dashboard/index.html', context)
+    
+    #Graph stuff
+    labels = ["January", "Febuary", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"]
+    data = [0,0,0,0,0,0,0,0,0,0,0,0]
+    print(len(request.user.profile.subject_set.all()))
+    for i in range(len(request.user.profile.subject_set.all())):
+        for grade in request.user.profile.subject_set.all()[i].grade_set.all():
+            avg = (grade.criterionA+grade.criterionB +
+                grade.criterionC+grade.criterionD)/4
+            month = grade.created.month
+            data[month-1] = avg
+
+    return render(request, 'dashboard/index.html', {
+        "subjects": subjects,
+        "gradeform": gradeform,
+        'labels': labels, 
+        'data': data
+    })
 
 
 # Login and Register Function
@@ -70,19 +86,22 @@ SUBJECT_CHOICES = [
 ]
 
 
-def main_chart(request):
-    labels = ["January", "Febuary", "March", "April", "May", "June",
-              "July", "August", "September", "October", "November", "December"]
-    data = []
-    for grade in request.user.profile.subject_set.all()[1].grade_set.all():
-        avg = (grade.criterionA+grade.criterionB +
-               grade.criterionC+grade.criterionD)/4
-        data.append(avg)
+# def main_chart(request):
+#     labels = ["January", "Febuary", "March", "April", "May", "June",
+#               "July", "August", "September", "October", "November", "December"]
+#     data = [0,0,0,0,0,0,0,0,0,0,0,0]
+#     print(len(request.user.profile.subject_set.all()))
+#     for i in range(len(request.user.profile.subject_set.all())):
+#         for grade in request.user.profile.subject_set.all()[i].grade_set.all():
+#             avg = (grade.criterionA+grade.criterionB +
+#                 grade.criterionC+grade.criterionD)/4
+#             month = grade.created.month
+#             data[month-1] = avg
 
-    return render(request, 'dashboard/mainchart.html', {
-        'labels': labels, 
-        'data': data
-    })
+#     return render(request, 'dashboard/mainchart.html', {
+#         'labels': labels, 
+#         'data': data
+#     })
 
 
 @unauthenticated_user

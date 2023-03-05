@@ -7,7 +7,7 @@
 <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
 <script>
     var config = {
-        type: 'bar',              //s define chart type
+        type: 'line',              //s define chart type
         data: {
             datasets: [{
                 data: {{ data|safe }},    // data defined in views.py         
@@ -34,6 +34,7 @@
   
     window.onload = function() {
       var ctx = document.getElementById('mainchart').getContext('2d');
-      window.myPie = new Chart(ctx, config);
+      var myChart = new Chart(ctx, config);
+      console.log("test");
     };
 </script>
