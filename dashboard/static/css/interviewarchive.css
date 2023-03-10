@@ -1,0 +1,27 @@
+
+
+.carousel {
+	margin-top: 50px;
+}
+
+.carousel-inner {
+	height: 100px;
+}
+
+.carousel-caption {
+	color: #fff;
+}
+
+.bordcol-overrides {
+	border-color: #11e497;
+}
+
+.addgrades {
+	position: static;
+	background: #1a1a23;
+}
+
+.gradeforms {
+	border-radius: 50px;
+	width: 100%;
+}

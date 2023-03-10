@@ -192,3 +192,6 @@ def radialtest(request):
     
 def accountcreation (request): 
     return render(request, 'dashboard/accountcreation.html',)
+
+def interviewarchive(request):
+    return render(request, 'dashboard/interviewarchive.html')

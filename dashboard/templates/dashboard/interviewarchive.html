@@ -1,0 +1,221 @@
+{% extends 'dashboard/base.html' %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<link rel="stylesheet" href="{% static 'css/interviewarchive.css' %}" />
+	<script src="{% static 'frontend/addgrades.js' %}"></script>
+</head>
+
+<body>
+	{% block content %}
+	<link rel="stylesheet" href="{% static 'css/interviewarchive.css' %}" />
+	<div class="container-fluid col-md-10 p-4 addgrades" id="addgrades" style="display: none;">
+		<div class="p-5 d-flex justify-content-center" style="height: 80%;">
+			<form method="POST">
+				{% csrf_token %}
+				<div class="row">
+					<div class="col-6 p-4 d-flex justify-content-center">
+						<div class="bg-light col-lg-4 col-md-5 col-sm-6 p-5 gradeforms">
+							<div class="row">
+								<div class="col-6" style="color: black;">
+									<p class="h2 strong">Grades</p>
+									<p class="h5 strong">Use the boxes to input scores for each criterion</p>
+								</div>
+								<div class="col-6 p-3">
+									{{gradeform.subject}}
+									{{gradeform.criterionA}}
+									{{gradeform.criterionB}}
+									{{gradeform.criterionC}}
+									{{gradeform.criterionD}}
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-6 p-4 d-flex justify-content-center">
+						<div class="bg-light col-lg-4 col-md-5 col-sm-6 p-5 gradeforms">
+							<div style="color: black;">
+								<p class="h2">Input Student Reflection Record</p>
+								<p class="h5">In the space provided</p>
+								{{gradeform.srr}}
+								<input type="submit" value="Continue" name="continue"
+									class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2"
+									style="width: 100%;" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class=" container-fluid mainbody col-md-10 p-5" id="mainbody">
+		<div class=" row">
+			<div class="col-8">
+				<h1><strong> Interview Archives</strong></h1>
+			</div>
+		</div>
+
+		<div class="p-3"></div>
+
+		<div class=" row">
+			<div class="px-4 py-3 col border bordcol-overrides rounded">
+				<p class="font-weight-bold lead d-block"><strong> English </strong></p>
+				<div class="overflow-auto" style="max-height: 25em">
+					<div class="px-3 py-3 border bordcol rounded">
+						<p class="lead text-light">Criterion A</p>
+						<img src="{% static 'img/empty.png' %}" class="border border-danger img-fluid" alt="" style="max-height: 20em">
+					</div>
+					<div class="pt-md-3"></div>
+					<div class="px-3 py-3 border bordcol rounded">
+						<p class="lead text-light">Criterion B</p>
+						<img src="{% static 'img/empty.png' %}" class="border border-danger img-fluid" alt="" style="max-height: 20em">
+					</div>
+					<div class="pt-md-3"></div>
+					<div class="px-3 py-3 border bordcol rounded">
+						<p class="lead text-light">Criterion C</p>
+						<img src="{% static 'img/empty.png' %}" class="border border-danger img-fluid" alt="" style="max-height: 20em">
+					</div>
+					<div class="pt-md-3"></div>
+					<div class="px-3 py-3 border bordcol rounded">
+						<p class="lead text-light">Criterion D</p>
+						<img src="{% static 'img/empty.png' %}" class="border border-danger img-fluid" alt="" style="max-height: 20em">
+					</div>
+					<div class="pt-md-3"></div>
+					<div class="px-3 py-3 border bordcol rounded">
+						<p class="lead text-light">Miscellaneous</p>
+						<img src="{% static 'img/empty.png' %}" class="border border-danger img-fluid" alt="" style="max-height: 20em">
+					</div>
+				</div>
+			</div>
+
+			<div class="p-4"></div>
+
+			<div class="px-4 py-3 col border bordcol-overrides rounded">
+				<p class="font-weight-bold lead d-block"><strong> Chinese </strong></p>
+				<div class="overflow-auto" style="max-height: 25em">
+					<div class="px-3 py-3 border bordcol rounded">
+						<p class="lead text-light">Criterion A</p>
+						<img src="{% static 'img/empty.png' %}" class="border border-danger img-fluid" alt="" style="max-height: 20em">
+					</div>
+					<div class="pt-md-3"></div>
+					<div class="px-3 py-3 border bordcol rounded">
+						<p class="lead text-light">Criterion B</p>
+						<img src="{% static 'img/empty.png' %}" class="border border-danger img-fluid" alt="" style="max-height: 20em">
+					</div>
+					<div class="pt-md-3"></div>
+					<div class="px-3 py-3 border bordcol rounded">
+						<p class="lead text-light">Criterion C</p>
+						<img src="{% static 'img/empty.png' %}" class="border border-danger img-fluid" alt="" style="max-height: 20em">
+					</div>
+					<div class="pt-md-3"></div>
+					<div class="px-3 py-3 border bordcol rounded">
+						<p class="lead text-light">Criterion D</p>
+						<img src="{% static 'img/empty.png' %}" class="border border-danger img-fluid" alt="" style="max-height: 20em">
+					</div>
+					<div class="pt-md-3"></div>
+					<div class="px-3 py-3 border bordcol rounded">
+						<p class="lead text-light">Miscellaneous</p>
+						<img src="{% static 'img/empty.png' %}" class="border border-danger img-fluid" alt="" style="max-height: 20em">
+					</div>
+				</div>
+			</div>
+
+			
+			
+		</div>
+		<div class=" row mt-4">
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+		crossorigin="anonymous"></script>
+	<script>
+		var form_fields = document.getElementsByTagName("input"); //Find input fields and put placeholders on them
+		var subjectselect = document.getElementsByTagName("select");
+		var srr = document.getElementsByTagName("textarea")
+
+		subjectselect[0].className += "form-select p-2 my-3";
+		subjectselect[0].style.borderRadius = "20px";
+
+		srr[0].className += "form-control p-2"
+
+		for (var field in form_fields) {
+			form_fields[field].className += "form-control p-2 my-3";
+			form_fields[field].style.borderRadius = "20px";
+		}
+	</script>
+
+	{% comment %}
+	<div class="mainbody container-fluid col-md-10 px-3 containerfr" id="blur">
+		<div id="dashsec1" class="row">
+			<div id="biggraph" class="col-12 col-lg-7 p-2 mt-3">
+				<div class="container">
+					<div class="pt-lg-5"></div>
+					<div class="recentperf p-3">
+						<h1>Recent Performance</h1>
+						<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
+					</div>
+				</div>
+			</div>
+			<div id="focusimprovement" class="col-lg-5 p-3 align-items-center">
+				<h1>Improvement Area</h1>
+				<div class="improvementcontent p-4">
+					<h3 class="improvementtitle">Focus Area Title</h3>
+					<div class="improvementdata">
+						<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
+					</div>
+					<div class="improvementdescription pt-1">
+						Focus area description Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius,
+						distinctio qui. Architecto quidem doloremque dolorem rem eos alias sapiente quaerat
+						atque repudiandae, distinctio officia non veritatis provident iste ducimus rerum?
+					</div>
+				</div>
+			</div>
+			<div id="dashsec2" class="row pt-5">
+				<div id="subjectbw" class="col-12">
+					<div class="container-fluid p-0">
+						<div class="row m-1">
+							<div class="col-4 bestsub mb-3">
+								<div class="subcontent p-3">
+									<h3 class="subtitle">Best Subject</h3>
+									<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
+									<div class="bestsubdescription">
+										Best subject description Lorem, ipsum dolor sit amet consectetur
+										adipisicing
+										elit. Nisi quam laudantium, libero deserunt possimus
+									</div>
+								</div>
+							</div>
+							<div class="col-4 worstsub mb-3">
+								<div class="subcontent p-3">
+									<h3 class="subtitle">Worst Subject</h3>
+									<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
+									<div class="bestsubdescription">
+										Worst subject description Lorem, ipsum dolor sit amet consectetur
+										adipisicing
+										elit. Nisi quam laudantium, libero deserunt possimus
+									</div>
+								</div>
+							</div>
+							<div class="col-4 worstsub">
+								<div class="subcontent p-3">
+									<h4 class="subtitle">Most Improved Subject</h4>
+									<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid biggraph" />
+									<div class="bestsubdescription">
+										Improved subject description Lorem, ipsum dolor sit amet consectetur
+										adipisicing elit. Nisi quam laudantium, libero deserunt possimus
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endcomment %} {% endblock content %}
+	<!-- </div> -->
+</body>
+
+</html>
