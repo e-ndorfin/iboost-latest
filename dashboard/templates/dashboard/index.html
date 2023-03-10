@@ -66,22 +66,7 @@
 		<div class=" row mt-4">
 			<div class="px-4 py-3 col-8 border bordcol-overrides rounded">
 				<p class="font-weight-bold lead d-block">YOUR Performance</p>
-				<canvas id="myChart"></canvas>
-
-				<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
-				<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
-				<script type="text/javascript">
-					$.get('{% url "line_chart_json" %}', function (data) {
-						var ctx = $("#myChart").get(0).getContext("2d");
-						new Chart(ctx, {
-							type: "line",
-							data: data,
-						});
-					});
-				</script>
-				{% comment %}
-				<img src="{% static 'img/empty.png' %}" class="border border-danger img-fluid" alt="" />
-				{% endcomment %}
+				{% include 'dashboard/mainchart.html' %}
 			</div>
 			<div class="col-3 px-4 py-3 ms-auto me-1 border bordcol-overrides rounded">
 				<p class="lead text-light">Todo</p>
@@ -123,7 +108,6 @@
 
 		for (var field in form_fields) {
 			form_fields[field].className += "form-control p-2 my-3";
-			form_fields[field].style.borderRadius = "20px";
 		}
 	</script>
 
