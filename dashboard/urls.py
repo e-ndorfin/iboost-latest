@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views
-from .views import line_chart, line_chart_json
 
 urlpatterns = [
     path('base/', views.base, name="base"),
@@ -12,8 +11,6 @@ urlpatterns = [
     path('improvements3/', views.improvements3, name='improvements3'),
     path('profile/', views.profile, name='profile'),
     path('testing/', views.testing, name='testing'),
-    path('chart', line_chart, name='line_chart'),
-    path('chartJSON', line_chart_json, name='line_chart_json'),
     path('chineseg/', views.chineseg, name="chineseg"),
     path('register/', views.registerPage, name="register"),
     path('modaltest/', views.modaltest, name="modaltest"),

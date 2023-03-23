@@ -10,7 +10,9 @@
         type: 'line',              //s define chart type
         data: {
             datasets: [{
-                data: {{ data|safe }},    // data defined in views.py         
+                label: 'Grades',
+                data: {{ data|safe }},    // data defined in views.py
+                borderColor: 'rgb(255,255,255)',         
             }],
             labels: {{ labels|safe }}          // labels defined in views.py
         },
@@ -24,11 +26,6 @@
                 }]
             },
             responsive: true,               // ensures the chart adjusts with window size 
-                
-            // title: {                        // sets chart title
-            //     display: true,
-            //     text: {{ title| safe }}
-            // }
         }
     };
   

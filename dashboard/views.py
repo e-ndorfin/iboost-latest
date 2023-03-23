@@ -19,38 +19,11 @@ from .forms import *
 from .decorators import unauthenticated_user, allowed_users
 
 
-class LineChartJSONView(BaseLineChartView):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-
-    def get_labels(self):
-        """Return 7 labels for the x-axis."""
-        return ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
-    def get_providers(self):
-        """Return names of datasets."""
-        return ["English", "Chinese", "Chemistry"]
-
-    def get_data(self):
-        """Return 3 datasets to plot."""
-
-        return [[0, 0, 0, 4, 6, 5, 7, 4, 4, 4, 6, 7],
-                [0, 0, 0, 4, 5, 6, 7, 4, 7, 4, 7, 8, 8],
-                [2, 0, 0, 5, 7, 4, 6, 7, 8, 8, 8, 8, 6]]
-
-
-line_chart = TemplateView.as_view(template_name='line_chart.html')
-line_chart_json = LineChartJSONView.as_view()
-
-
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['students'])
 def index(request):
     subjects = request.user.profile.subject_set.all()
-    print(subjects)
     grades = request.user.profile.subject_set.all()[1].grade_set.all()
-    print(grades)
     # Grade form
     gradeform = GradesForm()
     if request.method == 'POST':
@@ -63,13 +36,18 @@ def index(request):
     labels = ["January", "Febuary", "March", "April", "May", "June",
               "July", "August", "September", "October", "November", "December"]
     data = [0,0,0,0,0,0,0,0,0,0,0,0]
-    print(len(request.user.profile.subject_set.all()))
+    avggrade = [0,0,0,0,0,0,0,0,0,0,0,0]
+    monthgradecount = [0,0,0,0,0,0,0,0,0,0,0,0]
+    average = 0
+    month = 0
     for i in range(len(request.user.profile.subject_set.all())):
         for grade in request.user.profile.subject_set.all()[i].grade_set.all():
             avg = (grade.criterionA+grade.criterionB +
                 grade.criterionC+grade.criterionD)/4
             month = grade.created.month
-            data[month-1] = avg
+            monthgradecount[month-1] += 1
+            avggrade[month-1] += avg
+            data[month-1] = avggrade[month-1]/monthgradecount[month-1]
 
     return render(request, 'dashboard/index.html', {
         "subjects": subjects,
