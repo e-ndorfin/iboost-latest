@@ -64,14 +64,14 @@
 			</div>
 		</div>
 		<div class="container-fluid px-2 overflow-hidden">
-			<div class=" row mt-4 gx-3">
-				<div class="col-8 p-3">
+			<div class=" row mt-4 gx-2">
+				<div class="col-8 p-2">
 					<div class="p-3 border bordcol-overrides rounded">
 						<p class="font-weight-bold lead d-block">Your Performance</p>
 						{% include 'dashboard/mainchart.html' %}
 					</div>
 				</div>
-				<div class="col-4 p-3">
+				<div class="col-4 p-2">
 					<div class="p-3 border bordcol-overrides rounded">
 						<p class="lead text-light">Your Worst Performance</p>
 						Subject: {{bestworst.0.0.subject}}
@@ -86,19 +86,19 @@
 			</div>
 		</div>
 		<div class="container-fluid px-2 overflow-hidden">
-			<div class=" row mt-2 gx-3">
+			<div class=" row mt-2 gx-2">
 				<p class="h3">Recent Tests</p>
-				<div class="col-4 p-3">
+				<div class="col-4 p-2">
 					<div class="p-3 border bordcol-overrides rounded">
 						<p class="lead text-light">Test 1</p>
 					</div>
 				</div>
-				<div class="col-4 p-3">
+				<div class="col-4 p-2">
 					<div class="p-3 border bordcol-overrides rounded">
 						<p class="lead text-light">Test 2</p>
 					</div>
 				</div>
-				<div class="col-4 p-3">
+				<div class="col-4 p-2">
 					<div class="p-3 border bordcol-overrides rounded">
 						<p class="font-weight-bold lead d-block">Your Best Performance</p>
 						{% with bestworst|last as last %}
