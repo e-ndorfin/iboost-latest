@@ -38,22 +38,46 @@ def index(request):
     data = [0,0,0,0,0,0,0,0,0,0,0,0]
     avggrade = [0,0,0,0,0,0,0,0,0,0,0,0]
     monthgradecount = [0,0,0,0,0,0,0,0,0,0,0,0]
-    average = 0
+    sortavg = []
+    bestworst = []
     month = 0
+    #Calculate average for each month
     for i in range(len(request.user.profile.subject_set.all())):
         for grade in request.user.profile.subject_set.all()[i].grade_set.all():
             avg = (grade.criterionA+grade.criterionB +
                 grade.criterionC+grade.criterionD)/4
+            grade.avg = avg
+            grade.save()
             month = grade.created.month
             monthgradecount[month-1] += 1
             avggrade[month-1] += avg
             data[month-1] = avggrade[month-1]/monthgradecount[month-1]
-
+    
+    # #Find best and worst subjects
+    for k in range(len(request.user.profile.subject_set.all())):
+        for grade in request.user.profile.subject_set.all()[k].grade_set.all():
+            sortavg.append(grade.avg)
+        #Insertion sort
+        for i in range(1, len(sortavg)):
+            key = sortavg[i]
+            k = i-1
+            while k >= 0 and sortavg[k] > key:
+                sortavg[k+1] = sortavg[k]
+                k -= 1
+            sortavg[k+1] = key
+    #Filter for grades
+    for r in range(len(request.user.profile.subject_set.all())):
+        for j in range(len(sortavg)):
+            if(request.user.profile.subject_set.all()[r].grade_set.all().filter(avg=sortavg[j]).exists()):
+                bestworst.append(request.user.profile.subject_set.all()[r].grade_set.all().filter(avg=sortavg[j]))
+        
+            
     return render(request, 'dashboard/index.html', {
         "subjects": subjects,
         "gradeform": gradeform,
         'labels': labels, 
-        'data': data
+        'data': data,
+        'bestworst': bestworst
     })
 
 
@@ -62,24 +86,6 @@ SUBJECT_CHOICES = [
     ('', 'Subject '), ('Chinese', "Chinese"), ('English', "English"), ('Math', "Math"), ('Science', "Science"), ('Individuals and Societies', "Individuals and Societies"), ('Music',
                                                                                                                                                                              "Music"), ('Drama', "Drama"), ('Art', "Art"), ('MYP Physical Education', "MYP Physical Education"), ('Design', "Design"), ('Computer Science', "Computer Science")
 ]
-
-
-# def main_chart(request):
-#     labels = ["January", "Febuary", "March", "April", "May", "June",
-#               "July", "August", "September", "October", "November", "December"]
-#     data = [0,0,0,0,0,0,0,0,0,0,0,0]
-#     print(len(request.user.profile.subject_set.all()))
-#     for i in range(len(request.user.profile.subject_set.all())):
-#         for grade in request.user.profile.subject_set.all()[i].grade_set.all():
-#             avg = (grade.criterionA+grade.criterionB +
-#                 grade.criterionC+grade.criterionD)/4
-#             month = grade.created.month
-#             data[month-1] = avg
-
-#     return render(request, 'dashboard/mainchart.html', {
-#         'labels': labels, 
-#         'data': data
-#     })
 
 
 @unauthenticated_user

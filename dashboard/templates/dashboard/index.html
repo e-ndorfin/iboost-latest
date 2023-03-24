@@ -63,36 +63,59 @@
 				</div>
 			</div>
 		</div>
-		<div class=" row mt-4">
-			<div class="px-4 py-3 col-8 border bordcol-overrides rounded">
-				<p class="font-weight-bold lead d-block">YOUR Performance</p>
-				{% include 'dashboard/mainchart.html' %}
+		<div class="container-fluid px-2 overflow-hidden">
+			<div class=" row mt-4 gx-3">
+				<div class="col-8 p-3">
+					<div class="p-3 border bordcol-overrides rounded">
+						<p class="font-weight-bold lead d-block">Your Performance</p>
+						{% include 'dashboard/mainchart.html' %}
+					</div>
+				</div>
+				<div class="col-4 p-3">
+					<div class="p-3 border bordcol-overrides rounded">
+						<p class="lead text-light">Your Worst Performance</p>
+						Subject: {{bestworst.0.0.subject}}
+						<br>
+						Grade: {{bestworst.0.0}}
+						<hr>
+						<div class="p-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo hic animi rerum? Ipsa, quidem. Sint amet
+							temporibus non tempore nisi optio nihil, id sapiente vero veniam, voluptatem est, beatae accusantium.</div>
+
+					</div>
+				</div>
 			</div>
-			<div class="col-3 px-4 py-3 ms-auto me-1 border bordcol-overrides rounded">
-				<p class="lead text-light">Todo</p>
+		</div>
+		<div class="container-fluid px-2 overflow-hidden">
+			<div class=" row mt-2 gx-3">
+				<p class="h3">Recent Tests</p>
+				<div class="col-4 p-3">
+					<div class="p-3 border bordcol-overrides rounded">
+						<p class="lead text-light">Test 1</p>
+					</div>
+				</div>
+				<div class="col-4 p-3">
+					<div class="p-3 border bordcol-overrides rounded">
+						<p class="lead text-light">Test 2</p>
+					</div>
+				</div>
+				<div class="col-4 p-3">
+					<div class="p-3 border bordcol-overrides rounded">
+						<p class="font-weight-bold lead d-block">Your Best Performance</p>
+						{% with bestworst|last as last %}
+						<div>
+							Subject: {{last.0.subject}}
+							<br>
+							Grade: {{last.0}}
+							<hr>
+							<h2></h2>
+							<div class="p-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo hic animi rerum? Ipsa, quidem. Sint amet temporibus non tempore nisi optio nihil, id sapiente vero veniam, voluptatem est, beatae accusantium.</div>
+						</div>
+						{% endwith %}
+					</div>
+				</div>
 			</div>
 		</div>
 
-		<div class="row mt-4">
-			<div class="col-4 px-4 py-3 border bordcol-overrides rounded">
-				<p class="lead font-weight-bold d-block">Leaderboard</p>
-			</div>
-			<div class="col-7 ms-auto me-1 px-4 py-3 border bordcol-overrides rounded">
-				<p class="lead font-weight-bold d-block">Recent Test</p>
-				<div class="row">
-					<div class="col-5">
-	<div class="container-fluid mainbody col-md-10 p-5">
-		<div class="row"> 
-			<h6>Subject</h6>
-			<div class="border bordcol-overrides rounded col" style="height: 100px"></div>
-			<div class="pt-md-3"></div>
-			<div class="border bordcol-overrides rounded col">
-				<p style="font-size: 12px">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit.
-				</p>
-			</div>
-		</div>
-	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
 		crossorigin="anonymous"></script>

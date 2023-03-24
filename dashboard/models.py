@@ -31,6 +31,7 @@ class Grade(models.Model):
     criterionB = models.IntegerField(default=0, null=True)
     criterionC = models.IntegerField(default=0, null=True)
     criterionD = models.IntegerField(default=0, null=True)
+    avg = models.FloatField(default=0, null=True)
     created = models.DateTimeField(default=timezone.now)
     subject = models.ForeignKey(Subject, null=True, on_delete=models.CASCADE)
 
