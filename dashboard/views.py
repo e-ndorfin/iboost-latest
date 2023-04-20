@@ -35,7 +35,7 @@ def index(request):
     #Graph stuff
     labels = ["January", "Febuary", "March", "April", "May", "June",
               "July", "August", "September", "October", "November", "December"]
-    data = [0,0,0,0,0,0,0,0,0,0,0,0]
+    datamain = [0,0,0,0,0,0,0,0,0,0,0,0]
     avggrade = [0,0,0,0,0,0,0,0,0,0,0,0]
     monthgradecount = [0,0,0,0,0,0,0,0,0,0,0,0]
     sortavg = []
@@ -52,13 +52,25 @@ def index(request):
             month = grade.created.month
             monthgradecount[month-1] += 1
             avggrade[month-1] += avg
-            data[month-1] = avggrade[month-1]/monthgradecount[month-1]
+            datamain[month-1] = avggrade[month-1]/monthgradecount[month-1]
+
+    #Calculate average for each subject
+    subjects = request.user.profile.subject_set.all()
+    subjectavg = 0
+    for subject in subjects:
+        for grade in subject.grade_set.all():
+            subjectavg += grade.avg
+        if len(subject.grade_set.all()) != 0:
+            subjectavg = subjectavg/len(subject.grade_set.all())
+        subject.subjectavg = subjectavg
+        subject.save()
+        subjectavg = 0
     
-    # #Find best and worst subjects
+    #Find best and worst subjects
     for k in range(len(request.user.profile.subject_set.all())):
         for grade in request.user.profile.subject_set.all()[k].grade_set.all():
             sortavg.append(grade.avg)
-        #Insertion sort
+        #Sort
         for i in range(1, len(sortavg)):
             key = sortavg[i]
             k = i-1
@@ -66,6 +78,7 @@ def index(request):
                 sortavg[k+1] = sortavg[k]
                 k -= 1
             sortavg[k+1] = key
+
     #Add best/worst:
     for r in range(len(request.user.profile.subject_set.all())):
         if(request.user.profile.subject_set.all()[r].grade_set.all().exists() == True):
@@ -76,13 +89,12 @@ def index(request):
             bestworst[0]=grades[p]
         elif grades[p].avg == sortavg[len(sortavg)-1]:
             bestworst[1] = grades[p]
-        
             
     return render(request, 'dashboard/index.html', {
         "subjects": subjects,
         "gradeform": gradeform,
         'labels': labels, 
-        'data': data,
+        'data': datamain,
         'bestworst': bestworst
     })
 

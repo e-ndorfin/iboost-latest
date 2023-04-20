@@ -18,6 +18,8 @@ class Subject(models.Model):
     # User has a "One to Many" relationship with Subject, as one User can have multiple subjects,while the opposite is not the case
     subjectname = models.CharField(max_length=100, null=True)
     profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE)
+    subjectavg = models.DecimalField(
+        default=0, decimal_places=1, max_digits=2, null=True)
 
     def __str__(self):
         return self.subjectname
@@ -31,7 +33,8 @@ class Grade(models.Model):
     criterionB = models.IntegerField(default=0, null=True)
     criterionC = models.IntegerField(default=0, null=True)
     criterionD = models.IntegerField(default=0, null=True)
-    avg = models.FloatField(default=0, null=True)
+    avg = models.DecimalField(
+        default=0, decimal_places=1, max_digits=2, null=True)
     created = models.DateTimeField(default=timezone.now)
     subject = models.ForeignKey(Subject, null=True, on_delete=models.CASCADE)
 

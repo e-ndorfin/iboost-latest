@@ -76,10 +76,26 @@
 						<p class="lead text-light">Your Worst Performance</p>
 						Subject: {{bestworst.0.subject}}
 						<br>
-						Grade: {{bestworst.0}}
 						<hr>
-						<div class="p-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo hic animi rerum? Ipsa, quidem. Sint amet
-							temporibus non tempore nisi optio nihil, id sapiente vero veniam, voluptatem est, beatae accusantium.</div>
+						<div class="container-fluid">
+							<div class="row pb-3">
+								<div class="col">
+									<div class="h6">Grade: {{bestworst.0}}</div>
+								<div class="col">
+									<div class="h6">Average Grade: {{bestworst.0.subject.subjectavg}}</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-6">
+									<div class="h6">Your Reflection:</div>
+									<div class="p-3">{{bestworst.0.srr}}</div>
+								</div>
+								<div class="col-6">
+									<div class="h6">Our Suggestions:</div>
+									<div class="p3">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus, deleniti magni. Illum, recusandae velit. Doloribus dolore esse nulla voluptatem iste doloremque eaque quasi rem adipisci ullam debitis voluptas, distinctio obcaecati?</div>
+								</div>
+							</div>
+						</div>
 
 					</div>
 				</div>
@@ -108,7 +124,7 @@
 							Grade: {{bestworst.1}}
 							<hr>
 							<h2></h2>
-							<div class="p-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo hic animi rerum? Ipsa, quidem. Sint amet temporibus non tempore nisi optio nihil, id sapiente vero veniam, voluptatem est, beatae accusantium.</div>
+							<div class="p-3">{{bestworst.1.srr}}</div>
 						</div>
 						{% endwith %}
 					</div>
