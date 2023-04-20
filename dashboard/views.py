@@ -39,7 +39,8 @@ def index(request):
     avggrade = [0,0,0,0,0,0,0,0,0,0,0,0]
     monthgradecount = [0,0,0,0,0,0,0,0,0,0,0,0]
     sortavg = []
-    bestworst = []
+    bestworst = [0,0]
+    grades = []
     month = 0
     #Calculate average for each month
     for i in range(len(request.user.profile.subject_set.all())):
@@ -65,11 +66,16 @@ def index(request):
                 sortavg[k+1] = sortavg[k]
                 k -= 1
             sortavg[k+1] = key
-    #Filter for grades
+    #Add best/worst:
     for r in range(len(request.user.profile.subject_set.all())):
-        for j in range(len(sortavg)):
-            if(request.user.profile.subject_set.all()[r].grade_set.all().filter(avg=sortavg[j]).exists()):
-                bestworst.append(request.user.profile.subject_set.all()[r].grade_set.all().filter(avg=sortavg[j]))
+        if(request.user.profile.subject_set.all()[r].grade_set.all().exists() == True):
+            for grade in request.user.profile.subject_set.all()[r].grade_set.all():
+                grades.append(grade)
+    for p in range(len(grades)):
+        if grades[p].avg == sortavg[0]:
+            bestworst[0]=grades[p]
+        elif grades[p].avg == sortavg[len(sortavg)-1]:
+            bestworst[1] = grades[p]
         
             
     return render(request, 'dashboard/index.html', {

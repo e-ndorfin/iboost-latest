@@ -74,9 +74,9 @@
 				<div class="col-4 p-2">
 					<div class="p-3 border bordcol-overrides rounded">
 						<p class="lead text-light">Your Worst Performance</p>
-						Subject: {{bestworst.0.0.subject}}
+						Subject: {{bestworst.0.subject}}
 						<br>
-						Grade: {{bestworst.0.0}}
+						Grade: {{bestworst.0}}
 						<hr>
 						<div class="p-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo hic animi rerum? Ipsa, quidem. Sint amet
 							temporibus non tempore nisi optio nihil, id sapiente vero veniam, voluptatem est, beatae accusantium.</div>
@@ -103,9 +103,9 @@
 						<p class="font-weight-bold lead d-block">Your Best Performance</p>
 						{% with bestworst|last as last %}
 						<div>
-							Subject: {{last.0.subject}}
+							Subject: {{bestworst.1.subject}}
 							<br>
-							Grade: {{last.0}}
+							Grade: {{bestworst.1}}
 							<hr>
 							<h2></h2>
 							<div class="p-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo hic animi rerum? Ipsa, quidem. Sint amet temporibus non tempore nisi optio nihil, id sapiente vero veniam, voluptatem est, beatae accusantium.</div>
