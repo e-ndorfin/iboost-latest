@@ -42,6 +42,7 @@ def index(request):
     bestworst = [0,0]
     grades = []
     month = 0
+
     #Calculate average for each month
     for i in range(len(request.user.profile.subject_set.all())):
         for grade in request.user.profile.subject_set.all()[i].grade_set.all():
@@ -97,6 +98,51 @@ def index(request):
         'data': datamain,
         'bestworst': bestworst
     })
+
+def bestbar_chart(request):
+    labels = ["Criterion A, Criterion B, Criterion C, Criterion D, Grade Average, Subject Average"]
+    data = [0,0,0,0,0,0]
+    bestworst = [0,0]
+    sortavg = []
+    grades = []
+
+    #Set data
+    for r in range(len(request.user.profile.subject_set.all())):
+        if(request.user.profile.subject_set.all()[r].grade_set.all().exists() == True):
+            for grade in request.user.profile.subject_set.all()[r].grade_set.all():
+                grades.append(grade)
+
+    #Find best and worst subjects
+    for k in range(len(request.user.profile.subject_set.all())):
+        for grade in request.user.profile.subject_set.all()[k].grade_set.all():
+            sortavg.append(grade.avg)
+        #Sort
+        for i in range(1, len(sortavg)):
+            key = sortavg[i]
+            k = i-1
+            while k >= 0 and sortavg[k] > key:
+                sortavg[k+1] = sortavg[k]
+                k -= 1
+            sortavg[k+1] = key
+
+    #Add best/worst:
+    for r in range(len(request.user.profile.subject_set.all())):
+        if(request.user.profile.subject_set.all()[r].grade_set.all().exists() == True):
+            for grade in request.user.profile.subject_set.all()[r].grade_set.all():
+                grades.append(grade)
+    for p in range(len(grades)):
+        if grades[p].avg == sortavg[0]:
+            bestworst[0]=grades[p]
+        elif grades[p].avg == sortavg[len(sortavg)-1]:
+            bestworst[1] = grades[p]
+    data[0] = bestworst[1].criterionA
+    data[1] = bestworst[1].criterionB
+    data[2] = bestworst[1].criterionC
+    data[3] = bestworst[1].criterionD
+    data[4] = bestworst[1].avg
+    data[5] = bestworst[1].subject.subjectavg
+    print(data)
+    return render(request, 'dashboard/index.html')
 
 
 # Login and Register Function
