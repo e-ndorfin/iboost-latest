@@ -1,0 +1,40 @@
+{% load static %}
+<div class="container">
+    <canvas id="bestbarchart"></canvas>
+</div>
+
+<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+<script>
+    var config = {
+        type: 'bar',              //s define chart type
+        data: {
+            datasets: [{
+                label: 0,
+                data: {{ databest| safe }},    // data defined in views.py
+                backgroundColor: ['rgba(54, 162, 235, 0.5)', 'rgba(255, 205, 86, 0.5)','rgba(75, 192, 192, 0.5)', 'rgba(255, 99, 132, 0.5)', 'rgba(153, 102, 255, 0.5)','rgba(255,255,255, 0.5)'],
+                borderColor: ['rgba(54, 162, 235)', 'rgba(255, 205, 86)', 'rgba(75, 192, 192)', 'rgba(255, 99, 132)', 'rgba(153, 102, 255)', 'rgba(120,119,119)'],
+                borderWidth: 2,
+            }],
+            labels: {{ labelsbest | safe }}          // labels defined in views.py
+        },
+        options: {                            // optional parameters - more can be found in the chart.js documentation 
+            scales: {
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        beginAtZero: true   // minimum y axes will be 0.
+                    }
+                }]
+            },
+            legend: {
+                display: false
+            },
+            responsive: true,               // ensures the chart adjusts with window size 
+        }
+    };
+
+    window.onload = function () {
+        var ctx = document.getElementById('bestbarchart').getContext('2d');
+        window.myPie = new Chart(ctx, config);
+    };
+</script>

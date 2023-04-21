@@ -89,8 +89,8 @@ def index(request):
         if grades[p].avg == sortavg[0]:
             bestworst[0]=grades[p]
         elif grades[p].avg == sortavg[len(sortavg)-1]:
-            bestworst[1] = grades[p]
-            
+            bestworst[1] = grades[p] 
+
     return render(request, 'dashboard/index.html', {
         "subjects": subjects,
         "gradeform": gradeform,
@@ -100,8 +100,8 @@ def index(request):
     })
 
 def bestbar_chart(request):
-    labels = ["Criterion A, Criterion B, Criterion C, Criterion D, Grade Average, Subject Average"]
-    data = [0,0,0,0,0,0]
+    labelsbest = ["Criterion A", "Criterion B", "Criterion C", "Criterion D", "Grade Average", "Subject Average"]
+    databest = [0,0,0,0,0,0]
     bestworst = [0,0]
     sortavg = []
     grades = []
@@ -135,14 +135,16 @@ def bestbar_chart(request):
             bestworst[0]=grades[p]
         elif grades[p].avg == sortavg[len(sortavg)-1]:
             bestworst[1] = grades[p]
-    data[0] = bestworst[1].criterionA
-    data[1] = bestworst[1].criterionB
-    data[2] = bestworst[1].criterionC
-    data[3] = bestworst[1].criterionD
-    data[4] = bestworst[1].avg
-    data[5] = bestworst[1].subject.subjectavg
-    print(data)
-    return render(request, 'dashboard/index.html')
+    databest[0] = bestworst[1].criterionA
+    databest[1] = bestworst[1].criterionB
+    databest[2] = bestworst[1].criterionC
+    databest[3] = bestworst[1].criterionD
+    databest[4] = float(bestworst[1].avg)
+    databest[5] = float(bestworst[1].subject.subjectavg)
+    return render(request, 'dashboard/barchartbest.html', {
+        'labelsbest': labelsbest,
+        'databest': databest,
+    })
 
 
 # Login and Register Function
