@@ -25,3 +25,20 @@
 	border-radius: 50px;
 	width: 100%;
 }
+
+.tag {
+	background: #11e497;
+	border-radius: 20px;
+	color:#1a1a23;
+	text-align: center;
+	margin-bottom: 0rem;
+}
+
+.tagdiv{
+	text-align: center;
+	margin-bottom: 0rem;
+}
+
+.p{
+	margin-bottom: 0rem;
+}

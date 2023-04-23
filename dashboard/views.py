@@ -200,6 +200,10 @@ def testing(request):
     subjectname = Subject.objects.all()
     return render(request, 'dashboard/testing.html', {'grades': grades, 'subjectname': subjectname},)
 
+@ login_required(login_url='login')
+@ allowed_users(allowed_roles=['students'])
+def editprofile(request):
+    return render(request, 'dashboard/editprofile.html')
 
 @ login_required(login_url='login')
 def chineseg(request):
