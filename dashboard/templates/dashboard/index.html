@@ -76,11 +76,7 @@
 						<p class="lead text-light">Your Worst Performance</p>
 						Subject: {{bestworst.0.subject}}
 						<br>
-						Grade: {{bestworst.0}}
 						<hr>
-						<div class="p-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo hic animi rerum? Ipsa, quidem. Sint amet
-							temporibus non tempore nisi optio nihil, id sapiente vero veniam, voluptatem est, beatae accusantium.</div>
-
 					</div>
 				</div>
 			</div>
@@ -107,8 +103,7 @@
 							<br>
 							Grade: {{bestworst.1}}
 							<hr>
-							<h2></h2>
-							<div class="p-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo hic animi rerum? Ipsa, quidem. Sint amet temporibus non tempore nisi optio nihil, id sapiente vero veniam, voluptatem est, beatae accusantium.</div>
+							{% include 'dashboard/barchartbest.html' %}
 						</div>
 						{% endwith %}
 					</div>
