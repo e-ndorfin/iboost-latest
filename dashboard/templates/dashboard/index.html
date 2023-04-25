@@ -68,7 +68,36 @@
 				<div class="col-8 p-2">
 					<div class="p-3 border bordcol-overrides rounded">
 						<p class="font-weight-bold lead d-block">Your Performance</p>
-						{% include 'dashboard/mainchart.html' %}
+						<div class="container">
+							<canvas id="mainchart"></canvas>
+						</div>
+						<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+						<script>
+							const ctx_main = document.getElementById('mainchart').getContext('2d');
+							var config_main = {
+								type: 'line',              //s define chart type
+								data: {
+									datasets: [{
+										label: 'OA',
+										data: {{ data| safe }},    // data defined in views.py
+										borderColor: 'rgb(255,255,255)',         
+						            }],
+									labels: {{ labels | safe }}          // labels defined in views.py
+						        },
+								options: {                            // optional parameters - more can be found in the chart.js documentation 
+									scales: {
+										yAxes: [{
+											display: true,
+											ticks: {
+												beginAtZero: true   // minimum y axes will be 0.
+											}
+										}]
+									},
+									responsive: true,               // ensures the chart adjusts with window size 
+								}
+						    };
+							const chart_main = new Chart(ctx_main, config_main)
+						</script>
 					</div>
 				</div>
 				<div class="col-4 p-2">
@@ -76,7 +105,46 @@
 						<p class="lead text-light">Your Worst Performance</p>
 						Subject: {{bestworst.0.subject}}
 						<br>
+						Grade: {{bestworst.0}}
+						<br>
 						<hr>
+						<div class="container">
+							<canvas id="worstbarchart"></canvas>
+						</div>
+						<hr>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt labore hic tempora quasi eius, sapiente architecto, consectetur, officiis delectus repudiandae consequatur rerum qui eos ab ex sunt fuga impedit laborum?
+						<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+						<script>
+							const ctx_worst = document.getElementById('worstbarchart').getContext('2d');
+							var config_worst = {
+								type: 'bar',              //s define chart type
+								data: {
+									datasets: [{
+										label: 0,
+										data: {{ dataworst| safe }},    // data defined in views.py
+									backgroundColor: ['rgba(54, 162, 235, 0.5)', 'rgba(255, 205, 86, 0.5)', 'rgba(75, 192, 192, 0.5)', 'rgba(255, 99, 132, 0.5)', 'rgba(153, 102, 255, 0.5)', 'rgba(255,255,255, 0.5)'],
+									borderColor: ['rgba(54, 162, 235)', 'rgba(255, 205, 86)', 'rgba(75, 192, 192)', 'rgba(255, 99, 132)', 'rgba(153, 102, 255)', 'rgba(120,119,119)'],
+									borderWidth: 2,
+									}],
+									labels: {{labelsworst | safe }}          // labels defined in views.py
+								},
+								options: {                            // optional parameters - more can be found in the chart.js documentation 
+									scales: {
+										yAxes: [{
+											display: true,
+											ticks: {
+												beginAtZero: true   // minimum y axes will be 0.
+											}
+										}]
+									},
+									legend: {
+										display: false
+									},
+									responsive: true,               // ensures the chart adjusts with window size 
+								}
+							};
+							const chart_worst = new Chart(ctx_worst, config_worst)
+						</script>
 					</div>
 				</div>
 			</div>
@@ -103,7 +171,43 @@
 							<br>
 							Grade: {{bestworst.1}}
 							<hr>
-							{% include 'dashboard/barchartbest.html' %}
+							<div class="container">
+								<canvas id="bestbarchart"></canvas>
+							</div>
+							<hr>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum facere optio maiores eaque beatae quas asperiores? Eos adipisci tempore autem voluptatum ab, corporis, dolorum distinctio reprehenderit, aut dignissimos dolore itaque.
+							<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+							<script>
+								const ctx_best = document.getElementById('bestbarchart').getContext('2d');
+								var config_best = {
+									type: 'bar',              //s define chart type
+									data: {
+										datasets: [{
+											label: 0,
+											data: {{ databest|safe }},    // data defined in views.py
+											backgroundColor: ['rgba(54, 162, 235, 0.5)', 'rgba(255, 205, 86, 0.5)', 'rgba(75, 192, 192, 0.5)', 'rgba(255, 99, 132, 0.5)', 'rgba(153, 102, 255, 0.5)', 'rgba(255,255,255, 0.5)'],
+											borderColor: ['rgba(54, 162, 235)', 'rgba(255, 205, 86)', 'rgba(75, 192, 192)', 'rgba(255, 99, 132)', 'rgba(153, 102, 255)', 'rgba(120,119,119)'],
+											borderWidth: 2,
+							            }],
+										labels: {{labelsbest | safe}}          // labels defined in views.py
+							        },
+									options: {                            // optional parameters - more can be found in the chart.js documentation 
+										scales: {
+											yAxes: [{
+												display: true,
+												ticks: {
+													beginAtZero: true   // minimum y axes will be 0.
+												}
+											}]
+										},
+										legend: {
+											display: false
+										},
+										responsive: true,               // ensures the chart adjusts with window size 
+									}
+								};
+								const chart_best = new Chart(ctx_best, config_best)
+							</script>
 						</div>
 						{% endwith %}
 					</div>

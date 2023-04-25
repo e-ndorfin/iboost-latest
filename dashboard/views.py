@@ -42,6 +42,12 @@ def index(request):
     bestworst = [0,0]
     grades = []
     month = 0
+    databest = [0,0,0,0,0,0]
+    dataworst = [0, 0, 0, 0, 0, 0]
+    labelsbest= ["Criterion A", "Criterion B", "Criterion C",
+                  "Criterion D", "Grade Average", "Subject Average"]
+    labelsworst = ["Criterion A", "Criterion B", "Criterion C",
+                   "Criterion D", "Grade Average", "Subject Average"]
 
     #Calculate average for each month
     for i in range(len(request.user.profile.subject_set.all())):
@@ -90,69 +96,41 @@ def index(request):
             bestworst[0]=grades[p]
         elif grades[p].avg == sortavg[len(sortavg)-1]:
             bestworst[1] = grades[p] 
+    
+    if bestworst[0] != 0 and bestworst[1] != 0:
+        #Set best:
+        databest[0] = bestworst[1].criterionA
+        databest[1] = bestworst[1].criterionB
+        databest[2] = bestworst[1].criterionC
+        databest[3] = bestworst[1].criterionD
+        databest[4] = float(bestworst[1].avg)
+        databest[5] = float(bestworst[1].subject.subjectavg)
+
+        #Set worst:
+        dataworst[0] = bestworst[0].criterionA
+        dataworst[1] = bestworst[0].criterionB
+        dataworst[2] = bestworst[0].criterionC
+        dataworst[3] = bestworst[0].criterionD
+        dataworst[4] = float(bestworst[0].avg)
+        dataworst[5] = float(bestworst[0].subject.subjectavg)
 
     return render(request, 'dashboard/index.html', {
         "subjects": subjects,
         "gradeform": gradeform,
         'labels': labels, 
         'data': datamain,
-        'bestworst': bestworst
-    })
-
-def bestbar_chart(request):
-    labelsbest = ["Criterion A", "Criterion B", "Criterion C", "Criterion D", "Grade Average", "Subject Average"]
-    databest = [0,0,0,0,0,0]
-    bestworst = [0,0]
-    sortavg = []
-    grades = []
-
-    #Set data
-    for r in range(len(request.user.profile.subject_set.all())):
-        if(request.user.profile.subject_set.all()[r].grade_set.all().exists() == True):
-            for grade in request.user.profile.subject_set.all()[r].grade_set.all():
-                grades.append(grade)
-
-    #Find best and worst subjects
-    for k in range(len(request.user.profile.subject_set.all())):
-        for grade in request.user.profile.subject_set.all()[k].grade_set.all():
-            sortavg.append(grade.avg)
-        #Sort
-        for i in range(1, len(sortavg)):
-            key = sortavg[i]
-            k = i-1
-            while k >= 0 and sortavg[k] > key:
-                sortavg[k+1] = sortavg[k]
-                k -= 1
-            sortavg[k+1] = key
-
-    #Add best/worst:
-    for r in range(len(request.user.profile.subject_set.all())):
-        if(request.user.profile.subject_set.all()[r].grade_set.all().exists() == True):
-            for grade in request.user.profile.subject_set.all()[r].grade_set.all():
-                grades.append(grade)
-    for p in range(len(grades)):
-        if grades[p].avg == sortavg[0]:
-            bestworst[0]=grades[p]
-        elif grades[p].avg == sortavg[len(sortavg)-1]:
-            bestworst[1] = grades[p]
-    databest[0] = bestworst[1].criterionA
-    databest[1] = bestworst[1].criterionB
-    databest[2] = bestworst[1].criterionC
-    databest[3] = bestworst[1].criterionD
-    databest[4] = float(bestworst[1].avg)
-    databest[5] = float(bestworst[1].subject.subjectavg)
-    return render(request, 'dashboard/barchartbest.html', {
+        'bestworst': bestworst,
         'labelsbest': labelsbest,
         'databest': databest,
+        'labelsworst' : labelsworst,
+        'dataworst': dataworst,
     })
-
 
 # Login and Register Function
 SUBJECT_CHOICES = [
     ('', 'Subject '), ('Chinese', "Chinese"), ('English', "English"), ('Math', "Math"), ('Science', "Science"), ('Individuals and Societies', "Individuals and Societies"), ('Music',
                                                                                                                                                                              "Music"), ('Drama', "Drama"), ('Art', "Art"), ('MYP Physical Education', "MYP Physical Education"), ('Design', "Design"), ('Computer Science', "Computer Science")
 ]
-
 
 @unauthenticated_user
 def registerPage(request):
