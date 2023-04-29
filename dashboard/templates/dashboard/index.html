@@ -102,7 +102,7 @@
 				</div>
 				<div class="col-4 p-2">
 					<div class="p-3 border bordcol-overrides rounded">
-						<p class="lead text-light">Your Worst Performance</p>
+						<p class="lead text-light">Your Worst Subject</p>
 						Subject: {{bestworst.0.subject}}
 						<br>
 						Grade: {{bestworst.0}}
@@ -151,20 +151,21 @@
 		</div>
 		<div class="container-fluid px-2 overflow-hidden">
 			<div class=" row mt-2 gx-2">
-				<p class="h3">Recent Tests</p>
 				<div class="col-4 p-2">
+					<p class="h3">Recent Test</p>
 					<div class="p-3 border bordcol-overrides rounded">
 						<p class="lead text-light">Test 1</p>
 					</div>
 				</div>
 				<div class="col-4 p-2">
+					<p class="h3">Overall Performance</p>
 					<div class="p-3 border bordcol-overrides rounded">
 						<p class="lead text-light">Test 2</p>
 					</div>
 				</div>
 				<div class="col-4 p-2">
 					<div class="p-3 border bordcol-overrides rounded">
-						<p class="font-weight-bold lead d-block">Your Best Performance</p>
+						<p class="font-weight-bold lead d-block">Your Best Subject</p>
 						{% with bestworst|last as last %}
 						<div>
 							Subject: {{bestworst.1.subject}}
