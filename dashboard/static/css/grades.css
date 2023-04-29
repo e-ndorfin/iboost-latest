@@ -1,16 +1,10 @@
-.gradeact {
-	background: #11e497;
-	border-radius: 0.3em;
-	box-shadow: 0 0.5em 0.5em -0.4em rgb(29, 136, 8);
+.grades-container {
+	background-color: rgb (1, 11, 25);
+	color: rgb(1, 11, 25);
 }
-
-.gradeact a {
-	color: #181725;
+.subject {
+	border-radius: 50px;
+	background: white;
+	height: 100px;
+	width: 100px;
 }
-
-.body{
-	background: rgba(0, 0, 0, 0.9);
-	margin: 0;
-	color: #fff;
-}
-
