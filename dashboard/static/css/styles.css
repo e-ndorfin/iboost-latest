@@ -202,3 +202,18 @@ background: #818181;
 .fr#blur.active {
 	filter: blur(20px);
 }
+
+
+.bordcol-overrides {
+	border-color: #11e497;
+}
+
+.addgrades {
+	position: static;
+	background: #1a1a23;
+}
+
+.gradeforms {
+	border-radius: 50px;
+	width: 100%;
+}
