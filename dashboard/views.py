@@ -48,6 +48,8 @@ def index(request):
                   "Criterion D", "Grade Average", "Subject Average"]
     labelsworst = ["Criterion A", "Criterion B", "Criterion C",
                    "Criterion D", "Grade Average", "Subject Average"]
+    labelsradar = []
+    dataradar = [0,0,0,0,0,0]
 
     #Calculate average for each month
     for i in range(len(request.user.profile.subject_set.all())):
@@ -64,13 +66,17 @@ def index(request):
     #Calculate average for each subject
     subjects = request.user.profile.subject_set.all()
     subjectavg = 0
+    i = 0
     for subject in subjects:
+        labelsradar.append(subject.subjectname)
         for grade in subject.grade_set.all():
             subjectavg += grade.avg
         if len(subject.grade_set.all()) != 0:
             subjectavg = subjectavg/len(subject.grade_set.all())
         subject.subjectavg = subjectavg
         subject.save()
+        dataradar[i] = float(subjectavg)
+        i += 1
         subjectavg = 0
     
     #Find best and worst subjects
@@ -124,6 +130,8 @@ def index(request):
         'databest': databest,
         'labelsworst' : labelsworst,
         'dataworst': dataworst,
+        'dataradar': dataradar,
+        'labelsradar': labelsradar,
     })
 
 # Login and Register Function

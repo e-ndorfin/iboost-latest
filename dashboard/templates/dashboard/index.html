@@ -1,16 +1,15 @@
 {% extends 'dashboard/base.html' %} {% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<link rel="stylesheet" href="{% static 'css/index.css' %}" />
 	<script src="{% static 'frontend/addgrades.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'css/index.css' %}" />
 </head>
 
 <body>
-	{% block content %}
-	<link rel="stylesheet" href="{% static 'css/index.css' %}" />
 	<div class="container-fluid col-md-10 p-4 addgrades" id="addgrades" style="display: none;">
 		<div class="p-5 d-flex justify-content-center" style="height: 80%;">
 			<form method="POST">
@@ -102,7 +101,7 @@
 				</div>
 				<div class="col-4 p-2">
 					<div class="p-3 border bordcol-overrides rounded">
-						<p class="lead text-light">Your Worst Subject</p>
+						<p class="lead text-light">Your Worst Performance</p>
 						Subject: {{bestworst.0.subject}}
 						<br>
 						Grade: {{bestworst.0}}
@@ -150,22 +149,54 @@
 			</div>
 		</div>
 		<div class="container-fluid px-2 overflow-hidden">
-			<div class=" row mt-2 gx-2">
-				<div class="col-4 p-2">
-					<p class="h3">Recent Test</p>
-					<div class="p-3 border bordcol-overrides rounded">
-						<p class="lead text-light">Test 1</p>
+			<div class=" row gx-2">
+				<div class="col-8 p-2">
+					<p class="h5">Performance</p>
+					<div class="border rounded">
+						<canvas class="p-3" id="performanceradarchart"></canvas>
 					</div>
+					<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+					<script>
+						const ctx_radar = document.getElementById('performanceradarchart').getContext('2d');
+						var config_radar = {
+							type: 'radar',              //s define chart type
+							data: {
+								datasets: [{
+									data: {{ dataradar| safe }},    // data defined in views.py
+									backgroundColor: ['rgba(54, 162, 235, 0.5)'],
+									borderColor: ['rgba(54, 162, 235)'],
+									borderWidth: 2,
+									pointBorderColor: '#fff',
+								}],
+								labels: {{ labelsradar|safe}},          // labels defined in views.py
+							},
+							options: {
+								scales: {
+									r: {
+										gridLines: {
+											color: 'white'
+										}
+									}
+								},
+								fontColor: 'white',
+								legend: {
+									display: false
+								},
+								responsiveness: true
+							}
+						};
+						const chart_radar = new Chart(ctx_radar, config_radar)
+					</script>
 				</div>
-				<div class="col-4 p-2">
-					<p class="h3">Overall Performance</p>
+				<!-- <div class="col-3 p-2">
+					<p class="h5">Recent Test</p>
 					<div class="p-3 border bordcol-overrides rounded">
-						<p class="lead text-light">Test 2</p>
+						<p class="lead text-light"></p>
 					</div>
-				</div>
+				</div> -->
 				<div class="col-4 p-2">
 					<div class="p-3 border bordcol-overrides rounded">
-						<p class="font-weight-bold lead d-block">Your Best Subject</p>
+						<p class="font-weight-bold lead d-block">Your Best Performance</p>
 						{% with bestworst|last as last %}
 						<div>
 							Subject: {{bestworst.1.subject}}
