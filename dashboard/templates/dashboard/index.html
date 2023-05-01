@@ -6,11 +6,14 @@
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<link rel="stylesheet" href="{% static 'css/index.css' %}" />
 	<script src="{% static 'frontend/addgrades.js' %}"></script>
-	<link rel="stylesheet" href="{% static 'css/index.css' %}" />
 </head>
 
 <body>
 	<div class="container-fluid col-md-10 p-4 addgrades" id="addgrades" style="display: none;">
+		<div class="d-flex justify-content-end align-items-center">
+			<img onclick="removegrades('mainbody','addgrades');" src="{% static 'img/return.png' %}" style="color: white; width: 3rem; ">
+			</img>
+		</div>
 		<div class="p-5 d-flex justify-content-center" style="height: 80%;">
 			<form method="POST">
 				{% csrf_token %}
@@ -55,7 +58,6 @@
 			</div>
 			<div class="d-flex mb-2 col-4 justify-content-end align-items-center">
 				<div class="addgrades">
-					<script src="{% static 'frontend/addgrades.js' %}"></script>
 					<button class="btn btn-light text-dark" type="button"
 						onclick="addgrades('mainbody','addgrades');">ADD
 						GRADES</button>
