@@ -201,7 +201,7 @@ def logoutUser(request):
 @ login_required(login_url='login')
 @ allowed_users(allowed_roles=['students'])
 def improvements(request):
-    return render(request,  'dashboard/improvements1.html', {})
+    return render(request,  'dashboard/improvements.html',)
 
 
 @ login_required(login_url='login')
@@ -214,17 +214,6 @@ def base(request):
 def grades(request):
     return render(request, 'dashboard/grades.html')
 
-
-@ login_required(login_url='login')
-@ allowed_users(allowed_roles=['students'])
-def improvements2(request):
-    return render(request, 'dashboard/improvements2.html')
-
-
-@ login_required(login_url='login')
-@ allowed_users(allowed_roles=['students'])
-def improvements3(request):
-    return render(request, 'dashboard/improvements3.html')
 
 
 @ login_required(login_url='login')
