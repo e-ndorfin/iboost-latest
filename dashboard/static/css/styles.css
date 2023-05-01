@@ -19,12 +19,6 @@
 	color: #181725;
 }
 
-body {
-	color: white;
-	/* font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva,
-		Verdana, sans-serif; */
-}
-
 @media only screen and (max-width: 768px) {
 	#sidenav {
 		display: none;
@@ -201,4 +195,19 @@ background: #818181;
 
 .fr#blur.active {
 	filter: blur(20px);
+}
+
+
+.bordcol-overrides {
+	border-color: #11e497;
+}
+
+.addgrades {
+	position: static;
+	background: #1a1a23;
+}
+
+.gradeforms {
+	border-radius: 50px;
+	width: 100%;
 }
