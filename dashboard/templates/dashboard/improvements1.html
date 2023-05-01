@@ -4,60 +4,68 @@
 	{% block content %}
 	<head>
 		<link rel="stylesheet" href="{% static 'css/improvements.css' %}" />
+		<script src="{% static 'frontend\improvements.js' %}"></script>
 	</head>
 	<!--Content section starts here-->
-	<div id="improvementscontent blur containerfr" class="mainbody col-md-10 pt-3">
-	 <div class="row">
-		<h1 class="col">Your Improvement Areas</h1>
-		<div class="d-flex mb-2 col justify-content-end align-items-center">
-			<div>
-				<a class="btn btn-light text-dark" type="button" href="/interviewarchive">
-					Interview Archives</a>
+	<div id="improvementscontent blur containerfr" class="mainbody col-md-10 pt-5">
+	 	<div class="row">
+			<div class="col">
+				<h1>Your Improvement Areas</h1>
+				<div class="p-1"></div>
+				<p1>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+					In gravida arcu risus, ac malesuada tortor faucibus nec. Maecenas sed diam quis eros placerat vestibulum id vitae augue. Etiam ligula lorem, 
+					faucibus non tortor tincidunt, scelerisque venenatis risus.</p1>
 			</div>
-	 </div>
-	</div>
-		<nav class="nav nav-pills nav-justified px-5">
-			<a class="nav-item nav-link active" href="/improvements">Improvement Name 1</a>
-			<a class="nav-item nav-link" href="/improvements2">Improvement Name 2</a>
-			<a class="nav-item nav-link" href="/improvements3">Improvement Name 3</a>
-		</nav>
-		<div class="container-fluid p-3">
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="improvement">
-						<h2>Improvement Name 1</h2>
-						<div id="improvement">
-							Unfortunately, your scores in "improvement name" are lower than what you might like,
-							especially in _____. Fixing this should help you improve your overall ____ score, as
-							well as give you valuable skills that transfer to other subjects!
-						</div>
-					</div>
-					<br />
-					<div class="improvement">
-						<h2 class="pt-3">Your "Improvement Name 1" Data</h2>
-						<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid improvementdata" />
-					</div>
+			<div class="col">
+				<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid improvementdata" style="max-height: 10em;" />
+			</div>
+		</div>
+		<div class="p-5"></div>
+		<div class="container-fluid p-3 caro">
+			<div class="improvlight">
+				<div class="p-4"></div>
+				<div class="wrapper">
+					<div class="slider">1</div>
+					<div class="slider">2</div>
+					<div class="slider">3</div>
+					<div class="slider">4</div>
+					<div class="slider">5</div>
 				</div>
-				<div class="col-lg-6">
-					<div class="improvement">
-						<h2>Improve your "Improvement Name"</h2>
-						<!-- Video teaching you how to improve (from interviews)-->
-						<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid improvementdata" />
-						<div id="improvement" class="p-4 mt-2">
-							_____ can be difficult to master. There's a lot of skills that you have to grasp when
-							completing your Criterion _ tasks. This video contains advice from a tenured IB
-							teaching professional, who should teach you everything you need to know to boost your
-							Criterion _ grade!
-						</div>
+				<div class="p-4"></div>
+			</div>
+			<div class="p-4"></div>
+			<div class="row">
+				<div class="col-4">
+					<div class="area1 border bordcol-overrides">
+						<p style="margin-top:0.5em; margin-bottom:0.5em;">Area One</p>
 					</div>
-					<br />
-					<div class="improvement">
-						<h2 class="pt-3">Your Progress</h2>
-						<img src="{% static 'img/empty.png' %}" alt="" class="img-fluid improvementdata" />
+					<div class="p-1"></div>
+					<p1>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+						In gravida arcu risus, ac malesuada tortor faucibus nec. Maecenas sed diam quis eros placerat vestibulum id vitae augue. Etiam ligula lorem, 
+						faucibus non tortor tincidunt, scelerisque venenatis risus.</p1>
+				</div>
+				<div class="col-4">
+					<div class="area1 border bordcol-overrides">
+						<p style="margin-top:0.5em; margin-bottom:0.5em;">Area One</p>
 					</div>
+					<div class="p-1"></div>
+					<p1>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+						In gravida arcu risus, ac malesuada tortor faucibus nec. Maecenas sed diam quis eros placerat vestibulum id vitae augue. Etiam ligula lorem, 
+						faucibus non tortor tincidunt, scelerisque venenatis risus.</p1>
+				</div>
+				<div class="col-4">
+					<div class="area1 border bordcol-overrides">
+						<p style="margin-top:0.5em; margin-bottom:0.5em;">Area One</p>
+					</div>
+					<div class="p-1"></div>
+					<p1>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+						In gravida arcu risus, ac malesuada tortor faucibus nec. Maecenas sed diam quis eros placerat vestibulum id vitae augue. Etiam ligula lorem, 
+						faucibus non tortor tincidunt, scelerisque venenatis risus.</p1>
+
 				</div>
 			</div>
 		</div>
+		
 	</div>
 
 	{% endblock content %}
