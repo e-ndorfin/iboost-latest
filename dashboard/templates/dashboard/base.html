@@ -148,23 +148,6 @@
                             />Improvements</a
                         >
                     </div>
-                    <div
-                        class="p-2 menutext profact"
-                        onclick="window.location.href = '{% url 'profile' %}'"
-                    >
-                        <a href="{% url 'profile' %}"
-                            ><img
-                                src="{% static 'img/profile.png' %}"
-                                alt="d"
-                                class="img-fluid"
-                                style="
-                                    max-width: 3em;
-                                    max-height: 2em;
-                                    padding: 0em 0.5em 0.2em 0em;
-                                "
-                            />Profile</a
-                        >
-                    </div>
                     <div class="pt-md-5"></div>
                     <div class="pt-md-5"></div>
                     <div class="pt-md-5"></div>
@@ -173,7 +156,7 @@
                     <div class="pt-md-5"></div>
                     <div class="pt-md-5"></div>
                     <div class="p-2 accountconfig">
-                        <a href="account.html">Account</a>
+                        <a href="{% url 'profile' %}">Account</a>
                     </div>
                     <div class="p-2 accountconfig2">
                         <a href="{% url 'logout' %}">Log out</a>
