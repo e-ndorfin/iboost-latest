@@ -31,31 +31,31 @@ def index(request):
         gradeform = GradesForm(request.POST)
         if gradeform.is_valid():
             gradeform.save()
-    
-    #Graph stuff
+
+    # Graph stuff
     labels = ["January", "Febuary", "March", "April", "May", "June",
               "July", "August", "September", "October", "November", "December"]
-    datamain = [0,0,0,0,0,0,0,0,0,0,0,0]
-    avggrade = [0,0,0,0,0,0,0,0,0,0,0,0]
-    monthgradecount = [0,0,0,0,0,0,0,0,0,0,0,0]
+    datamain = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    avggrade = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    monthgradecount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     sortavg = []
-    bestworst = [0,0]
+    bestworst = [0, 0]
     grades = []
     month = 0
-    databest = [0,0,0,0,0,0]
+    databest = [0, 0, 0, 0, 0, 0]
     dataworst = [0, 0, 0, 0, 0, 0]
-    labelsbest= ["Criterion A", "Criterion B", "Criterion C",
+    labelsbest = ["Criterion A", "Criterion B", "Criterion C",
                   "Criterion D", "Grade Average", "Subject Average"]
     labelsworst = ["Criterion A", "Criterion B", "Criterion C",
                    "Criterion D", "Grade Average", "Subject Average"]
     labelsradar = []
-    dataradar = [0,0,0,0,0,0]
+    dataradar = [0, 0, 0, 0, 0, 0]
 
-    #Calculate average for each month
+    # Calculate average for each month
     for i in range(len(request.user.profile.subject_set.all())):
         for grade in request.user.profile.subject_set.all()[i].grade_set.all():
             avg = (grade.criterionA+grade.criterionB +
-                grade.criterionC+grade.criterionD)/4
+                   grade.criterionC+grade.criterionD)/4
             grade.avg = avg
             grade.save()
             month = grade.created.month
@@ -63,7 +63,7 @@ def index(request):
             avggrade[month-1] += avg
             datamain[month-1] = avggrade[month-1]/monthgradecount[month-1]
 
-    #Calculate average for each subject
+    # Calculate average for each subject
     subjects = request.user.profile.subject_set.all()
     subjectavg = 0
     i = 0
@@ -78,12 +78,12 @@ def index(request):
         dataradar[i] = float(subjectavg)
         i += 1
         subjectavg = 0
-    
-    #Find best and worst subjects
+
+    # Find best and worst subjects
     for k in range(len(request.user.profile.subject_set.all())):
         for grade in request.user.profile.subject_set.all()[k].grade_set.all():
             sortavg.append(grade.avg)
-        #Sort
+        # Sort
         for i in range(1, len(sortavg)):
             key = sortavg[i]
             k = i-1
@@ -92,19 +92,19 @@ def index(request):
                 k -= 1
             sortavg[k+1] = key
 
-    #Add best/worst:
+    # Add best/worst:
     for r in range(len(request.user.profile.subject_set.all())):
-        if(request.user.profile.subject_set.all()[r].grade_set.all().exists() == True):
+        if (request.user.profile.subject_set.all()[r].grade_set.all().exists() == True):
             for grade in request.user.profile.subject_set.all()[r].grade_set.all():
                 grades.append(grade)
     for p in range(len(grades)):
         if grades[p].avg == sortavg[0]:
-            bestworst[0]=grades[p]
+            bestworst[0] = grades[p]
         elif grades[p].avg == sortavg[len(sortavg)-1]:
-            bestworst[1] = grades[p] 
-    
+            bestworst[1] = grades[p]
+
     if bestworst[0] != 0 and bestworst[1] != 0:
-        #Set best:
+        # Set best:
         databest[0] = bestworst[1].criterionA
         databest[1] = bestworst[1].criterionB
         databest[2] = bestworst[1].criterionC
@@ -112,7 +112,7 @@ def index(request):
         databest[4] = float(bestworst[1].avg)
         databest[5] = float(bestworst[1].subject.subjectavg)
 
-        #Set worst:
+        # Set worst:
         dataworst[0] = bestworst[0].criterionA
         dataworst[1] = bestworst[0].criterionB
         dataworst[2] = bestworst[0].criterionC
@@ -123,22 +123,24 @@ def index(request):
     return render(request, 'dashboard/index.html', {
         "subjects": subjects,
         "gradeform": gradeform,
-        'labels': labels, 
+        'labels': labels,
         'data': datamain,
         'bestworst': bestworst,
         'labelsbest': labelsbest,
         'databest': databest,
-        'labelsworst' : labelsworst,
+        'labelsworst': labelsworst,
         'dataworst': dataworst,
         'dataradar': dataradar,
         'labelsradar': labelsradar,
     })
+
 
 # Login and Register Function
 SUBJECT_CHOICES = [
     ('', 'Subject '), ('Chinese', "Chinese"), ('English', "English"), ('Math', "Math"), ('Science', "Science"), ('Individuals and Societies', "Individuals and Societies"), ('Music',
                                                                                                                                                                              "Music"), ('Drama', "Drama"), ('Art', "Art"), ('MYP Physical Education', "MYP Physical Education"), ('Design', "Design"), ('Computer Science', "Computer Science")
 ]
+
 
 @unauthenticated_user
 def registerPage(request):
@@ -211,9 +213,8 @@ def base(request):
 
 @ login_required(login_url='login')
 @ allowed_users(allowed_roles=['students'])
-def grades(request):
-    return render(request, 'dashboard/grades.html')
-
+def subjects(request):
+    return render(request, 'dashboard/subjects.html')
 
 
 @ login_required(login_url='login')
@@ -235,10 +236,12 @@ def testing(request):
     subjectname = Subject.objects.all()
     return render(request, 'dashboard/testing.html', {'grades': grades, 'subjectname': subjectname},)
 
+
 @ login_required(login_url='login')
 @ allowed_users(allowed_roles=['students'])
 def editprofile(request):
     return render(request, 'dashboard/editprofile.html')
+
 
 @ login_required(login_url='login')
 def chineseg(request):
@@ -259,6 +262,7 @@ def radialtest(request):
 
 def accountcreation(request):
     return render(request, 'dashboard/accountcreation.html',)
+
 
 def interviewarchive(request):
     return render(request, 'dashboard/interviewarchive.html')

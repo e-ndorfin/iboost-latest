@@ -1,36 +1,49 @@
 .indexact {
-	background: #11e497;
-	border-radius: 0.3em;
-	box-shadow: 0 0.5em 0.5em -0.4em rgb(29, 136, 8);
+    background: #11e497;
+    border-radius: 0.3em;
+    box-shadow: 0 0.5em 0.5em -0.4em rgb(29, 136, 8);
 }
 
 .indexact a {
-	color: #181725;
+    color: #181725;
 }
 
-
 .carousel {
-	margin-top: 50px;
+    margin-top: 50px;
 }
 
 .carousel-inner {
-	height: 100px;
+    height: 100px;
 }
 
 .carousel-caption {
-	color: #fff;
+    color: #fff;
 }
 
 .bordcol-overrides {
-	border-color: #11e497;
+    border-color: #11e497;
 }
 
 .addgrades {
-	position: static;
-	background: #1a1a23;
+    position: static;
+    background: #1a1a23;
 }
 
 .gradeforms {
-	border-radius: 50px;
-	width: 100%;
+    border-radius: 50px;
+    width: 100%;
+}
+
+.bi-x {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    font-size: 3rem;
+    color: white;
+}
+
+.bi-x:hover {
+    cursor: pointer;
+    color: #11e497;
+    transition: color 0.5s ease;
 }

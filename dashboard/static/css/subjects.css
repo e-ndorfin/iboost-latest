@@ -1,0 +1,33 @@
+.grades-container {
+    /* background: #1a1a23; */
+    background: rgb(24, 23, 37);
+    background: linear-gradient(
+        90deg,
+        rgba(24, 23, 37, 1) 0%,
+        rgba(40, 40, 40, 1) 100%
+    );
+}
+
+.subject {
+    font-size: 40px;
+}
+
+.subject:hover {
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
+}
+
+.subject-text {
+    color: white;
+    text-decoration: none;
+    display: block;
+    font-size: 40px;
+    text-align: center;
+    font-weight: 500;
+    position: relative;
+}
+
+.subject-text:hover {
+    color: #11e497;
+    transition: color 0.5s ease;
+}
