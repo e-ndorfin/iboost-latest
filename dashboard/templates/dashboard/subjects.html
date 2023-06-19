@@ -1,0 +1,49 @@
+{% extends 'dashboard/base.html' %} {% load static %} {% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+        <link rel="icon" href="{% static 'img/logo_icon.ico' %}" />
+        <link rel="stylesheet" href="{% static 'css/subjects.css' %}" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+        />
+    </head>
+    <body>
+        <div class="col-md-10 pt-3 container-fluid grades-container">
+            <div class="d-flex align-items-center justify-content-center h-100">
+                <div
+                    class="menu row flex-column align-content-center justify-content-center gy-3"
+                >
+                    <div class="subject col">
+                        <a class="subject-text bi bi-journals" href="#">
+                            English</a
+                        >
+                    </div>
+                    <div class="subject col">
+                        <a class="subject-text bi bi-translate" href="#">
+                            Chinese</a
+                        >
+                    </div>
+                    <div class="subject col">
+                        <a class="subject-text bi bi-calculator" href="#">
+                            Math</a
+                        >
+                    </div>
+                    <div class="subject col">
+                        <a class="subject-text bi bi-virus" href="#">
+                            Science</a
+                        >
+                    </div>
+                    <div class="subject col">
+                        <a class="subject-text bi bi-globe" href="#"> INS</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endblock content %}
+    </body>
+</html>

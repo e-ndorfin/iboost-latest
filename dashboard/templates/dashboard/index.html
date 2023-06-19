@@ -10,10 +10,7 @@
 
 <body>
 	<div class="container-fluid col-md-10 p-4 addgrades" id="addgrades" style="display: none;">
-		<div class="d-flex justify-content-end align-items-center">
-			<img onclick="removegrades('mainbody','addgrades');" src="{% static 'img/return.png' %}" style="color: white; width: 3rem; ">
-			</img>
-		</div>
+		<i class="bi bi-x" onclick="removegrades('mainbody','addgrades');"></i>
 		<div class="p-5 d-flex justify-content-center" style="height: 80%;">
 			<form method="POST">
 				{% csrf_token %}
