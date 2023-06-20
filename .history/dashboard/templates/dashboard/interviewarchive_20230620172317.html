@@ -10,14 +10,10 @@
 
 <body>
 	<link rel="stylesheet" href="{% static 'css/interviewarchive.css' %}" />
-	<div class="container-fluid mainbody col-md-10 p-5" id="mainbody">
+	<div class=" container-fluid mainbody col-md-10 p-5" id="mainbody">
 		<div class="row">
-			<div class="col-md-6">
-				<h1 class='d-inline-block'><strong> The Archive</strong></h1>
-			</div>
-			<div class="col-md-6 d-flex justify-content-end">
-				<button class="multi-collapse-button accordion-icon btn-primary" type="button" data-bs-toggle="collapse" data-bs-target=".collapse" aria-expanded="false" aria-controls="controls">close</button>	
-			</div>
+			<h1 style="display:inline-block"><strong> The Archive</strong></h1>
+			<button class="multi-collapse-button bi bi-list align-self-end" type="button" data-bs-toggle="collapse" data-bs-target=".collapse" aria-expanded="false" aria-controls="controls"></button>
 		</div>
 		<!-- Start of Computer Science -->
 		<div class="accordion compsci" id="accordionCompsci">
