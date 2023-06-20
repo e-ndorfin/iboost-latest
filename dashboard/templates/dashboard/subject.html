@@ -1,0 +1,20 @@
+{% extends 'dashboard/base.html' %} {% load static %} {% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <link rel="icon" href="{% static 'img/logo_icon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'css/subject.css' %}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <div class="col-md-10 pt-3 container-fluid grades-container">
+        {{subject.subjectavg}}
+    </div>
+</body>
+{% endblock content %}
+
+</html>

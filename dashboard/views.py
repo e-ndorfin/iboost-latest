@@ -266,3 +266,7 @@ def accountcreation(request):
 
 def interviewarchive(request):
     return render(request, 'dashboard/interviewarchive.html')
+
+def subject(request, sub):
+    subject = request.user.profile.subject_set.all().get(subjectname=sub)
+    return render(request, 'dashboard/subject.html', {'subject':subject})
