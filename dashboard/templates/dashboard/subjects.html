@@ -18,27 +18,27 @@
                     class="menu row flex-column align-content-center justify-content-center gy-3"
                 >
                     <div class="subject col">
-                        <a class="subject-text bi bi-journals" href="#">
-                            English</a
+                        <a class="subject-text bi bi-journals" href="{% url 'subject' request.user.profile.subject_set.all.0 %}">
+                            {{request.user.profile.subject_set.all.0}}</a
                         >
                     </div>
                     <div class="subject col">
-                        <a class="subject-text bi bi-translate" href="#">
-                            Chinese</a
+                        <a class="subject-text bi bi-translate" href="{% url 'subject' request.user.profile.subject_set.all.1 %}">
+                            {{request.user.profile.subject_set.all.1}}</a
                         >
                     </div>
                     <div class="subject col">
-                        <a class="subject-text bi bi-calculator" href="#">
-                            Math</a
+                        <a class="subject-text bi bi-calculator" href="{% url 'subject' request.user.profile.subject_set.all.2 %}">
+                            {{request.user.profile.subject_set.all.2}}</a
                         >
                     </div>
                     <div class="subject col">
-                        <a class="subject-text bi bi-virus" href="#">
-                            Science</a
+                        <a class="subject-text bi bi-virus" href="{% url 'subject' request.user.profile.subject_set.all.3 %}">
+                            {{request.user.profile.subject_set.all.3}}</a
                         >
                     </div>
                     <div class="subject col">
-                        <a class="subject-text bi bi-globe" href="#"> INS</a>
+                        <a class="subject-text bi bi-globe" href="{% url 'subject' request.user.profile.subject_set.all.4 %}"> {{request.user.profile.subject_set.all.4}}</a>
                     </div>
                 </div>
             </div>

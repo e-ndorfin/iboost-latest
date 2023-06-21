@@ -134,12 +134,21 @@ def index(request):
         'labelsradar': labelsradar,
     })
 
-
 # Login and Register Function
 SUBJECT_CHOICES = [
-    ('', 'Subject '), ('Chinese', "Chinese"), ('English', "English"), ('Math', "Math"), ('Science', "Science"), ('Individuals and Societies', "Individuals and Societies"), ('Music',
-                                                                                                                                                                             "Music"), ('Drama', "Drama"), ('Art', "Art"), ('MYP Physical Education', "MYP Physical Education"), ('Design', "Design"), ('Computer Science', "Computer Science")
+    ('', 'Subject '), ('Chinese', "Chinese"), ('English', "English"), ('Math', "Math"), ('Science', "Science"), ('Individuals and Societies', "Individuals and Societies"), ('Music',                                                                                                                                                                            "Music"), ('Drama', "Drama"), ('Art', "Art"), ('MYP Physical Education', "MYP Physical Education"), ('Design', "Design"), ('Computer Science', "Computer Science")
 ]
+
+
+@ login_required(login_url='login')
+@ allowed_users(allowed_roles=['students'])
+def subjects(request):
+    subjects = request.user.profile.subject_set.all()
+    return render(request, 'dashboard/subjects.html', {'subjects': subjects})
+
+def subject(request, sub):
+    subject = request.user.profile.subject_set.all().get(subjectname=sub)
+    return render(request, 'dashboard/subject.html', {'subject': subject})
 
 
 @unauthenticated_user
@@ -213,12 +222,6 @@ def base(request):
 
 @ login_required(login_url='login')
 @ allowed_users(allowed_roles=['students'])
-def subjects(request):
-    return render(request, 'dashboard/subjects.html')
-
-
-@ login_required(login_url='login')
-@ allowed_users(allowed_roles=['students'])
 def profile(request):
     return render(request, 'dashboard/profile.html',)
 
@@ -266,7 +269,3 @@ def accountcreation(request):
 
 def interviewarchive(request):
     return render(request, 'dashboard/interviewarchive.html')
-
-def subject(request, sub):
-    subject = request.user.profile.subject_set.all().get(subjectname=sub)
-    return render(request, 'dashboard/subject.html', {'subject':subject})

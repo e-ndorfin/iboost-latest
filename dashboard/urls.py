@@ -6,8 +6,10 @@ urlpatterns = [
     path('index/', views.index, name="index"),
 
     path('improvements/', views.improvements, name="improvements"),
+
     path('subjects/', views.subjects, name='subjects'),
-    path('subjects/<str:sub>', views.subject, name='subject'),
+    path('subject/<str:sub>', views.subject, name='subject'),
+
     path('profile/', views.profile, name='profile'),
     path('testing/', views.testing, name='testing'),
     path('chineseg/', views.chineseg, name="chineseg"),
