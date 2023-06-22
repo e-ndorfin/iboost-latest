@@ -4,7 +4,6 @@ var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
 
 function next() {
-	console.log("test")
 	let registercontainer = document.getElementById("regcontainer");
 	current_fs = event.target.parentNode.parentNode;
 	next_fs = event.target.parentNode.parentNode.nextElementSibling;

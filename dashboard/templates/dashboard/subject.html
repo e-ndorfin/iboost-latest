@@ -14,12 +14,42 @@
 
 <body>
     <div class="col-md-10 p-5 container-fluid grades-container">
-        <div class="h1"><strong>{{subject.subjectname}}</strong></div>
+        <div class="h1" id="subjectname">{{subject.subjectname}}</div>
         <div class="row m-3">
             <div class="col-6 p-3">
-                <div class="row border bordcol rounded p-4">
+                <div class="row border bordcol rounded p-3">
                     <div class="col">
-
+                        <div class="h5">Your Performance</div>
+                        <div class="container">
+                            <canvas id="subjectchart"></canvas>
+                        </div>
+                        <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+                        <script>
+                            const ctx_subject = document.getElementById('subjectchart').getContext('2d');
+                            var config_subject = {
+                                type: 'line',              //s define chart type
+                                data: {
+                                    datasets: [{
+                                        label: 'Subject Performance',
+                                        data: {{ data| safe }},    // data defined in views.py
+                                        borderColor: 'rgb(255,255,255)',         
+                        			}],
+                                    labels: {{ labels | safe }}          // labels defined in views.py
+                                },
+                                options: {                            // optional parameters - more can be found in the chart.js documentation 
+                                    scales: {
+                                        yAxes: [{
+                                            display: true,
+                                            ticks: {
+                                                beginAtZero: true   // minimum y axes will be 0.
+                                            }
+                                        }]
+                                    },
+                                    responsive: true,               // ensures the chart adjusts with window size 
+                                }
+                            };
+                            const chart_subject = new Chart(ctx_subject, config_subject)
+                        </script>
                     </div>
                 </div>
             </div>
@@ -36,21 +66,67 @@
         </div>
         <div class="row m-3">
             <div class="col-7 p-3">
+                <div class="h3">Recent Grades</div>
                 <div class="row p-4 border bordcol rounded">
-                    <div class="col">
-
+                    <div class="col-8">
+                        <div class="container">
+                            <canvas id="gradebarchart"></canvas>
+                        </div>
+                        <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+                        <script>
+                            var num = 0;
+                            const ctx_grade = document.getElementById('gradebarchart').getContext('2d');
+                            var config_grade = {
+                                type: 'bar',              //s define chart type
+                                data: {
+                                    datasets: [{
+                                        label: 0,
+                                        data: {{ datagrades|safe}}[num],    // data defined in views.py
+                                    backgroundColor: ['rgba(54, 162, 235, 0.5)', 'rgba(255, 205, 86, 0.5)', 'rgba(75, 192, 192, 0.5)', 'rgba(255, 99, 132, 0.5)', 'rgba(153, 102, 255, 0.5)', 'rgba(255,255,255, 0.5)'],
+                                    borderColor: ['rgba(54, 162, 235)', 'rgba(255, 205, 86)', 'rgba(75, 192, 192)', 'rgba(255, 99, 132)', 'rgba(153, 102, 255)', 'rgba(120,119,119)'],
+                                    borderWidth: 2,
+                                    }],
+                                    labels: {{ labelsgrade | safe }}          // labels defined in views.py
+                                },
+                                options: {                            // optional parameters - more can be found in the chart.js documentation 
+                                    scales: {
+                                        yAxes: [{
+                                            display: true,
+                                            ticks: {
+                                                beginAtZero: true   // minimum y axes will be 0.
+                                            }
+                                        }]
+                                    },
+                                    legend: {
+                                        display: false
+                                    },
+                                    responsive: true,               // ensures the chart adjusts with window size 
+                                }
+                            };
+                            const chart_grade = new Chart(ctx_grade, config_grade)
+                        </script>
+                    </div>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-10"><div class="h4">Reflection</div></div>
+                        </div>
+                        {{srrs.0}}
+                        <br>
                     </div>
                 </div>
             </div>
             <div class="col-5 p-3">
                 <div class="row p-4 border bordcol rounded">
                     <div class="col">
-                
+                        <div class="h5">What do we do with this box?</div>
+                        <img src="{% static 'img/empty.png' %}" alt="" class="img-fluid improvementdata" style="max-height: 20em;" />
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse nesciunt laboriosam perferendis tenetur laborum, illum placeat fuga pariatur amet quae, quia accusantium iusto adipisci eveniet unde accusamus animi velit. Aspernatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt quasi, eius ipsa assumenda amet quia vitae? Odit modi, molestiae doloremque quos neque commodi eaque quibusdam quod dolor voluptatum repellendus velit?
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="{% static 'frontend/subject.js' %}"></script>
     {% endblock content %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"

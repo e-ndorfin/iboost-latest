@@ -147,8 +147,40 @@ def subjects(request):
     return render(request, 'dashboard/subjects.html', {'subjects': subjects})
 
 def subject(request, sub):
+    #Subject Main Graph
+    monthgradecount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    avggrade = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    datasubject = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    datagrade = [0,0,0,0,0,0]
+    datagrades = []
+    srrs = []
+    labelsgrade = ["Criterion A", "Criterion B", "Criterion C",
+                   "Criterion D", "Grade Average", "Subject Average"]
+    labels = ["January", "Febuary", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"]
     subject = request.user.profile.subject_set.all().get(subjectname=sub)
-    return render(request, 'dashboard/subject.html', {'subject': subject})
+    # Calculate average for each month
+    for grade in subject.grade_set.all():
+        avg = (grade.criterionA+grade.criterionB +
+                grade.criterionC+grade.criterionD)/4
+        grade.avg = avg
+        grade.save()
+        month = grade.created.month
+        monthgradecount[month-1] += 1
+        avggrade[month-1] += avg
+        datasubject[month-1] = avggrade[month-1]/monthgradecount[month-1]
+    
+    #Show each test with reflection
+    for grade in subject.grade_set.all():
+        datagrade[0] = grade.criterionA
+        datagrade[1] = grade.criterionB
+        datagrade[2] = grade.criterionC
+        datagrade[3] = grade.criterionD
+        datagrade[4] = float(grade.avg)
+        datagrade[5] = float(grade.subject.subjectavg)
+        datagrades.append(datagrade.copy())
+        srrs.append(grade.srr)
+    return render(request, 'dashboard/subject.html', {'subject': subject, 'labels':labels, 'data':datasubject, 'datagrades':datagrades, 'labelsgrade':labelsgrade, 'srrs':srrs})
 
 
 @unauthenticated_user
