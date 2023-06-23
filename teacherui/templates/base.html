@@ -56,30 +56,8 @@
                     <div class="collapse navbar-collapse" id="navmenu">
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-<<<<<<< HEAD
-                                <a href="{% url 'index' %}" class="nav-link"
-                                    >Dashboard</a
-                                >
-                            </li>
-                            <li class="nav-item">
-                                <a href="{% url 'subjects' %}" class="nav-link"
-                                    >Subjects</a
-                                >
-                            </li>
-                            <li class="nav-item">
-                                <a
-                                    href="{% url 'reflections' %}"
-                                    class="nav-link"
-                                    >Reflections</a
-                                >
-                            </li>
-                            <li class="nav-item">
-                                <a href="{% url 'profile' %}" class="nav-link"
-                                    >Profile</a
-=======
                                 <a href="{% url 'teacherui' %}" class="nav-link"
                                     >Teacher Dashboard</a
->>>>>>> aae8ae6cf97f583d3975c8e3a5c070fc393fd277
                                 >
                             </li>
                         </ul>
@@ -102,10 +80,7 @@
                         /></a>
                     </div>
                     <div class="p-2"></div>
-                    <div
-                        class="p-2 menutext indexact"
-                        onclick="window.location.href = '{% url 'teacherui' %}'"
-                    >
+                    <div class="p-2 menutext indexact">
                         <a href="{% url 'teacherui' %}">
                             <img
                                 src="{% static 'img/dashboard.png' %}"
@@ -118,40 +93,6 @@
                                 "
                             />Teacher Dashboard
                         </a>
-                    </div>
-                    <div
-                        class="p-2 menutext gradeact"
-                        onclick="window.location.href = '{% url 'subjects' %}'"
-                    >
-                        <a href="{% url 'subjects' %}" onclick="toggle()"
-                            ><img
-                                src="{% static 'img/grades.png' %}"
-                                alt="d"
-                                class="img-fluid"
-                                style="
-                                    max-width: 3em;
-                                    max-height: 2em;
-                                    padding: 0em 0.5em 0.2em 0em;
-                                "
-                            />Grades</a
-                        >
-                    </div>
-                    <div
-                        class="p-2 menutext improvact"
-                        onclick="window.location.href = '{% url 'reflections' %}'""
-                    >
-                        <a href="{% url 'reflections' %}"
-                            ><img
-                                src="{% static 'img/improvements.png' %}"
-                                alt="d"
-                                class="img-fluid"
-                                style="
-                                    max-width: 3em;
-                                    max-height: 2em;
-                                    padding: 0em 0.5em 0.2em 0em;
-                                "
-                            />Reflections</a
-                        >
                     </div>
                     <div class="pt-md-5"></div>
                     <div class="pt-md-5"></div>

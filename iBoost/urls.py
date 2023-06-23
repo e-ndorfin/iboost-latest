@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('dashboard.urls')),
     path('accounts/', include('allauth.urls')),
+    path('', include('teacherui.urls')),
     path('logout', LogoutView.as_view()),
 ]
