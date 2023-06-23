@@ -154,6 +154,7 @@ def subject(request, sub):
     datagrade = [0,0,0,0,0,0]
     datagrades = []
     srrs = []
+    criterionavg = [0,0,0,0]
     labelsgrade = ["Criterion A", "Criterion B", "Criterion C",
                    "Criterion D", "Grade Average", "Subject Average"]
     labels = ["January", "Febuary", "March", "April", "May", "June",
@@ -170,7 +171,7 @@ def subject(request, sub):
         avggrade[month-1] += avg
         datasubject[month-1] = avggrade[month-1]/monthgradecount[month-1]
     
-    #Show each test with reflection
+    #Show most recent test with reflection
     for grade in subject.grade_set.all():
         datagrade[0] = grade.criterionA
         datagrade[1] = grade.criterionB
@@ -180,7 +181,16 @@ def subject(request, sub):
         datagrade[5] = float(grade.subject.subjectavg)
         datagrades.append(datagrade.copy())
         srrs.append(grade.srr)
-    return render(request, 'dashboard/subject.html', {'subject': subject, 'labels':labels, 'data':datasubject, 'datagrades':datagrades, 'labelsgrade':labelsgrade, 'srrs':srrs})
+    
+    #Find worst criterion:
+    num = 1
+    for grade in subject.grade_set.all():
+        criterionavg[0] = float((criterionavg[0]+float(grade.criterionA))/num)
+        criterionavg[1] = float((criterionavg[1]+float(grade.criterionB))/num)
+        criterionavg[2] = float((criterionavg[2]+float(grade.criterionC))/num)
+        criterionavg[3] = float((criterionavg[3]+float(grade.criterionD))/num)
+        num += 1
+    return render(request, 'dashboard/subject.html', {'subject': subject, 'labels':labels, 'data':datasubject, 'datagrades':datagrades, 'labelsgrade':labelsgrade, 'srrs':srrs, 'criterionavg':criterionavg})
 
 
 @unauthenticated_user
