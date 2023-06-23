@@ -26,12 +26,15 @@ def index(request):
     grades = request.user.profile.subject_set.all()[1].grade_set.all()
     # Grade form
     gradeform = GradesForm()
+    srrform = SRRForm()
     if request.method == 'POST':
         # Add grades
+        srrform = SRRForm(request.POST)
         gradeform = GradesForm(request.POST)
-        if gradeform.is_valid():
+        if gradeform.is_valid() and srrform.is_valid():
+            srrform.save().grade = gradeform.save(commit=False)
             gradeform.save()
-
+            srrform.save()
     # Graph stuff
     labels = ["January", "Febuary", "March", "April", "May", "June",
               "July", "August", "September", "October", "November", "December"]
@@ -123,6 +126,7 @@ def index(request):
     return render(request, 'dashboard/index.html', {
         "subjects": subjects,
         "gradeform": gradeform,
+        'srrform': srrform, 
         'labels': labels,
         'data': datamain,
         'bestworst': bestworst,
@@ -180,7 +184,8 @@ def subject(request, sub):
         datagrade[4] = float(grade.avg)
         datagrade[5] = float(grade.subject.subjectavg)
         datagrades.append(datagrade.copy())
-        srrs.append(grade.srr)
+        for srr in grade.srr_set.all():
+            srrs.append(srr.srr)
     
     #Find worst criterion:
     num = 1
@@ -253,8 +258,13 @@ def logoutUser(request):
 
 @ login_required(login_url='login')
 @ allowed_users(allowed_roles=['students'])
-def improvements(request):
-    return render(request,  'dashboard/improvements.html',)
+def reflections(request):
+    grades = []
+    # Get all reflections
+    for k in range(len(request.user.profile.subject_set.all())):
+        for grade in request.user.profile.subject_set.all()[k].grade_set.all():
+            grades.append(grade)
+    return render(request,  'dashboard/reflections.html', {'grades': grades} )
 
 
 @ login_required(login_url='login')

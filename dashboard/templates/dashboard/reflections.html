@@ -1,0 +1,43 @@
+{% extends 'dashboard/base.html' %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% block content %}
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{% static 'css/reflections.css' %}" />
+</head>
+
+<body>
+    <div class="col-md-10 mainbody containerfr p-5">
+        <div class="row border rounded p-3">
+            <div class="col-12">
+                <div class="h3">Reflections</div>
+                <div class="container-fluid p-3">
+                    {% for grade in grades %}
+                        <div class="border rounded p-3 mb-3">
+                            <div class="row">
+                                <div class="col-9">
+                                    <div class="h5">{{grade.subject}}</div>
+                                </div>
+                                <div class="col-3 d-flex justify-content-end">
+                                    <div class="h7">{{grade.created}}</div>
+                                </div>
+                            </div>
+                            <div class="row d-flex flex-column p-3">
+                                <div>{{grade.srr}}</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+    {% endblock content %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
