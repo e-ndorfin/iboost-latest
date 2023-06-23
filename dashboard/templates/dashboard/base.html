@@ -56,7 +56,6 @@
                     <div class="collapse navbar-collapse" id="navmenu">
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-<<<<<<< HEAD
                                 <a href="{% url 'index' %}" class="nav-link"
                                     >Dashboard</a
                                 >
@@ -76,10 +75,6 @@
                             <li class="nav-item">
                                 <a href="{% url 'profile' %}" class="nav-link"
                                     >Profile</a
-=======
-                                <a href="{% url 'teacherui' %}" class="nav-link"
-                                    >Teacher Dashboard</a
->>>>>>> aae8ae6cf97f583d3975c8e3a5c070fc393fd277
                                 >
                             </li>
                         </ul>
@@ -94,7 +89,7 @@
                 <div class="d-flex flex-column">
                     <div class="p-2"></div>
                     <div class="p-2">
-                        <a href="{% url 'teacherui' %}" class="navbar-brand"
+                        <a href="{% url 'index' %}" class="navbar-brand"
                             ><img
                                 src="{% static 'img/logo.png' %}"
                                 alt="IBOOST"
@@ -104,9 +99,9 @@
                     <div class="p-2"></div>
                     <div
                         class="p-2 menutext indexact"
-                        onclick="window.location.href = '{% url 'teacherui' %}'"
+                        onclick="window.location.href = '{% url 'index' %}'"
                     >
-                        <a href="{% url 'teacherui' %}">
+                        <a href="{% url 'index' %}">
                             <img
                                 src="{% static 'img/dashboard.png' %}"
                                 alt="d"
@@ -116,7 +111,7 @@
                                     max-height: 2em;
                                     padding: 0em 0.5em 0.2em 0em;
                                 "
-                            />Teacher Dashboard
+                            />Dashboard
                         </a>
                     </div>
                     <div

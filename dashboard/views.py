@@ -259,12 +259,31 @@ def logoutUser(request):
 @ login_required(login_url='login')
 @ allowed_users(allowed_roles=['students'])
 def reflections(request):
-    grades = []
+    srrs = []
+    bestdataradar = [0,0,0,0,0,0,0,0,0,0,0];
+    worstdataradar = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    ATLs = ['Interaction','Language','Collaboration','Information Literacy','Media Literacy','Affective Skills','Organizational Skills','Reflection','Critical Thinking','Creative Thinking','Transfer']
     # Get all reflections
     for k in range(len(request.user.profile.subject_set.all())):
         for grade in request.user.profile.subject_set.all()[k].grade_set.all():
-            grades.append(grade)
-    return render(request,  'dashboard/reflections.html', {'grades': grades} )
+            for srr in grade.srr_set.all():
+                srrs.append(srr)
+            #ATL Radar
+            for srr in grade.srr_set.all():
+                for atl in ATLs:
+                    if(srr.bestatl == atl):
+                        bestdataradar[ATLs.index(atl)] += 1
+                    if(srr.worstatl == atl):
+                        worstdataradar[ATLs.index(atl)] += 1
+    
+    #Add Reflections
+    reflectionform = SRRForm()
+    if request.method == 'POST':
+        #Add SRR
+        reflectionform = SRRForm(request.POST)
+        if reflectionform.is_valid():
+            reflectionform.save()
+    return render(request,  'dashboard/reflections.html', {'srrs': srrs, 'ATLs':ATLs, 'bestdataradar':bestdataradar, 'worstdataradar':worstdataradar, 'reflectionform':reflectionform} )
 
 
 @ login_required(login_url='login')

@@ -39,7 +39,7 @@ class Grade(models.Model):
     subject = models.ForeignKey(Subject, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "A:%i B:%i C:%i D:%i" % (self.criterionA, self.criterionB, self.criterionC, self.criterionD)
+        return "A: %i B: %i C: %i D: %i" % (self.criterionA, self.criterionB, self.criterionC, self.criterionD)
     
 class SRR(models.Model):
     ATL_CHOICES = (
