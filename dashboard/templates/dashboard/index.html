@@ -45,6 +45,7 @@
 								{{srrform.bestatl}}
 								<div class="h5">Worst ATL</div>
 								{{srrform.worstatl}}
+								<div style="display: none;">{{srrform.profile}}</div>
 								<input type="submit" value="Continue" name="continue"
 									class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2"
 									style="width: 100%;" />
@@ -247,6 +248,7 @@
 								const chart_best = new Chart(ctx_best, config_best)
 							</script>
 						</div>
+						<div id="profile" style="display: none;">{{request.user.profile}}</div>
 						{% endwith %}
 					</div>
 				</div>
@@ -267,6 +269,19 @@
 		for (var field in form_fields) {
 			form_fields[field].className += "form-control p-2 my-3";
 		}
+	</script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			profile = document.getElementById("profile").textContent
+			profileselect = document.getElementById("id_profile");
+			for (var i = 0; i < profileselect.options.length; i++) {
+				if (profileselect.options[i].textContent == profile) {
+					profileselect.options[i].selected = true;
+				} else {
+					profileselect.options[i].selected = false;
+				}
+			}
+		});
 	</script>
 	{% endblock content %}
 	<!-- </div> -->

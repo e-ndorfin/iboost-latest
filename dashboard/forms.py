@@ -38,4 +38,4 @@ class SRRForm(ModelForm):
     worstatl = forms.ChoiceField(choices=ATL_CHOICES)
     class Meta:
         model = SRR
-        fields = ['srr', 'title', 'bestatl', 'worstatl']
+        fields = ['srr', 'title', 'bestatl', 'worstatl','profile']

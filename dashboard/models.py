@@ -59,7 +59,8 @@ class SRR(models.Model):
     title = models.TextField(max_length=100, null=True)
     bestatl = models.CharField(max_length=50, choices=ATL_CHOICES)
     worstatl = models.CharField(max_length=50, choices=ATL_CHOICES)
-    grade = models.ForeignKey(Grade, null=True, on_delete=models.CASCADE)
+    grade = models.ForeignKey(Grade, null=True, on_delete=models.CASCADE, default="")
+    profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title

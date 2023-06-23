@@ -263,18 +263,13 @@ def reflections(request):
     bestdataradar = [0,0,0,0,0,0,0,0,0,0,0];
     worstdataradar = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     ATLs = ['Interaction','Language','Collaboration','Information Literacy','Media Literacy','Affective Skills','Organizational Skills','Reflection','Critical Thinking','Creative Thinking','Transfer']
-    # Get all reflections
-    for k in range(len(request.user.profile.subject_set.all())):
-        for grade in request.user.profile.subject_set.all()[k].grade_set.all():
-            for srr in grade.srr_set.all():
-                srrs.append(srr)
-            #ATL Radar
-            for srr in grade.srr_set.all():
-                for atl in ATLs:
-                    if(srr.bestatl == atl):
-                        bestdataradar[ATLs.index(atl)] += 1
-                    if(srr.worstatl == atl):
-                        worstdataradar[ATLs.index(atl)] += 1
+    for srr in request.user.profile.srr_set.all():
+        srrs.append(srr)
+        for atl in ATLs:
+            if(srr.bestatl == atl):
+                bestdataradar[ATLs.index(atl)] += 1
+            if(srr.worstatl == atl):
+                worstdataradar[ATLs.index(atl)] += 1
     
     #Add Reflections
     reflectionform = SRRForm()
