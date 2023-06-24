@@ -1,5 +1,4 @@
 from django.db import models
-<<<<<<< HEAD
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
@@ -10,6 +9,8 @@ class Teacher(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     username = models.CharField(max_length=30, null=True)
     email = models.CharField(max_length=200, null=True)
+    school = models.CharField(max_length=200, null=True)
+    num_classes = models.IntegerField(default=0, null=True)
     def __str__(self):
         return self.username
 
@@ -21,15 +22,7 @@ class Klass(models.Model):
 
 class Student(models.Model):
     # Database Fields
-    name = models.CharField(max_length=30, null=True)
     profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE)
     klass = models.ForeignKey(Klass, null=True, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
-    
-
-    
-=======
-
-# Create your models here.
->>>>>>> 939225835867056dea5b60e3945c388829677dd8

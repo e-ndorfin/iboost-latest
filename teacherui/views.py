@@ -13,21 +13,50 @@ from django.contrib.auth.models import Group
 from django.forms import inlineformset_factory
 from django import forms
 from .models import *
-# from .forms import *
-# from .decorators import unauthenticated_user, allowed_users
+from .forms import *
+from .decorators import unauthenticated_user, allowed_users
 
 # @login_required(login_url='login')
 # @allowed_users (allowed_roles=['students'])
 
+@allowed_users (allowed_roles=['teachers'])
 def base(request): 
     return render (request, 'base.html')
 
+
+@allowed_users(allowed_roles=['teachers'])
 def teacherui(request): 
     return render (request, 'teacherui.html')
 
-<<<<<<< HEAD
+
+@allowed_users(allowed_roles=['teachers'])
 def teacherclass(request):
     return render (request, 'teacherclass.html')
 
-=======
->>>>>>> 939225835867056dea5b60e3945c388829677dd8
+def teacheraccountcreation(request):
+    form = RegisterUserForm()
+    teacherform = RegisterTeacherForm()
+    # If the user is registering an account
+    if request.method == "POST":
+        # For registering the account
+        if request.POST.get('submit') == 'Register Account':
+            teacherform = RegisterTeacherForm(request.POST)
+            form = RegisterUserForm(request.POST)
+            print("test1")
+            print(form.errors)
+            if form.is_valid():  # If the password is valid, save
+                print("test")
+                user = form.save()
+                username = form.cleaned_data.get('username')
+                email = form.cleaned_data.get('email')
+                group = Group.objects.get(name="teachers")
+                user.groups.add(group)
+                school = teacherform.data.get('school')
+                num_classes = teacherform.data.get('num_classes')
+                Teacher.objects.create(
+                    user=user, username=username, email=email, school=school, num_classes=num_classes)
+                messages.success(
+                    request, 'Account was created for ' + username)
+                return redirect('login')
+    context = {'form': form, 'teacherform':teacherform}
+    return render(request, 'teacheraccountcreation.html', context)

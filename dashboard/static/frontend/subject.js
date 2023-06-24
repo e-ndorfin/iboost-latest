@@ -4,10 +4,10 @@ var subject = document.getElementById('subjectname').textContent.toLowerCase().r
 const math = ['<iframe style="width: 100%; height: 25vh;" src="https://www.youtube.com/embed/M9Rrf9-yWxw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '<iframe style="width: 100%; height: 25vh;" src="https://www.youtube.com/embed/CAtw6yDRPe4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '<iframe style="width: 100%; height: 25vh;" src="https://www.youtube.com/embed/AEtk2xNQlno" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '<iframe style="width: 100%; height: 25vh;" src="https://www.youtube.com/embed/wUlZjCYIVsE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>','math'];
 const computerscience = ['<iframe style="width: 100%; height: 25vh;" src="https://www.youtube.com/embed/b4pCjnAE7zk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>, <iframe style="width: 100%; height: 25vh;" src="https://www.youtube.com/embed/f7JwN0gr_ww" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '<iframe style="width: 100%; height: 25vh;" src="https://www.youtube.com/embed/f7JwN0gr_ww" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen ></iframe>', '<iframe style="width: 100%; height: 25vh;" src="https://www.youtube.com/embed/f7JwN0gr_ww" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen ></iframe>', '<iframe style="width: 100%; height: 25vh;" src="https://www.youtube.com/embed/C6jVcqBacO8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>','computerscience'];
 const individualsandsocieties = ['individualsandsocieties'];
-const chinese = ['chinese'];
-const english = ['english'];
-const science = ['science'];
-const music = ['music'];
+const chinese = [0,0,0,0,'chinese'];
+const english = [0,0,0,0,'english'];
+const science = [0,0,0,0,'science'];
+const music = [0,0,0,0,'music'];
 const visualarts = ['visualarts'];
 const designtechnology = ['designtechnology'];
 
@@ -42,5 +42,6 @@ for(grade in criterionavg){
 for(item in videoarray){
     if(subject == videoarray[item].slice(-1))
         document.getElementById("video").innerHTML += videoarray[item][weakcritindex];
+        console.log(videoarray[item][weakcritindex]);
 }
 
