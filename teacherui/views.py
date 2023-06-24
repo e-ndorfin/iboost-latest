@@ -22,14 +22,26 @@ from dashboard.models import *
 
 # filtering for students:
 def AlphabeticalOrder(request):
-    student = Student.objects.filter(is_published=True).order_by('name')
+    student = Student.objects.all(is_published=True).order_by('name')
     context ={
         'student':student
     }
     return render (request, 'teacherclass.html', context)
 
 def RevAlphabeticalOrder(request):
-    student = Student.objects.filter(is_published=True).order_by('-name')
+    student = Student.objects.all(is_published=True).order_by('-name')
+    context ={
+        'student':student
+    }
+    return render (request, 'teacherclass.html', context)
+
+# def ReflectionSort(request):
+#    number_srr = Student.objects.all
+
+
+
+
+
 
 def base(request): 
     return render (request, 'base.html')
