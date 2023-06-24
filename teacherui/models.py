@@ -24,5 +24,6 @@ class Student(models.Model):
     # Database Fields
     profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE)
     klass = models.ForeignKey(Klass, null=True, on_delete=models.CASCADE)
+    srr = models.ForeignKey(SRR, null=True, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
