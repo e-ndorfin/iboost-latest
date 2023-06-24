@@ -28,7 +28,7 @@ class Subject(models.Model):
 class Grade(models.Model):
     # Database fields
     # Subject has a "One to Many" relationship with Grade, as one User can have multiple subjects,while the opposite is not the case
-    srr = models.TextField(max_length=1000, null=True)
+    # srr = models.TextField(max_length=1000, null=True)
     criterionA = models.IntegerField(default=0, null=True)
     criterionB = models.IntegerField(default=0, null=True)
     criterionC = models.IntegerField(default=0, null=True)
@@ -39,4 +39,28 @@ class Grade(models.Model):
     subject = models.ForeignKey(Subject, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "A:%i B:%i C:%i D:%i" % (self.criterionA, self.criterionB, self.criterionC, self.criterionD)
+        return "A: %i B: %i C: %i D: %i" % (self.criterionA, self.criterionB, self.criterionC, self.criterionD)
+    
+class SRR(models.Model):
+    ATL_CHOICES = (
+        ('Interaction', 'Interaction'),
+        ('Language', 'Language'),
+        ('Collaboration', 'Collaboration'),
+        ('Information Literacy', 'Information Literacy'),
+        ('Media Literacy', 'Media Literacy'),
+        ('Affective Skills', 'Affective Skills'),
+        ('Organizational Skills', 'Organizational Skills'),
+        ('Reflection', 'Reflection'),
+        ('Critical Thinking', 'Critical Thinking'),
+        ('Creative Thinking', 'Creative Thinking'),
+        ('Transfer', 'Transfer'),
+    )
+    srr = models.TextField(max_length=1000, null=True)
+    title = models.TextField(max_length=100, null=True)
+    bestatl = models.CharField(max_length=50, choices=ATL_CHOICES)
+    worstatl = models.CharField(max_length=50, choices=ATL_CHOICES)
+    grade = models.ForeignKey(Grade, null=True, on_delete=models.CASCADE, default="")
+    profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title

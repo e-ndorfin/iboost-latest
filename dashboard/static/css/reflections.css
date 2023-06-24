@@ -1,0 +1,17 @@
+.bordcol{
+    border: #34343b;
+}
+
+.bi-x {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    font-size: 3rem;
+    color: white;
+}
+
+.bi-x:hover {
+    cursor: pointer;
+    color: #11e497;
+    transition: color 0.5s ease;
+}

@@ -25,6 +25,9 @@ def base(request):
 def teacherui(request): 
     return render (request, 'teacherui.html')
 
+<<<<<<< HEAD
 def teacherclass(request):
     return render (request, 'teacherclass.html')
 
+=======
+>>>>>>> 939225835867056dea5b60e3945c388829677dd8

@@ -1,0 +1,193 @@
+{% extends 'dashboard/base.html' %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% block content %}
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{% static 'css/reflections.css' %}" />
+    <script src="{% static 'frontend/addreflection.js' %}"></script>
+</head>
+
+<body>
+    <div class="container-fluid col-md-10 p-4 mainbody containerfr" id="addreflection" style="display: none;">
+        <div class="d-flex justify-content-center">
+            <i class="bi bi-x" onclick="removereflection('mainbody','addreflection');"></i>
+            <div class="p-5 d-flex justify-content-center" style="height: 80%; width: 75%;">
+                <div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="bg-light p-5" style="border-radius: 50px;">
+                            <div style="color:black;">
+                                <div class="h3">Add Reflection</div>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="h5">Reflection Title:</div>
+                                    </div>
+                                    <div class="col-9">{{reflectionform.title}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="h5">Reflection:</div>
+                                    </div>
+                                    <div class="col-9">{{reflectionform.srr}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="h5">Best ATL Skill:</div>
+                                    </div>
+                                    <div class="col-8">
+                                        {{reflectionform.bestatl}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="h5">Worst ATL Skill:</div>
+                                    </div>
+                                    <div class="col-8">
+                                        {{reflectionform.worstatl}}
+                                    </div>
+                                </div>
+                                <div class="row" style="display: none;">
+                                    {{reflectionform.profile}}
+                                </div>
+                            </div>
+                            <input type="submit" value="Continue" name="continue"
+                                class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2" style="width: 100%;" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="mainbody" class="col-md-10 mainbody containerfr p-5">  
+        <div class="row border rounded p-3 d-flex flex-column">
+            <div>
+                <div class="row">
+                    <div class="col-10">
+                        <div id="profile" style="display: none;">{{request.user.profile}}</div>
+                        <div class="h3">Reflections</div>
+                    </div>
+                    <div class="col-2">
+                        <button class="btn-light form-control" onclick="addreflection('mainbody','addreflection')">Add Reflection</button>
+                    </div>
+                </div>
+                <div class="container-fluid p-3">
+                    {% for srr in srrs %}
+                        <div class="border rounded p-3 mb-3">
+                            <div class="row">
+                                <div class="col-9">
+                                    <div class="h5">{{srr.title}}</div>
+                                </div>
+                                <div class="col-3 d-flex justify-content-end">
+                                    <div class="h7">{{srr.grade.created}}</div>
+                                </div>
+                            </div>
+                            <div class="row d-flex flex-column p-3">
+                                <div>{{srr.srr}}</div>
+                                <div>Grade: {{srr.grade}}</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="h5">Your Best ATL Skill</div>
+                    <div class="border rounded">
+                        <canvas class="p-3" id="bestatlradarchart"></canvas>
+                    </div>
+                    <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+                    <script>
+                        const ctx_bestradar = document.getElementById('bestatlradarchart').getContext('2d');
+                        var config_bestradar = {
+                            type: 'radar',              //s define chart type
+                            data: {
+                                datasets: [{
+                                    data: {{ bestdataradar| safe }},    // data defined in views.py
+                                    backgroundColor: ['rgba(54, 162, 235, 0.5)'],
+                                    borderColor: ['rgba(54, 162, 235)'],
+                                    borderWidth: 2,
+                                    pointBorderColor: '#fff',
+                            	}],
+                                labels: {{ ATLs | safe }},          // labels defined in views.py
+                            },
+                            options: {
+                                scales: {
+                                    r: {
+                                        gridLines: {
+                                            color: 'white'
+                                        }
+                                    }
+                                },
+                                fontColor: 'white',
+                                    legend: {
+                                        display: false
+                                    },
+                                responsiveness: true
+                            }
+                        };
+                        const chart_bestradar = new Chart(ctx_bestradar, config_bestradar)
+                    </script>
+                </div>
+                <div class="col-6">
+                    <div class="h5">Your Worst ATL Skill</div>
+                    <div class="border rounded">
+                        <canvas class="p-3" id="worstatlradarchart"></canvas>
+                    </div>
+                    <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+                    <script>
+                        const ctx_worstradar = document.getElementById('worstatlradarchart').getContext('2d');
+                        var config_worstradar = {
+                            type: 'radar',              //s define chart type
+                            data: {
+                                datasets: [{
+                                    data: {{ worstdataradar| safe }},    // data defined in views.py
+                                    backgroundColor: ['rgba(54, 162, 235, 0.5)'],
+                                    borderColor: ['rgba(54, 162, 235)'],
+                                    borderWidth: 2,
+                                    pointBorderColor: '#fff',
+                            	}],
+                                labels: {{ ATLs | safe }},          // labels defined in views.py
+                            },
+                            options: {
+                                scales: {
+                                    r: {
+                                        gridLines: {
+                                            color: 'white'
+                                        }
+                                    }
+                                },
+                                fontColor: 'white',
+                                    legend: {
+                                        display: false
+                                    },
+                                responsiveness: true
+                            }
+                        };
+                        const chart_worstradar = new Chart(ctx_worstradar, config_worstradar)
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            profile = document.getElementById("profile").textContent
+            profileselect = document.getElementById("id_profile");
+            for(var i = 0; i < profileselect.options.length; i++){
+                if(profileselect.options[i].textContent == profile){
+                    profileselect.options[i].selected = true;
+                } else{
+                    profileselect.options[i].selected = false;
+                }
+            }
+        });
+    </script>
+    {% endblock content %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
