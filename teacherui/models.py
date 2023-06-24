@@ -1,5 +1,4 @@
 from django.db import models
-<<<<<<< HEAD
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
@@ -29,7 +28,3 @@ class Student(models.Model):
     
 
     
-=======
-
-# Create your models here.
->>>>>>> 939225835867056dea5b60e3945c388829677dd8

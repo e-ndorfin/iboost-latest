@@ -12,12 +12,24 @@ from django.urls import reverse
 from django.contrib.auth.models import Group
 from django.forms import inlineformset_factory
 from django import forms
-from .models import *
+from teacherui.models import *
+from dashboard.models import *
 # from .forms import *
 # from .decorators import unauthenticated_user, allowed_users
 
 # @login_required(login_url='login')
 # @allowed_users (allowed_roles=['students'])
+
+# filtering for students:
+def AlphabeticalOrder(request):
+    student = Student.objects.filter(is_published=True).order_by('name')
+    context ={
+        'student':student
+    }
+    return render (request, 'teacherclass.html', context)
+
+def RevAlphabeticalOrder(request):
+    student = Student.objects.filter(is_published=True).order_by('-name')
 
 def base(request): 
     return render (request, 'base.html')
@@ -25,9 +37,5 @@ def base(request):
 def teacherui(request): 
     return render (request, 'teacherui.html')
 
-<<<<<<< HEAD
 def teacherclass(request):
     return render (request, 'teacherclass.html')
-
-=======
->>>>>>> 939225835867056dea5b60e3945c388829677dd8
