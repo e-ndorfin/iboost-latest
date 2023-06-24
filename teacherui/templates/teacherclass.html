@@ -1,0 +1,72 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/teacherclass.css' %}" />
+        <script src="{% static 'frontend/addgrades.js' %}"></script>
+    </head>
+
+    <body>
+        <div class="container-fluid mainbody col-md-10 p-5" id="mainbody">
+            <div class="row">
+                <h1 class="col-8">[Grade] [Class name] [Class number]</h1>
+                <div class="col-4">
+                    <button class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2"
+                    style="width: 90%;" >Assign Comment</button>
+                </div>
+            </div>
+            <div class="container-fluid mt-4 px-2 overflow-hidden">
+                <div class="row">
+                    <h2 class="col-8">Students:</h2> <h5>Sort By:</h5>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <div class="studenticon"></div>
+                        <div class="p-2"></div>
+                        <div class="studentlab">
+                            Titus Yau
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="studenticon"></div>
+                        <div class="p-2"></div>
+                        <div class="studentlab">
+                            Titus Yau
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="studenticon"></div>
+                        <div class="p-2"></div>
+                        <div class="studentlab">
+                            Titus Yau
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="studenticon"></div>
+                        <div class="p-2"></div>
+                        <div class="studentlab">
+                            Titus Yau
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="studenticon"></div>
+                        <div class="p-2"></div>
+                        <div class="studentlab">
+                            Titus Yau
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="studenticon"></div>
+                        <div class="p-2"></div>
+                        <div class="studentlab">
+                            Titus Yau
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock content %}
+    </body>
+</html>

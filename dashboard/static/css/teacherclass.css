@@ -1,0 +1,15 @@
+.studenticon{
+    background-color: rgb(33, 40, 78);
+    border-radius: 1em;
+    height:15em;
+    width: 15em;
+}
+
+.stdicon{
+    height:15em;
+    width: 15em;
+}
+
+.studentlab{
+    align-content: center;
+}
