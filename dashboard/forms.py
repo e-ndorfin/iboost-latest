@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.forms.widgets import *
 from django.contrib.auth.models import User
+from teacherui.models import *
 
 from .models import *
 
@@ -39,3 +40,8 @@ class SRRForm(ModelForm):
     class Meta:
         model = SRR
         fields = ['srr', 'title', 'bestatl', 'worstatl','profile']
+
+class JoinClassForm(ModelForm):
+    class Meta:
+        model = Student
+        fields = ['profile', 'klass']

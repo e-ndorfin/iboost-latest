@@ -25,4 +25,4 @@ class Student(models.Model):
     profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE)
     klass = models.ForeignKey(Klass, null=True, on_delete=models.CASCADE)
     def __str__(self):
-        return self.name
+        return self.profile.username

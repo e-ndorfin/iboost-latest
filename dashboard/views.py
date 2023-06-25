@@ -123,6 +123,13 @@ def index(request):
         dataworst[4] = float(bestworst[0].avg)
         dataworst[5] = float(bestworst[0].subject.subjectavg)
 
+    #Join Classes
+    joinclassform = JoinClassForm()
+    if request.method == 'POST':
+        joinclassform = JoinClassForm(request.POST)
+        if joinclassform.is_valid():
+            joinclassform.save()
+
     return render(request, 'dashboard/index.html', {
         "subjects": subjects,
         "gradeform": gradeform,
@@ -136,6 +143,7 @@ def index(request):
         'dataworst': dataworst,
         'dataradar': dataradar,
         'labelsradar': labelsradar,
+        'joinclassform':joinclassform
     })
 
 # Login and Register Function
@@ -238,10 +246,12 @@ def loginPage(request):
         passwordreq = request.POST.get('password')
         user = authenticate(
             request, username=usernamereq, password=passwordreq)
-        print(user)
         if user is not None:
             auth_login(request, user)
-            return redirect('index')
+            if user.groups.filter(name='students').exists():
+                return redirect('index')
+            elif user.groups.filter(name='teachers').exists():
+                return redirect('teacherui')
         else:  # If username/password is incorrect
             messages.info(
                 request, 'Sorry, your username or password was incorrect. Please try again.')
