@@ -26,7 +26,17 @@ def base(request):
 
 @allowed_users(allowed_roles=['teachers'])
 def teacherui(request): 
-    return render (request, 'teacherui.html')
+    classes = []
+    for klass in request.user.teacher.klass_set.all():
+        classes.append(klass)
+    
+    #Add Classes
+    classform = AddClassForm()
+    if request.method == 'POST':
+        classform = AddClassForm(request.POST)
+        if classform.is_valid():
+            classform.save()
+    return render (request, 'teacherui.html', {'classes':classes, 'classform':classform})
 
 
 @allowed_users(allowed_roles=['teachers'])

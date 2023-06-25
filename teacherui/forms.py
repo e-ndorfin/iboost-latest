@@ -15,3 +15,8 @@ class RegisterTeacherForm(ModelForm):
     class Meta:
         model = Teacher
         fields = ['school', 'num_classes']
+
+class AddClassForm(ModelForm):
+    class Meta:
+        model = Klass
+        fields = ['classname', 'teachers']
