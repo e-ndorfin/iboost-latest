@@ -12,11 +12,14 @@ from django.urls import reverse
 from django.contrib.auth.models import Group
 from django.forms import inlineformset_factory
 from django import forms
+import logging
 
 # Create your views here.
 from .models import *
 from .forms import *
 from .decorators import unauthenticated_user, allowed_users
+
+logger = logging.getLogger(__name__)
 
 
 @login_required(login_url='login')
@@ -28,6 +31,7 @@ def index(request):
     gradeform = GradesForm()
     srrform = SRRForm()
     if request.method == 'POST':
+        print('indexpost')
         # Add grades
         srrform = SRRForm(request.POST)
         gradeform = GradesForm(request.POST)
@@ -123,13 +127,6 @@ def index(request):
         dataworst[4] = float(bestworst[0].avg)
         dataworst[5] = float(bestworst[0].subject.subjectavg)
 
-    #Join Classes
-    joinclassform = JoinClassForm()
-    if request.method == 'POST':
-        joinclassform = JoinClassForm(request.POST)
-        if joinclassform.is_valid():
-            joinclassform.save()
-
     return render(request, 'dashboard/index.html', {
         "subjects": subjects,
         "gradeform": gradeform,
@@ -143,8 +140,9 @@ def index(request):
         'dataworst': dataworst,
         'dataradar': dataradar,
         'labelsradar': labelsradar,
-        'joinclassform':joinclassform
     })
+    
+    
 
 # Login and Register Function
 SUBJECT_CHOICES = [
@@ -290,6 +288,19 @@ def reflections(request):
             reflectionform.save()
     return render(request,  'dashboard/reflections.html', {'srrs': srrs, 'ATLs':ATLs, 'bestdataradar':bestdataradar, 'worstdataradar':worstdataradar, 'reflectionform':reflectionform} )
 
+@ login_required(login_url='login')
+@ allowed_users(allowed_roles=['students'])
+def addclass(request): 
+    #Join Classes
+    joinclassform = JoinClassForm()
+    if request.method == 'POST':
+        joinclassform = JoinClassForm(request.POST)
+        if joinclassform.is_valid(): 
+            usr = joinclassform.save(commit=False)
+            usr.profile = request.user.profile
+            usr.save()
+            
+    return render(request, 'dashboard/joinclass.html', {'joinclassform': joinclassform})
 
 @ login_required(login_url='login')
 def base(request):

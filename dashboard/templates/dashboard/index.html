@@ -8,7 +8,7 @@
 	<script src="{% static 'frontend/addgrades.js' %}"></script>
 </head>
 
-<body>
+<body onload="profileSelect()"">
 	<div class="container-fluid col-md-10 p-4 addgrades" id="addgrades" style="display: none;">
 		<i class="bi bi-x" onclick="removegrades('mainbody','addgrades');"></i>
 		<div class="p-5 d-flex justify-content-center" style="height: 80%;">
@@ -67,7 +67,7 @@
 						onclick="addgrades('mainbody','addgrades');">ADD
 						GRADES</button>
 				</div>
-				<form method="POST" onsubmit="setTimeout(function(){window.location.reload();},10);">
+				<form method="POST">
 					{% csrf_token %}
 					<div>
 						<button type="button" class="btn btn-light rounded" data-bs-toggle="modal" data-bs-target="#joinClassModal"">
@@ -81,11 +81,12 @@
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title" id="joinClassModalLabel">Join Class</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									<button type="button" id="joinClassButton" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="console.log('hi');"></button>
 								</div>
 								<div class="modal-body">
 									{{joinclassform.klass}}
-									<div style="display:none;">{{joinclassform.profile}}</div>
+									<!-- {{joinclassform.profile}} -->
+									<!-- <div style="display:none;">{{joinclassform.profile}}</div> -->
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -303,17 +304,20 @@
 			classnamefield.style.borderRadius = "20px";
 	</script>
 	<script>
-		document.addEventListener('DOMContentLoaded', function () {
-			profile = document.getElementById("profile").textContent
-			profileselect = document.getElementById("id_profile");
+		function profileSelect(){
+			console.log('hi'); 
+			var profile = document.getElementById("profile").textContent;
+			var profileselect = document.getElementById("id_profile");
 			for (var i = 0; i < profileselect.options.length; i++) {
 				if (profileselect.options[i].textContent == profile) {
-					profileselect.options[i].selected = true;
+					profileselect.selectedIndex = i;
+					console.log(profileselect.options[i]);
+					console.log(profile);
 				} else {
-					profileselect.options[i].selected = false;
+					// profileselect.options[i].selected = false;
+					continue; 
 				}
-			}
-		});
+		}};
 	</script>
 	{% endblock content %}
 	<!-- </div> -->

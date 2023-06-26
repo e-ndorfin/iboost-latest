@@ -44,4 +44,5 @@ class SRRForm(ModelForm):
 class JoinClassForm(ModelForm):
     class Meta:
         model = Student
-        fields = ['profile', 'klass']
+        fields = ['klass']
+
