@@ -76,13 +76,12 @@
             var teacher = document.getElementById('teacher').textContent;
             var teacherfield = document.getElementById('id_teachers');
             for (var i = 0; i < teacherfield.options.length; i++) {
-                    if (teacherfield.options[i].textContent == teacher) {
-                        teacherfield.options[i].selected = true;
-                    } else {
-                        teacherfield.options[i].selected = false;
-                    }
+                if (teacherfield.options[i].textContent == teacher) {
+                    teacherfield.options[i].selected = true;
+                } else {
+                    teacherfield.options[i].selected = false;
+                }
             }
-
         </script>
         {% endblock content %}
     </body>

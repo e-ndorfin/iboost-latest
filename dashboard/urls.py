@@ -21,4 +21,5 @@ urlpatterns = [
     # path('mainchart/', views.main_chart, name="main_chart"),
     path('interviewarchive/', views.interviewarchive, name="interviewarchive"),
     path('editprofile/', views.editprofile, name="editprofile"),
+    path('addclass/', views.addclass, name='addclass'),
 ]
