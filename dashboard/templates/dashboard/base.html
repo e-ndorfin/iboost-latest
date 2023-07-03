@@ -77,6 +77,11 @@
                                     >Profile</a
                                 >
                             </li>
+                            <li class="nav-item">
+                                <a href="{% url 'interviewarchive' %}" class="nav-link"
+                                    >Archives</a
+                                >
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -146,6 +151,23 @@
                                     padding: 0em 0.5em 0.2em 0em;
                                 "
                             />Reflections</a
+                        >
+                    </div>
+                    <div
+                        class="p-2 menutext improvact"
+                        onclick="window.location.href = '{% url 'interviewarchive' %}'""
+                    >
+                        <a href="{% url 'interviewarchive' %}"
+                            ><img
+                                src="{% static 'img/pref.png' %}"
+                                alt="d"
+                                class="img-fluid"
+                                style="
+                                    max-width: 3em;
+                                    max-height: 2em;
+                                    padding: 0em 0.5em 0.2em 0em;
+                                "
+                            />Archives</a
                         >
                     </div>
                     <div class="pt-md-5"></div>

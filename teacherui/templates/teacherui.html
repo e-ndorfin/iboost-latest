@@ -12,27 +12,34 @@
     <body>
         <div class="container-fluid mainbody col-md-10 p-5" id="mainbody">
             <div class="row">
-                <h1>Welcome, <strong id="teacher">{{request.user}}</strong>.</h1>
+                <div class="col-11">
+                    <h1>Welcome, <strong id="teacher">{{request.user}}</strong>.</h1>
+                </div>
+                <div class="col-1">
+                    <div>
+                        <button type="button" class="btn btn-light rounded p-2" data-bs-toggle="modal" data-bs-target="#addClassModal"">
+                            <div>Add Class</div>
+                        </button>
+                    </div>
+                </div>
             </div>
             <div class="container-fluid mt-4 px-2 overflow-hidden">
                 <h2>Your classes:</h2>
                 <div class="row p-3">
                     {% for klass in classes %}
-                        <div class="col-3 p-2">
-                            <button class="btn btn-light p-5" style="width: 80%">
-                                <div class="h3">{{klass.classname}}</div>
+                        <div class="col-3 p-2 ">
+                            <button class="classbtd" style="width: 90%">
+                                <div class="h3 classbtd">{{klass.classname}}</div>
                             </button>
+                            <div class="p-2"></div>
+                            <div class="p-2"></div>
+                            <div class="p-2"></div>
                         </div>
                     {% endfor %}
                 </div>
                 <div class="row p-3">
                     <form method="POST" onsubmit="setTimeout(function(){window.location.reload();},10);">
                         {% csrf_token %}
-                        <div class="col-3">
-                            <button type="button" class="btn btn-light rounded p-5" data-bs-toggle="modal" data-bs-target="#addClassModal"">
-                                <div class=" h3">Add Class</div>
-                            </button>
-                        </div>
                         <!-- Modal -->
                         <div class="modal fade" id="addClassModal" tabindex="-1" aria-labelledby="addClassModalLabel" aria-hidden="true"
                             style="color: black;">

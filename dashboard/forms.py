@@ -39,3 +39,6 @@ class SRRForm(ModelForm):
     class Meta:
         model = SRR
         fields = ['srr', 'title', 'bestatl', 'worstatl','profile']
+        widgets = {
+          'title': forms.Textarea(attrs={'rows':1, 'cols':40}),
+        }

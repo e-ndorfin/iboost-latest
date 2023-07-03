@@ -55,7 +55,7 @@ class SRR(models.Model):
         ('Creative Thinking', 'Creative Thinking'),
         ('Transfer', 'Transfer'),
     )
-    srr = models.TextField(max_length=1000, null=True)
+    srr = models.TextField(max_length=1000, null=True) 
     title = models.TextField(max_length=100, null=True)
     bestatl = models.CharField(max_length=50, choices=ATL_CHOICES)
     worstatl = models.CharField(max_length=50, choices=ATL_CHOICES)

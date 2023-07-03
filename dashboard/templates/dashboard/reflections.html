@@ -14,7 +14,7 @@
         <div class="d-flex justify-content-center">
             <i class="bi bi-x" onclick="removereflection('mainbody','addreflection');"></i>
             <div class="p-5 d-flex justify-content-center" style="height: 80%; width: 75%;">
-                <div>
+                <div class="" style="align-items: center;">
                     <form method="POST">
                         {% csrf_token %}
                         <div class="bg-light p-5" style="border-radius: 50px;">
@@ -22,7 +22,7 @@
                                 <div class="h3">Add Reflection</div>
                                 <div class="row">
                                     <div class="col-3">
-                                        <div class="h5">Reflection Title:</div>
+                                        <div class="h5">Title:</div>
                                     </div>
                                     <div class="col-9">{{reflectionform.title}}</div>
                                 </div>
@@ -34,15 +34,15 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-4">
-                                        <div class="h5">Best ATL Skill:</div>
+                                        <div class="h5">Best Skill:</div>
                                     </div>
                                     <div class="col-8">
                                         {{reflectionform.bestatl}}
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row">\
                                     <div class="col-4">
-                                        <div class="h5">Worst ATL Skill:</div>
+                                        <div class="h5">Worst Skill:</div>
                                     </div>
                                     <div class="col-8">
                                         {{reflectionform.worstatl}}
