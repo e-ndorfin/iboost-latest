@@ -59,7 +59,7 @@
 								</h6>
 								<div class="d-flex justify-content-center">
 									<input type="button" id="register-btns" value="Continue" name="button"
-										onclick="next()"
+										onclick="next(); removeRepetitiveSubjects()"
 										class="btn btn-primary rounded-pill btn-block btn-sm continue mt-4 p-2" />
 								</div>
 							</fieldset>
@@ -148,10 +148,10 @@
 			</div>
 		</div>
 	</div>
-
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous">
+	</script>
 	<script>
 		//Query All input fields
 		var form_fields = document.getElementsByTagName("input"); //Find input fields and put placeholders on them
@@ -177,6 +177,36 @@
 			subject_fields[field].className += "form-select p-3 my-3";
 			subject_fields[field].style.borderRadius = "20px";
 		}
+
+		// Code to detect repetitive subjects 
+		function removeRepetitiveSubjects(){ 
+			var dropdowns = document.querySelectorAll(".subject-select");
+			var selected = [];
+
+			dropdowns.forEach(function(dropdown, index) {
+				var selectedValue = dropdown.value;
+				selected.push(selectedValue);
+
+				dropdown.addEventListener("change", function() {
+					selected[index] = this.value; 
+					dropdowns.forEach(function(otherDropdown) {
+					if (otherDropdown !== dropdown) {
+						otherDropdown.querySelectorAll("option").forEach(function(option) {
+						if (selected.includes(option.value)){ 
+							option.disabled = true;
+							option.style.color = "grey"; 
+						} else {
+							option.disabled = false;
+							option.style.color = "black"; 
+						}
+						});
+					}
+					});
+				});
+			});
+		}
+		
+
 	</script>
 	{% endblock content %}
 </body>

@@ -145,8 +145,8 @@ def index(request):
 
 # Login and Register Function
 SUBJECT_CHOICES = [
-    ('', 'Subject '), ('Chinese', "Chinese"), ('English', "English"), ('Math', "Math"), ('Science', "Science"), ('Individuals and Societies', "Individuals and Societies"), ('Music',
-                                                                                                                                                                             "Music"), ('Drama', "Drama"), ('Art', "Art"), ('MYP Physical Education', "MYP Physical Education"), ('Design', "Design"), ('Computer Science', "Computer Science")
+    ('', ''), ('Chinese', "Chinese"), ('English', "English"), ('Math', "Math"), ('Science', "Science"), ('Individuals and Societies', "Individuals and Societies"), ('Music',
+                                                                                                                                                                     "Music"), ('Drama', "Drama"), ('Art', "Art"), ('MYP Physical Education', "MYP Physical Education"), ('Design', "Design"), ('Computer Science', "Computer Science")
 ]
 
 
@@ -209,7 +209,7 @@ def subject(request, sub):
 def registerPage(request):
     form = RegisterUserForm()
     SubjectFormSet = inlineformset_factory(
-        Profile, Subject, fields=('subjectname',), extra=6, widgets={'subjectname': forms.Select(choices=SUBJECT_CHOICES)},)
+        Profile, Subject, fields=('subjectname',), extra=6, widgets={'subjectname': forms.Select(choices=SUBJECT_CHOICES, attrs={'class': 'subject-select '})}, )
     formset = SubjectFormSet()
     # If the user is registering an account
     if request.method == "POST":
