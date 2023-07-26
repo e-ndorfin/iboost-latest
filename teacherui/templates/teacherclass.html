@@ -5,21 +5,27 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <link rel="stylesheet" href="{% static 'css/index.css' %}" />
         <link rel="stylesheet" href="{% static 'css/teacherclass.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/teacherui.css' %}" />
         <script src="{% static 'frontend/addgrades.js' %}"></script>
     </head>
 
     <body>
         <div class="container-fluid mainbody col-md-10 p-5" id="mainbody">
             <div class="row">
-                <h1 class="col-8">[Grade] [Class name] [Class number]</h1>
-                <div class="col-4">
-                    <button class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2"
-                    style="width: 90%;" >Assign Comment</button>
-                </div>
+                <h1 class="col-8">{{klass.classname}}</h1>
             </div>
             <div class="container-fluid mt-4 px-2 overflow-hidden">
                 <div class="row">
-                    <h2 class="col-8">Students:</h2> <h5>Sort By:</h5>
+                    <h2 class="col-8">Students:</h2>
+                </div>
+                <div class="row">
+                    {% for student in students %}
+                    <div class="col-3 p-2 ">
+                        <a class="studentbox" style="width: 90%" href="{% url 'teacherclass' klass.classname %}">
+                            <div class="h3 studentbtd">{{student.profile}}</div>
+                        </a>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

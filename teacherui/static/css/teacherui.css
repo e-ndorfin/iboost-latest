@@ -1,0 +1,56 @@
+.classbox {
+    background-color: #363648;
+    border-radius: 1em;
+    color: #fff;
+    border: transparent;
+    transition-duration: 0.8s;
+    -webkit-transition-duration: 0.7s;
+    text-decoration: none;
+}
+
+.classbtd {
+    padding: 2em 2em 2em 2em;
+    background-color: #363648;
+    border-radius: 1em;
+    color: #fff;
+    border: transparent;
+    transition-duration: 0.8s;
+    -webkit-transition-duration: 0.7s;
+    text-decoration: none;
+}
+
+.classbox :hover {
+    color: #11e497;
+    box-shadow: #11e497;
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+}
+
+.studentbox {
+    background-color: #363648;
+    border-radius: 1em;
+    color: #fff;
+    border: transparent;
+    transition-duration: 0.8s;
+    -webkit-transition-duration: 0.7s;
+    text-decoration: none;
+}
+
+.studentbtd {
+    padding: 2em 2em 2em 2em;
+    background-color: #363648;
+    border-radius: 1em;
+    color: #fff;
+    border: transparent;
+    transition-duration: 0.8s;
+    -webkit-transition-duration: 0.7s;
+    text-decoration: none;
+}
+
+.studentbox :hover {
+    color: #11e497;
+    box-shadow: #11e497;
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+}
+
