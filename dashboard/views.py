@@ -39,6 +39,7 @@ def index(request):
             srrform.save().grade = gradeform.save(commit=False)
             gradeform.save()
             srrform.save()
+            return redirect('index')
     # Graph stuff
     labels = ["January", "Febuary", "March", "April", "May", "June",
               "July", "August", "September", "October", "November", "December"]
@@ -288,6 +289,7 @@ def reflections(request):
         reflectionform = SRRForm(request.POST)
         if reflectionform.is_valid():
             reflectionform.save()
+            return redirect('reflections')
     return render(request,  'dashboard/reflections.html', {'srrs': srrs, 'ATLs': ATLs, 'bestdataradar': bestdataradar, 'worstdataradar': worstdataradar, 'reflectionform': reflectionform})
 
 
@@ -302,6 +304,7 @@ def addclass(request):
             usr = joinclassform.save(commit=False)
             usr.profile = request.user.profile
             usr.save()
+            return redirect('index')
 
     return render(request, 'dashboard/joinclass.html', {'joinclassform': joinclassform})
 

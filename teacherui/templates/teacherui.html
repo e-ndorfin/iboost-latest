@@ -38,7 +38,7 @@
                     {% endfor %}
                 </div>
                 <div class="row p-3">
-                    <form method="POST" onsubmit="setTimeout(function(){window.location.reload();},10);">
+                    <form method="POST">
                         {% csrf_token %}
                         <!-- Modal -->
                         <div class="modal fade" id="addClassModal" tabindex="-1" aria-labelledby="addClassModalLabel" aria-hidden="true"

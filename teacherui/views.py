@@ -32,10 +32,12 @@ def teacherui(request):
     
     #Add Classes
     classform = AddClassForm()
+    print(request.method)
     if request.method == 'POST':
         classform = AddClassForm(request.POST)
         if classform.is_valid():
             classform.save()
+            return redirect('teacherui')
     return render (request, 'teacherui.html', {'classes':classes, 'classform':classform})
 
 
