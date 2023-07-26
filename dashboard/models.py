@@ -40,7 +40,8 @@ class Grade(models.Model):
 
     def __str__(self):
         return "A: %i B: %i C: %i D: %i" % (self.criterionA, self.criterionB, self.criterionC, self.criterionD)
-    
+
+
 class SRR(models.Model):
     ATL_CHOICES = (
         ('Interaction', 'Interaction'),
@@ -55,12 +56,14 @@ class SRR(models.Model):
         ('Creative Thinking', 'Creative Thinking'),
         ('Transfer', 'Transfer'),
     )
-    srr = models.TextField(max_length=1000, null=True) 
+    srr = models.TextField(max_length=1000, null=True)
     title = models.TextField(max_length=100, null=True)
     bestatl = models.CharField(max_length=50, choices=ATL_CHOICES)
     worstatl = models.CharField(max_length=50, choices=ATL_CHOICES)
-    grade = models.ForeignKey(Grade, null=True, on_delete=models.CASCADE, default="")
+    grade = models.ForeignKey(
+        Grade, null=True, on_delete=models.CASCADE, default="")
     profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE)
+    created = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.title
