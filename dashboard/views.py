@@ -30,16 +30,26 @@ def index(request):
     # Grade form
     gradeform = GradesForm()
     srrform = SRRForm()
+    joinclassform = JoinClassForm()
     if request.method == 'POST':
         print('indexpost')
         # Add grades
         srrform = SRRForm(request.POST)
         gradeform = GradesForm(request.POST)
+        joinclassform = JoinClassForm(request.POST)
         if gradeform.is_valid() and srrform.is_valid():
             srrform.save().grade = gradeform.save(commit=False)
             gradeform.save()
             srrform.save()
             return redirect('index')
+
+        if joinclassform.is_valid():
+            usr = joinclassform.save(commit=False)
+            usr.profile = request.user.profile
+            usr.save()
+            return redirect('index')
+
+        return render(request, 'dashboard/joinclass.html', {'joinclassform': joinclassform})
     # Graph stuff
     labels = ["January", "Febuary", "March", "April", "May", "June",
               "July", "August", "September", "October", "November", "December"]
@@ -138,6 +148,7 @@ def index(request):
         "subjects": subjects,
         "gradeform": gradeform,
         'srrform': srrform,
+        'joinclassform': joinclassform,
         'srrs': srrs,
         'labels': labels,
         'data': datamain,
