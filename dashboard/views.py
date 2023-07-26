@@ -252,6 +252,7 @@ def registerPage(request):
                 formset = SubjectFormSet(
                     request.POST, instance=profile)
                 if formset.is_valid():
+                    print(formset.save())
                     formset.save()
                 messages.success(
                     request, 'Account was created for ' + username)
