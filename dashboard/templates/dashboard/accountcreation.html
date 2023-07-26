@@ -58,7 +58,7 @@
 								</h6>
 								<div class="d-flex justify-content-center">
 									<input type="button" id="register-btns" value="Continue" name="button"
-										onclick="next(); removeRepetitiveSubjects()"
+										onclick="next(); removeRepetitiveSubjects();"
 										class="btn btn-primary rounded-pill btn-block btn-sm continue mt-4 p-2" />
 								</div>
 							</fieldset>
@@ -99,7 +99,7 @@
 								</div>
 								<div class="d-flex justify-content-center">
 									<input type="button" value="Continue" name="continue" id="register-btns"
-										onclick="next()"
+										onclick="next(); undisable();"
 										class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2" />
 								</div>
 							</fieldset>
@@ -139,7 +139,7 @@
 								</div>
 								<input type="submit" value="Register Account" name="submit" id="submit register-btns"
 									class="btn btn-info rounded-pill btn-block btn-sm continue p-2"
-									onsubmit="return false;" />
+									onsubmit="undisable();" />
 							</fieldset>
 						</form>
 					</div>
@@ -193,15 +193,34 @@
 					if (otherDropdown !== dropdown) {
 						otherDropdown.querySelectorAll("option").forEach(function(option) {
 						if (selected.includes(option.value)){ 
-							// option.disabled = true;
+							option.disabled = true;
 							option.style.color = "grey"; 
 						} else {
-							// option.disabled = false;
+							option.disabled = false;
 							option.style.color = "black"; 
 						}
 						});
 					}
 					});
+				});
+			});
+		}
+
+		function undisable(){
+			var dropdowns = document.querySelectorAll(".subject-select");
+			var selected = [];
+
+			dropdowns.forEach(function (dropdown, index) {
+				var selectedValue = dropdown.value;
+				selected.push(selectedValue);
+				dropdowns.forEach(function (otherDropdown) {
+					if (otherDropdown !== dropdown) {
+						otherDropdown.querySelectorAll("option").forEach(function (option) {
+							if (selected.includes(option.value)) {
+								option.disabled = false;
+							}
+						});
+					}
 				});
 			});
 		}
