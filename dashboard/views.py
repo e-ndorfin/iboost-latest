@@ -139,10 +139,10 @@ def index(request):
         dataworst[4] = float(bestworst[0].avg)
         dataworst[5] = float(bestworst[0].subject.subjectavg)
 
-        for srr in bestworst[1].srr_set.all():
-            srrs.append(srr.srr)
-        for srr in bestworst[0].srr_set.all():
-            srrs.append(srr.srr)
+    for srr in bestworst[1].srr_set.all():
+        srrs.append(srr.srr)
+    for srr in bestworst[0].srr_set.all():
+        srrs.append(srr.srr)
 
     return render(request, 'dashboard/index.html', {
         "subjects": subjects,
