@@ -10,6 +10,7 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
         />
+        
     </head>
     <body>
         <div class="col-md-10 pt-3 container-fluid grades-container">
@@ -17,33 +18,17 @@
                 <div
                     class="menu row flex-column align-content-center justify-content-center gy-3"
                 >
+                {% for subject in subjects %} 
                     <div class="subject col">
-                        <a class="subject-text bi bi-journals" href="{% url 'subject' request.user.profile.subject_set.all.0 %}">
-                            {{request.user.profile.subject_set.all.0}}</a
-                        >
+                        <a class="subject-text" href="{% url 'subject' subject.subjectname %}">
+                            {{subject.subjectname}}</a>
                     </div>
-                    <div class="subject col">
-                        <a class="subject-text bi bi-translate" href="{% url 'subject' request.user.profile.subject_set.all.1 %}">
-                            {{request.user.profile.subject_set.all.1}}</a
-                        >
-                    </div>
-                    <div class="subject col">
-                        <a class="subject-text bi bi-calculator" href="{% url 'subject' request.user.profile.subject_set.all.2 %}">
-                            {{request.user.profile.subject_set.all.2}}</a
-                        >
-                    </div>
-                    <div class="subject col">
-                        <a class="subject-text bi bi-virus" href="{% url 'subject' request.user.profile.subject_set.all.3 %}">
-                            {{request.user.profile.subject_set.all.3}}</a
-                        >
-                    </div>
-                    <div class="subject col">
-                        <a class="subject-text bi bi-globe" href="{% url 'subject' request.user.profile.subject_set.all.4 %}"> {{request.user.profile.subject_set.all.4}}</a>
-                    </div>
+
+                {% endfor %}
                 </div>
             </div>
         </div>
-
+        <script src="{% static 'frontend/subjects.js' %}"></script>
         {% endblock content %}
     </body>
 </html>

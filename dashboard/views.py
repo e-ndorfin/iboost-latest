@@ -162,6 +162,9 @@ SUBJECT_CHOICES = [
 @ allowed_users(allowed_roles=['students'])
 def subjects(request):
     subjects = request.user.profile.subject_set.all()
+
+    print(subjects)
+    logging.warn(subjects)
     return render(request, 'dashboard/subjects.html', {'subjects': subjects})
 
 
