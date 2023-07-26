@@ -99,3 +99,8 @@ for(item in videoarray){
         console.log(videoarray[item][weakcritindex]);
 }
 
+for(item in feedbackarray){
+    if(subject +'fb' == feedbackarray[item].slice(-1))
+        document.getElementById("feedback").innerHTML += feedbackarray[item][weakcritindex];
+        console.log(feedbackarray[item][weakcritindex]);
+}
