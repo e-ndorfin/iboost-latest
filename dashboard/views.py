@@ -282,7 +282,7 @@ def reflections(request):
     ATLs = ['Interaction', 'Language', 'Collaboration', 'Information Literacy', 'Media Literacy', 'Affective Skills',
             'Organizational Skills', 'Reflection', 'Critical Thinking', 'Creative Thinking', 'Transfer']
     for srr in request.user.profile.srr_set.all():
-        srrs.append(srr)
+        srrs.insert(0, srr)
         for atl in ATLs:
             if (srr.bestatl == atl):
                 bestdataradar[ATLs.index(atl)] += 1
