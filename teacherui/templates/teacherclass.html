@@ -21,7 +21,7 @@
                 <div class="row">
                     {% for student in students %}
                     <div class="col-3 p-2 ">
-                        <a class="studentbox" style="width: 90%" href="{% url 'teacherclass' klass.classname %}">
+                        <a class="studentbox" style="width: 90%" href="{% url 'teacherreflection' student.profile.username %}">
                             <div class="h3 studentbtd">{{student.profile}}</div>
                         </a>
                     </div>
