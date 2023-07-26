@@ -40,12 +40,12 @@
                                     <input type="submit" name="submit" class="btn btn-secondary" value="Login">
                                 </div>
                                 <div class="btn main-color reg-btn" data-toggle="modal" data-target="#signupBox"
-                                    onclick="signup()">
+                                    onclick="window.location.href='{% url 'register' %}'">
                                     Register
                                 </div>
                             </form>
                             {% for message in messages %}
-                            <p>{{message}}</p>
+                            <p class="text-danger mt-4">{{message}}</p>
                             {% endfor %}
                         </div>
                     </div>

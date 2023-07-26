@@ -130,7 +130,7 @@ def index(request):
     return render(request, 'dashboard/index.html', {
         "subjects": subjects,
         "gradeform": gradeform,
-        'srrform': srrform, 
+        'srrform': srrform,
         'labels': labels,
         'data': datamain,
         'bestworst': bestworst,
@@ -141,12 +141,12 @@ def index(request):
         'dataradar': dataradar,
         'labelsradar': labelsradar,
     })
-    
-    
+
 
 # Login and Register Function
 SUBJECT_CHOICES = [
-    ('', 'Subject '), ('Chinese', "Chinese"), ('English', "English"), ('Math', "Math"), ('Science', "Science"), ('Individuals and Societies', "Individuals and Societies"), ('Music',                                                                                                                                                                            "Music"), ('Drama', "Drama"), ('Art', "Art"), ('MYP Physical Education', "MYP Physical Education"), ('Design', "Design"), ('Computer Science', "Computer Science")
+    ('', 'Subject '), ('Chinese', "Chinese"), ('English', "English"), ('Math', "Math"), ('Science', "Science"), ('Individuals and Societies', "Individuals and Societies"), ('Music',
+                                                                                                                                                                             "Music"), ('Drama', "Drama"), ('Art', "Art"), ('MYP Physical Education', "MYP Physical Education"), ('Design', "Design"), ('Computer Science', "Computer Science")
 ]
 
 
@@ -156,15 +156,16 @@ def subjects(request):
     subjects = request.user.profile.subject_set.all()
     return render(request, 'dashboard/subjects.html', {'subjects': subjects})
 
+
 def subject(request, sub):
-    #Subject Main Graph
+    # Subject Main Graph
     monthgradecount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     avggrade = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     datasubject = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    datagrade = [0,0,0,0,0,0]
+    datagrade = [0, 0, 0, 0, 0, 0]
     datagrades = []
     srrs = []
-    criterionavg = [0,0,0,0]
+    criterionavg = [0, 0, 0, 0]
     labelsgrade = ["Criterion A", "Criterion B", "Criterion C",
                    "Criterion D", "Grade Average", "Subject Average"]
     labels = ["January", "Febuary", "March", "April", "May", "June",
@@ -173,15 +174,15 @@ def subject(request, sub):
     # Calculate average for each month
     for grade in subject.grade_set.all():
         avg = (grade.criterionA+grade.criterionB +
-                grade.criterionC+grade.criterionD)/4
+               grade.criterionC+grade.criterionD)/4
         grade.avg = avg
         grade.save()
         month = grade.created.month
         monthgradecount[month-1] += 1
         avggrade[month-1] += avg
         datasubject[month-1] = avggrade[month-1]/monthgradecount[month-1]
-    
-    #Show most recent test with reflection
+
+    # Show most recent test with reflection
     for grade in subject.grade_set.all():
         datagrade[0] = grade.criterionA
         datagrade[1] = grade.criterionB
@@ -192,8 +193,8 @@ def subject(request, sub):
         datagrades.append(datagrade.copy())
         for srr in grade.srr_set.all():
             srrs.append(srr.srr)
-    
-    #Find worst criterion:
+
+    # Find worst criterion:
     num = 1
     for grade in subject.grade_set.all():
         criterionavg[0] = float((criterionavg[0]+float(grade.criterionA))/num)
@@ -201,7 +202,7 @@ def subject(request, sub):
         criterionavg[2] = float((criterionavg[2]+float(grade.criterionC))/num)
         criterionavg[3] = float((criterionavg[3]+float(grade.criterionD))/num)
         num += 1
-    return render(request, 'dashboard/subject.html', {'subject': subject, 'labels':labels, 'data':datasubject, 'datagrades':datagrades, 'labelsgrade':labelsgrade, 'srrs':srrs, 'criterionavg':criterionavg})
+    return render(request, 'dashboard/subject.html', {'subject': subject, 'labels': labels, 'data': datasubject, 'datagrades': datagrades, 'labelsgrade': labelsgrade, 'srrs': srrs, 'criterionavg': criterionavg})
 
 
 @unauthenticated_user
@@ -253,7 +254,7 @@ def loginPage(request):
         else:  # If username/password is incorrect
             messages.info(
                 request, 'Sorry, your username or password was incorrect. Please try again.')
-            return render(request, 'dashboard/accountcreation.html', {})
+            # return render(request, 'dashboard/accountcreation.html', {})
     context = {}
     return render(request, 'dashboard/login.html', context)
 
@@ -268,39 +269,42 @@ def logoutUser(request):
 @ allowed_users(allowed_roles=['students'])
 def reflections(request):
     srrs = []
-    bestdataradar = [0,0,0,0,0,0,0,0,0,0,0];
-    worstdataradar = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    ATLs = ['Interaction','Language','Collaboration','Information Literacy','Media Literacy','Affective Skills','Organizational Skills','Reflection','Critical Thinking','Creative Thinking','Transfer']
+    bestdataradar = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    worstdataradar = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ATLs = ['Interaction', 'Language', 'Collaboration', 'Information Literacy', 'Media Literacy', 'Affective Skills',
+            'Organizational Skills', 'Reflection', 'Critical Thinking', 'Creative Thinking', 'Transfer']
     for srr in request.user.profile.srr_set.all():
         srrs.append(srr)
         for atl in ATLs:
-            if(srr.bestatl == atl):
+            if (srr.bestatl == atl):
                 bestdataradar[ATLs.index(atl)] += 1
-            if(srr.worstatl == atl):
+            if (srr.worstatl == atl):
                 worstdataradar[ATLs.index(atl)] += 1
-    
-    #Add Reflections
+
+    # Add Reflections
     reflectionform = SRRForm()
     if request.method == 'POST':
-        #Add SRR
+        # Add SRR
         reflectionform = SRRForm(request.POST)
         if reflectionform.is_valid():
             reflectionform.save()
-    return render(request,  'dashboard/reflections.html', {'srrs': srrs, 'ATLs':ATLs, 'bestdataradar':bestdataradar, 'worstdataradar':worstdataradar, 'reflectionform':reflectionform} )
+    return render(request,  'dashboard/reflections.html', {'srrs': srrs, 'ATLs': ATLs, 'bestdataradar': bestdataradar, 'worstdataradar': worstdataradar, 'reflectionform': reflectionform})
+
 
 @ login_required(login_url='login')
 @ allowed_users(allowed_roles=['students'])
-def addclass(request): 
-    #Join Classes
+def addclass(request):
+    # Join Classes
     joinclassform = JoinClassForm()
     if request.method == 'POST':
         joinclassform = JoinClassForm(request.POST)
-        if joinclassform.is_valid(): 
+        if joinclassform.is_valid():
             usr = joinclassform.save(commit=False)
             usr.profile = request.user.profile
             usr.save()
-            
+
     return render(request, 'dashboard/joinclass.html', {'joinclassform': joinclassform})
+
 
 @ login_required(login_url='login')
 def base(request):
