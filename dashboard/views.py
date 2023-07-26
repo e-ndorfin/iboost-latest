@@ -57,6 +57,7 @@ def index(request):
     labelsworst = ["Criterion A", "Criterion B", "Criterion C",
                    "Criterion D", "Grade Average", "Subject Average"]
     labelsradar = []
+    srrs = []
     dataradar = [0, 0, 0, 0, 0, 0]
 
     # Calculate average for each month
@@ -128,10 +129,16 @@ def index(request):
         dataworst[4] = float(bestworst[0].avg)
         dataworst[5] = float(bestworst[0].subject.subjectavg)
 
+        for srr in bestworst[1].srr_set.all():
+            srrs.append(srr.srr)
+        for srr in bestworst[0].srr_set.all():
+            srrs.append(srr.srr)
+
     return render(request, 'dashboard/index.html', {
         "subjects": subjects,
         "gradeform": gradeform,
         'srrform': srrform,
+        'srrs': srrs,
         'labels': labels,
         'data': datamain,
         'bestworst': bestworst,
