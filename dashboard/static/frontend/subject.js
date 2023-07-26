@@ -1,5 +1,5 @@
 //Script for determining which videos to show improvement area/ improvement text
-var subject = document.getElementById('subjectname').textContent.toLowerCase().replaceAll(" ","");
+var subject = document.getElementById('subjectname').textContent.toLowerCase().trim();
 
 const math = ['<iframe style="width: 100%; height: 25vh;" src="https://www.youtube.com/embed/M9Rrf9-yWxw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', 
 '<iframe style="width: 100%; height: 25vh;" src="https://www.youtube.com/embed/CAtw6yDRPe4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', 
@@ -99,3 +99,8 @@ for(item in videoarray){
         console.log(videoarray[item][weakcritindex]);
 }
 
+for(item in feedbackarray){
+    if(subject +'fb' == feedbackarray[item].slice(-1))
+        document.getElementById("feedback").innerHTML += feedbackarray[item][weakcritindex];
+        console.log(feedbackarray[item][weakcritindex]);
+}
