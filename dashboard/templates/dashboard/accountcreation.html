@@ -38,7 +38,7 @@
 			<div class="d-flex container login-form align-items-center justify-content-center" id="regcontainer">
 				<div style="width: 100%">
 					<div id="fieldset-group"">
-						<form method="POST">
+						<form method="POST" id="reg">
 							{% csrf_token %}
 							<!-- First page -->
 							<fieldset id="regpage" class="form-page">
@@ -142,6 +142,14 @@
 									onsubmit="undisable();" />
 							</fieldset>
 						</form>
+						<script>
+							const form = document.getElementById('reg');
+							form.addEventListener('keypress', function(e) {
+							  if (e.keyCode === 13) {
+								e.preventDefault();
+							  }
+							});
+						</script>
 					</div>
 				</div>
 			</div>
@@ -224,7 +232,7 @@
 				});
 			});
 		}
-		
+	
 
 	</script>
 	{% endblock content %}

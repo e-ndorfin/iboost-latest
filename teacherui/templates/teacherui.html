@@ -13,14 +13,14 @@
     <body>
         <div class="container-fluid mainbody col-md-10 p-5" id="mainbody">
             <div class="row">
-                <div class="col-11">
+                <div class="col-10">
                     <h1>Welcome, <strong id="teacher">{{request.user}}</strong>.</h1>
                 </div>
-                <div class="col-1">
-                    <div>
-                        <button type="button" class="btn btn-light rounded p-2" data-bs-toggle="modal" data-bs-target="#addClassModal"">
+                <div class="col-2">
+                    <div class="edit1">
+                        <div type="button" data-bs-toggle="modal" data-bs-target="#addClassModal"">
                             <div>Add Class</div>
-                        </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                     {% for klass in classes %}
                         <div class="col-3 p-2 ">
                             <a class="classbox" style="width: 90%" href="{% url 'teacherclass' klass.classname %}">
-                                <div class="h3 classbtd">{{klass.classname}}</div>
+                                <div class="h3 classbtd" style="width: 85%">{{klass.classname}}</div>
                             </a>
                         </div>
                     {% endfor %}

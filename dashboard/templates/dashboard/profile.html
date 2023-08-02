@@ -1,23 +1,75 @@
 {% extends 'dashboard/base.html' %} {% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
-    {% block content %}
-    <head>
-        <script>
-            function closeSidebar() {
-                document.getElementById("sidenav").style.display = "none";
-            }
-        </script>
-        <link rel="stylesheet" href="{% static 'css/profile.css' %}" />
-    </head>
-    <body>
-        <!-- Content starts here -->
-        <div class="col-md-10 mainbody containerfr p-5" id="blur">
-            <h1 class="pt-4 ml-4 mb-4">Account</h1>
+<head>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+	<script src="{% static 'frontend/addgrades.js' %}"></script>
+    <script src="{% static 'frontend/editprofile.js' %}"></script>
+</head>
 
-            <div
-                class="container-fluid p-md-5 p-3 border bordcol-overrides rounded"
-            >
+<body onload="profileSelect()"">
+	<div class="container-fluid col-md-10 p-4 addgrades" id="addgrades" style="display: none;">
+		<i class="bi bi-x" onclick="removegrades('mainbody','addgrades');"></i>
+		<div class="p-5 d-flex justify-content-center" style="height: 80%;">
+			<form method="POST">
+				{% csrf_token %}
+				<div>
+					<div class="p-5 d-flex justify-content-center">
+						<div class="bg-light gradeforms col-10 p-5" style="">
+							<div class="row">
+								<div class="col-6" style="color: black;">
+									<p class="h2 strong">Change Password</p>
+								</div>
+                                <div class="col-6" style="color: black;">
+									<div class="p-5">
+                                    </div>
+								</div>
+							</div>
+                            <div class="p-3">
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <p class="h5 strong">Current password</p>
+                                </div>
+                                <div class="col-6">
+                                    {{editprofileform.passwordreq}}
+                                </div>
+                            </div>
+                            <div class="p-3">
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <p class="h5 strong">New Password</p>
+                                </div>
+                                <div class="col-6">
+                                    
+                                </div>
+                            </div>
+                            <div class="p-3">
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <p class="h5 strong">Confirm New Password</p>
+                                </div>
+                                <div class="col-6">
+                                    
+                                </div>
+                            </div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="container-fluid mainbody col-md-10 p-5" id="mainbody">
+		<div class="row">
+			<div class="col-8">
+				<h1 class="pt-4 ml-4 mb-4">Account</h1>
+			</div>
+            <div class="container-fluid p-md-5 p-3 border bordcol-overrides rounded">
                 <div class="pt-2"></div>
                 <h3 class="pfptitle d-none d-lg-block">Account Overview</h3>
                 <div class="pfppref"></div>
@@ -28,24 +80,7 @@
                             <h4>Username</h4>
                         </div>
                         <div class="col-6">
-                            <table
-                                id="gradestable"
-                                class="table table-striped table-borderless table-hover table-responsive col"
-                                style="
-                                    font-family: 'Lucida Sans',
-                                        'Lucida Sans Regular', 'Lucida Grande',
-                                        'Lucida Sans Unicode', Geneva, Verdana,
-                                        sans-serif;
-                                    color: white;
-                                    font-size: 1em;
-                                "
-                            >
-                                <thead>
-                                    <tr contenteditable="true">
-                                        <td scope="col">titusyau123</td>
-                                    </tr>
-                                </thead>
-                            </table>
+                            {{user.username}}
                         </div>
                         <hr />
                     </div>
@@ -56,26 +91,118 @@
                             <h4>Email</h4>
                         </div>
                         <div class="col-6">
-                            <table
-                                id="gradestable"
-                                class="table table-striped table-borderless table-hover table-responsive col"
-                                style="
-                                    font-family: 'Lucida Sans',
-                                        'Lucida Sans Regular', 'Lucida Grande',
-                                        'Lucida Sans Unicode', Geneva, Verdana,
-                                        sans-serif;
-                                    color: white;
-                                    font-size: 1em;
-                                "
-                            >
-                                <thead>
-                                    <tr contenteditable="true">
-                                        <td scope="col">
-                                            titusyau123@clownjuice
-                                        </td>
-                                    </tr>
-                                </thead>
-                            </table>
+                            {{user.email}}
+                        </div>
+                        <hr />
+                    </div>
+                </div>
+                
+                <div class="pt-md-4"></div>
+                <div class="row">
+                    <div class="container-fluid col">
+                        <div class="edit1 col">
+                            <div type="button"
+                            onclick="addgrades('mainbody','addgrades');">
+                                Change Password
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<!-- <div class="d-flex mb-2 col-4 justify-content-end align-items-center">
+				<div class="addgrades">
+					<button class="btn btn-light text-dark" type="button"
+						onclick="addgrades('mainbody','addgrades');">ADD
+						GRADES</button>
+				</div>
+			</div> -->
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+		crossorigin="anonymous"></script>
+	<script>
+		var form_fields = document.getElementsByTagName("input"); //Find input fields and put placeholders on them
+		var subjectselect = document.getElementsByTagName("select");
+
+		subjectselect[0].className += "form-select p-2 my-3";
+		subjectselect[0].style.borderRadius = "20px";
+
+
+		for (var field in form_fields) {
+			form_fields[field].className += "form-control p-2 my-3";
+		}
+
+		var classnamefield = document.getElementById('id_klass');
+			classnamefield.className += "form-select p-4 my-3";
+			classnamefield.style.borderRadius = "20px";
+	</script>
+	<script>
+		function profileSelect(){
+			console.log('hi'); 
+			var profile = document.getElementById("profile").textContent;
+			var profileselect = document.getElementById("id_profile");
+			for (var i = 0; i < profileselect.options.length; i++) {
+				if (profileselect.options[i].textContent == profile) {
+					profileselect.selectedIndex = i;
+					console.log(profileselect.options[i]);
+					console.log(profile);
+				} else {
+					// profileselect.options[i].selected = false;
+					continue; 
+				}
+		}};
+	</script>
+	{% endblock content %}
+	<!-- </div> -->
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+   
+    <head>
+        <script>
+            function closeSidebar() {
+                document.getElementById("sidenav").style.display = "none";
+            }
+        </script>
+        <link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+        <script src="{% static 'frontend/addgrades.js' %}"></script>
+    </head>
+ -->
+
+
+<!-- 
+
+    <body> -->
+        
+        <!-- Content starts here -->
+        <!-- <div class="col-md-10 mainbody containerfr p-5" id="blur">
+            <h1 class="pt-4 ml-4 mb-4">Account</h1>
+
+            <div class="container-fluid p-md-5 p-3 border bordcol-overrides rounded">
+                <div class="pt-2"></div>
+                <h3 class="pfptitle d-none d-lg-block">Account Overview</h3>
+                <div class="pfppref"></div>
+                <div class="pt-md-4"></div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-6">
+                            <h4>Username</h4>
+                        </div>
+                        <div class="col-6">
+                            {{user.username}}
                         </div>
                         <hr />
                     </div>
@@ -83,47 +210,33 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-6">
-                            <h4>Password</h4>
+                            <h4>Email</h4>
                         </div>
                         <div class="col-6">
-                            <table
-                                id="gradestable"
-                                class="table table-striped table-borderless table-hover table-responsive col"
-                                style="
-                                    font-family: 'Lucida Sans',
-                                        'Lucida Sans Regular', 'Lucida Grande',
-                                        'Lucida Sans Unicode', Geneva, Verdana,
-                                        sans-serif;
-                                    color: white;
-                                    font-size: 1em;
-                                "
-                            >
-                                <thead>
-                                    <tr contenteditable="true">
-                                        <td scope="col">
-                                            ilovenotcoding@titus.com
-                                        </td>
-                                    </tr>
-                                </thead>
-                            </table>
+                            {{user.email}}
                         </div>
                         <hr />
                     </div>
                 </div>
+                
                 <div class="pt-md-4"></div>
                 <div class="row">
                     <div class="container-fluid col">
                         <div class="edit1 col">
-                            <div>
-                                <a href="{% url 'editprofile' %}" class="edit3"
-                                    >Edit Profile</a
-                                >
-                            </div>
+                            <div type="button"
+                            onclick="addgrades('mainbody','addgrades');">
+                                Change Password
+                        </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        {% endblock content %}
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+		crossorigin="anonymous"></script>
+	
+       
     </body>
-</html>
+</html> -->

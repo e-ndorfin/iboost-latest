@@ -5,7 +5,9 @@
 <head>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/profile.css' %}" />
 	<script src="{% static 'frontend/addgrades.js' %}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.min.js"></script>
 </head>
 
 <body onload="profileSelect()"">
@@ -61,18 +63,27 @@
 			<div class="col-md-8">
 				<h1>Welcome, <strong id="student">{{request.user}}</strong>.</h1>
 			</div>
+<<<<<<< HEAD
 			<div class="d-flex mb-2 col-md-4 justify-content-end align-items-center">
 				<div class="addgrades">
 					<button class="btn btn-light text-dark mx-2" type="button"
 						onclick="addgrades('mainbody','addgrades');">Add
 						Grades</button>
+=======
+			<div class="d-flex mb-2 col-4 justify-content-end align-items-center">
+				<div class="edit1">
+					<div type="button"
+						onclick="addgrades('mainbody','addgrades');">ADD
+						GRADES</div>
+>>>>>>> 54b30ea85ab312b86942087b77b73148e16a5e1a
 				</div>
+				<div class="p-4"></div>
 				<form method="POST">
 					{% csrf_token %}
-					<div>
-						<button type="button" class="btn btn-light rounded" data-bs-toggle="modal" data-bs-target="#joinClassModal"">
+					<div class="edit1">
+						<div type="button" data-bs-toggle="modal" data-bs-target="#joinClassModal"">
 				            Join Class
-						</button>
+						</div>
 					</div>
 					<!-- Modal -->
 					<div class="modal fade" id="joinClassModal" tabindex="-1" aria-labelledby="joinClassModalLabel" aria-hidden="true"
@@ -98,9 +109,13 @@
 		</div>
 		<div class="container-fluid px-2 overflow-hidden">
 			<div class=" row mt-4 gx-2">
+<<<<<<< HEAD
 				<div class="col-lg-8 p-2">
+=======
+				<div class="col-8 p-2">
+					<p class="h5">Your Performance</p>
+>>>>>>> 54b30ea85ab312b86942087b77b73148e16a5e1a
 					<div class="p-3 border bordcol-overrides rounded">
-						<p class="font-weight-bold lead d-block">Your Performance</p>
 						<div class="container">
 							<canvas id="mainchart"></canvas>
 						</div>
@@ -206,18 +221,25 @@
 								labels: {{ labelsradar|safe}},          // labels defined in views.py
 							},
 							options: {
-								scales: {
-									r: {
-										gridLines: {
-											color: 'white'
+								scale:{
+									r:{
+										ticks:{
+											backgroundColor:'white'
+										},
+										grid:{
+											color:'white'
+										},
+										pointLabels:{
+											color:'white'
 										}
+										
+
 									}
 								},
-								fontColor: 'white',
-								legend: {
-									display: false
+								legend:{
+									display:false
 								},
-								responsiveness: true
+								responsive:true,
 							}
 						};
 						const chart_radar = new Chart(ctx_radar, config_radar)
