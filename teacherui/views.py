@@ -42,8 +42,12 @@ def teacherui(request):
 
 
 @allowed_users(allowed_roles=['teachers'])
-def teacherclass(request):
-    return render (request, 'teacherclass.html')
+def teacherclass(request, klass):
+    students = []
+    klass = request.user.teacher.klass_set.all().get(classname=klass)
+    for student in klass.student_set.all():
+        students.append(student)
+    return render (request, 'teacherclass.html', {'klass':klass, 'students':students})
 
 def teacheraccountcreation(request):
     form = RegisterUserForm()

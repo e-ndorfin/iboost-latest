@@ -14,8 +14,6 @@
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
 	<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 	<link rel="stylesheet" href="{% static 'css/accountcreation.css' %}" />
-
-	<script src="{% static 'frontend/accountcreation.js' %}"></script>
 	<title>Sign-Up</title>
 	<style>
 		#fieldset-group fieldset:not(:first-of-type) {
@@ -39,10 +37,11 @@
 		<div class="bg-light col-lg-4 col-md-5 col-sm-6 p-4" style="max-height: 80%; border-radius: 50px">
 			<div class="d-flex container login-form align-items-center justify-content-center" id="regcontainer">
 				<div style="width: 100%">
-					<div id="fieldset-group">
+					<div id="fieldset-group"">
 						<form method="POST">
 							{% csrf_token %}
-							<fieldset id="regpage">
+							<!-- First page -->
+							<fieldset id="regpage" class="form-page">
 								<div class="my-4 d-flex justify-content-center">
 									<img src="{% static 'img/logo.png' %}" alt="IBOOST"
 										class="img-fluid p-4 align-self-center"
@@ -59,12 +58,12 @@
 								</h6>
 								<div class="d-flex justify-content-center">
 									<input type="button" id="register-btns" value="Continue" name="button"
-										onclick="next(); removeRepetitiveSubjects()"
+										onclick="next(); removeRepetitiveSubjects();"
 										class="btn btn-primary rounded-pill btn-block btn-sm continue mt-4 p-2" />
 								</div>
 							</fieldset>
-							{% comment %} Second page {% endcomment %}
-							<fieldset class="p-3" id="subjectselect">
+							<!-- Second page -->
+							<fieldset class="p-3 form-page" id="subjectselect">
 								<div class="container-fluid m-0 p-0">
 									<div class="row">
 										<div class="col-10">
@@ -100,12 +99,12 @@
 								</div>
 								<div class="d-flex justify-content-center">
 									<input type="button" value="Continue" name="continue" id="register-btns"
-										onclick="next()"
+										onclick="next(); undisable();"
 										class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2" />
 								</div>
 							</fieldset>
 
-							<fieldset class="p-3" id="submitset">
+							<fieldset class="p-3 form-page" id="submitset">
 								<div class="container-fluid m-0 p-0">
 									<div class="row">
 										<div class="col-10">
@@ -140,7 +139,7 @@
 								</div>
 								<input type="submit" value="Register Account" name="submit" id="submit register-btns"
 									class="btn btn-info rounded-pill btn-block btn-sm continue p-2"
-									onsubmit="return false;" />
+									onsubmit="undisable();" />
 							</fieldset>
 						</form>
 					</div>
@@ -152,6 +151,7 @@
 		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
 		crossorigin="anonymous">
 	</script>
+	<script src="{% static 'frontend/accountcreation.js' %}"></script>
 	<script>
 		//Query All input fields
 		var form_fields = document.getElementsByTagName("input"); //Find input fields and put placeholders on them
@@ -202,6 +202,25 @@
 						});
 					}
 					});
+				});
+			});
+		}
+
+		function undisable(){
+			var dropdowns = document.querySelectorAll(".subject-select");
+			var selected = [];
+
+			dropdowns.forEach(function (dropdown, index) {
+				var selectedValue = dropdown.value;
+				selected.push(selectedValue);
+				dropdowns.forEach(function (otherDropdown) {
+					if (otherDropdown !== dropdown) {
+						otherDropdown.querySelectorAll("option").forEach(function (option) {
+							if (selected.includes(option.value)) {
+								option.disabled = false;
+							}
+						});
+					}
 				});
 			});
 		}

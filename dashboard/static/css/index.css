@@ -47,30 +47,3 @@
     color: #11e497;
     transition: color 0.5s ease;
 }
-
-.classbtd{
-    background-color:#363648 ;
-    border-radius:1em;
-    color:#fff;
-    border:transparent;
-    padding: 2em 2em 2em 2em;
-    transition-duration: 0.8s;
-    -webkit-transition-duration: 0.7s;
-}
-
-.classbtd :hover{
-    color:#11e497;
-    box-shadow: #11e497;
-    transform:scale(1.2);
-    -webkit-transform: scale(1.2);
-}
-.classout{
-    transition-duration: 0.8s;
-    -webkit-transition-duration: 0.7s;
-}
-
-.classout{
-    color:#11e497;
-    box-shadow: #11e497;
-    transform:scale(1.1);
-}

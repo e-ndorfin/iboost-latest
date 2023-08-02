@@ -31,16 +31,26 @@ def index(request):
     # Grade form
     gradeform = GradesForm()
     srrform = SRRForm()
+    joinclassform = JoinClassForm()
     if request.method == 'POST':
         print('indexpost')
         # Add grades
         srrform = SRRForm(request.POST)
         gradeform = GradesForm(request.POST)
+        joinclassform = JoinClassForm(request.POST)
         if gradeform.is_valid() and srrform.is_valid():
             srrform.save().grade = gradeform.save(commit=False)
             gradeform.save()
             srrform.save()
             return redirect('index')
+
+        if joinclassform.is_valid():
+            usr = joinclassform.save(commit=False)
+            usr.profile = request.user.profile
+            usr.save()
+            return redirect('index')
+
+        return render(request, 'dashboard/joinclass.html', {'joinclassform': joinclassform})
     # Graph stuff
     labels = ["January", "Febuary", "March", "April", "May", "June",
               "July", "August", "September", "October", "November", "December"]
@@ -130,15 +140,16 @@ def index(request):
         dataworst[4] = float(bestworst[0].avg)
         dataworst[5] = float(bestworst[0].subject.subjectavg)
 
-        for srr in bestworst[1].srr_set.all():
-            srrs.append(srr.srr)
-        for srr in bestworst[0].srr_set.all():
-            srrs.append(srr.srr)
+    for srr in bestworst[1].srr_set.all():
+        srrs.append(srr.srr)
+    for srr in bestworst[0].srr_set.all():
+        srrs.append(srr.srr)
 
     return render(request, 'dashboard/index.html', {
         "subjects": subjects,
         "gradeform": gradeform,
         'srrform': srrform,
+        'joinclassform': joinclassform,
         'srrs': srrs,
         'labels': labels,
         'data': datamain,
@@ -202,6 +213,9 @@ SUBJECT_CHOICES = [
 @ allowed_users(allowed_roles=['students'])
 def subjects(request):
     subjects = request.user.profile.subject_set.all()
+
+    print(subjects)
+    logging.warn(subjects)
     return render(request, 'dashboard/subjects.html', {'subjects': subjects})
 
 
@@ -278,6 +292,7 @@ def registerPage(request):
                 formset = SubjectFormSet(
                     request.POST, instance=profile)
                 if formset.is_valid():
+                    print(formset.save())
                     formset.save()
                 messages.success(
                     request, 'Account was created for ' + username)
@@ -314,7 +329,7 @@ def logoutUser(request):
 
 
 @ login_required(login_url='login')
-@ allowed_users(allowed_roles=['students'])
+@ allowed_users(allowed_roles=['students', 'teachers'])
 def reflections(request):
     srrs = []
     bestdataradar = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -339,6 +354,33 @@ def reflections(request):
             return redirect('reflections')
     return render(request,  'dashboard/reflections.html', {'srrs': srrs, 'ATLs': ATLs, 'bestdataradar': bestdataradar, 'worstdataradar': worstdataradar, 'reflectionform': reflectionform})
 
+
+@ login_required(login_url='login')
+@ allowed_users(allowed_roles=['students', 'teachers'])
+def teacherreflection(request, student):
+    student = Profile.objects.get(username=student)
+    srrs = []
+    bestdataradar = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    worstdataradar = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ATLs = ['Interaction', 'Language', 'Collaboration', 'Information Literacy', 'Media Literacy', 'Affective Skills',
+            'Organizational Skills', 'Reflection', 'Critical Thinking', 'Creative Thinking', 'Transfer']
+    for srr in student.srr_set.all():
+        srrs.insert(0, srr)
+        for atl in ATLs:
+            if (srr.bestatl == atl):
+                bestdataradar[ATLs.index(atl)] += 1
+            if (srr.worstatl == atl):
+                worstdataradar[ATLs.index(atl)] += 1
+
+    # Add Reflections
+    reflectionform = SRRForm()
+    if request.method == 'POST':
+        # Add SRR
+        reflectionform = SRRForm(request.POST)
+        if reflectionform.is_valid():
+            reflectionform.save()
+            return redirect('reflections')
+    return render(request,  'dashboard/reflections.html', {'srrs': srrs, 'ATLs': ATLs, 'bestdataradar': bestdataradar, 'worstdataradar': worstdataradar, 'reflectionform': reflectionform})
 
 @ login_required(login_url='login')
 @ allowed_users(allowed_roles=['students'])
