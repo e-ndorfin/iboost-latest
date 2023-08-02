@@ -5,6 +5,7 @@
 <head>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/profile.css' %}" />
 	<script src="{% static 'frontend/addgrades.js' %}"></script>
 </head>
 
@@ -62,17 +63,18 @@
 				<h1>Welcome, <strong id="student">{{request.user}}</strong>.</h1>
 			</div>
 			<div class="d-flex mb-2 col-4 justify-content-end align-items-center">
-				<div class="addgrades">
-					<button class="btn btn-light text-dark" type="button"
+				<div class="edit1">
+					<div type="button"
 						onclick="addgrades('mainbody','addgrades');">ADD
-						GRADES</button>
+						GRADES</div>
 				</div>
+				<div class="p-4"></div>
 				<form method="POST">
 					{% csrf_token %}
-					<div>
-						<button type="button" class="btn btn-light rounded" data-bs-toggle="modal" data-bs-target="#joinClassModal"">
+					<div class="edit1">
+						<div type="button" data-bs-toggle="modal" data-bs-target="#joinClassModal"">
 				            Join Class
-						</button>
+						</div>
 					</div>
 					<!-- Modal -->
 					<div class="modal fade" id="joinClassModal" tabindex="-1" aria-labelledby="joinClassModalLabel" aria-hidden="true"

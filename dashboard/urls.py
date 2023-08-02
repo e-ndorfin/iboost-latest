@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('base/', views.base, name="base"),
@@ -22,4 +23,5 @@ urlpatterns = [
     path('interviewarchive/', views.interviewarchive, name="interviewarchive"),
     path('editprofile/', views.editprofile, name="editprofile"),
     path('addclass/', views.addclass, name='addclass'),
+
 ]

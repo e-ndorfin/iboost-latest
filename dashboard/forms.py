@@ -49,3 +49,9 @@ class JoinClassForm(ModelForm):
         model = Student
         fields = ['klass']
 
+class EditProfileForm(forms.Form):
+    class Meta:
+        cpassword=forms.CharField(label='cPassword', max_length=200)
+        npassword=forms.CharField(label='nPassword', max_length=200)
+        npassword2=forms.CharField(label='nPassword2', max_length=200)
+        fields = ['cpassword','npassword','npassword2']

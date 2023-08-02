@@ -13,7 +13,8 @@ from django.contrib.auth.models import Group
 from django.forms import inlineformset_factory
 from django import forms
 import logging
-
+from django.urls import reverse_lazy
+from.forms import EditProfileForm
 # Create your views here.
 from .models import *
 from .forms import *
@@ -150,6 +151,45 @@ def index(request):
         'labelsradar': labelsradar,
     })
 
+
+@ login_required(login_url='login')
+@ allowed_users(allowed_roles=['students'])
+def editprofile(request):
+    editprofileform = EditProfileForm()
+    if request.method == 'POST':
+        editprofileform = EditProfileForm(request.POST)
+        passwordreq = request.POST.get('password')
+        user = authenticate(
+            request, password=passwordreq)
+        if user is not None:
+            auth_login(request, user)
+            if user.groups.filter(name='students').exists()and editprofileform.is_valid():
+                    npasswordreq = request.POST.get('npassword')
+                    npasswordreq2 = request.POST.get('npassword2')
+                    if 'npassword2'=='npassword':
+                        editprofileform.save()
+                        return redirect('profile')
+                    else:
+                        messages.info(request, 'Sorry, your new password does not match, please try again.')
+            elif user.groups.filter(name='teachers').exists()and editprofileform.is_valid():
+                if user.groups.filter(name='students').exists()and editprofileform.is_valid():
+                    npasswordreq = request.POST.get('npassword')
+                    npasswordreq2 = request.POST.get('npassword2')
+                    if 'npassword2'=='npassword':
+                        editprofileform.save()
+                        return redirect('profile')
+                    else:
+                        messages.info(request, 'Sorry, your new password does not match, please try again.')
+        else:  # If username/password is incorrect
+            messages.info(
+                request, 'Sorry, your username or password was incorrect. Please try again.')
+            # return render(request, 'dashboard/accountcreation.html', {})
+        context = {}
+        print('profile')
+        # Add grades
+    context = {}
+    return render(request, 'dashboard/profile.html', {
+    "editprofileform": editprofileform,})
 
 # Login and Register Function
 SUBJECT_CHOICES = [
