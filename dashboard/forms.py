@@ -15,10 +15,18 @@ class RegisterUserForm(UserCreationForm):
 
 
 class GradesForm(ModelForm):
+    subject = forms.ModelChoiceField(queryset=Subject.objects.none())
     class Meta:
         model = Grade
         fields = ['subject', 'criterionA',
                   'criterionB', 'criterionC', 'criterionD']
+
+    def __init__(self, *args, **kwargs):
+        curr_user = kwargs.pop('curr_user', None)
+        print(curr_user)
+        super().__init__(*args, **kwargs)
+        self.fields['subject'].queryset = Subject.objects.filter(
+            profile__user=curr_user)
 
 
 class SRRForm(ModelForm):
