@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="{% static 'css/index.css' %}" />
 	<link rel="stylesheet" href="{% static 'css/profile.css' %}" />
 	<script src="{% static 'frontend/addgrades.js' %}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.min.js"></script>
 </head>
 
 <body onload="profileSelect()"">
@@ -101,8 +102,8 @@
 		<div class="container-fluid px-2 overflow-hidden">
 			<div class=" row mt-4 gx-2">
 				<div class="col-8 p-2">
+					<p class="h5">Your Performance</p>
 					<div class="p-3 border bordcol-overrides rounded">
-						<p class="font-weight-bold lead d-block">Your Performance</p>
 						<div class="container">
 							<canvas id="mainchart"></canvas>
 						</div>
@@ -187,7 +188,7 @@
 		<div class="container-fluid px-2 overflow-hidden">
 			<div class=" row gx-2">
 				<div class="col-8 p-2">
-					<p class="h5">Performance</p>
+					<p class="h5">Grade Distribution</p>
 					<div class="border rounded">
 						<canvas class="p-3" id="performanceradarchart"></canvas>
 					</div>
@@ -207,18 +208,25 @@
 								labels: {{ labelsradar|safe}},          // labels defined in views.py
 							},
 							options: {
-								scales: {
-									r: {
-										gridLines: {
-											color: 'white'
+								scale:{
+									r:{
+										ticks:{
+											backgroundColor:'white'
+										},
+										grid:{
+											color:'white'
+										},
+										pointLabels:{
+											color:'white'
 										}
+										
+
 									}
 								},
-								fontColor: 'white',
-								legend: {
-									display: false
+								legend:{
+									display:false
 								},
-								responsiveness: true
+								responsive:true,
 							}
 						};
 						const chart_radar = new Chart(ctx_radar, config_radar)
