@@ -299,6 +299,8 @@
 
 		for (var field in form_fields) {
 			form_fields[field].className += "form-control p-2 my-3";
+			form_fields[field].min = 0;
+			form_fields[field].max = 8;
 		}
 
 		for (var i = 0; i < 4; i++) {
