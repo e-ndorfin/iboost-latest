@@ -52,8 +52,7 @@ def index(request):
 
         return render(request, 'dashboard/joinclass.html', {'joinclassform': joinclassform})
     # Graph stuff
-    labels = ["January", "Febuary", "March", "April", "May", "June",
-              "July", "August", "September", "October", "November", "December"]
+    labels = ["July", "August", "September", "October", "November", "December", "January", "Febuary", "March", "April", "May", "June"]
     datamain = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     avggrade = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     monthgradecount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -81,7 +80,10 @@ def index(request):
             month = grade.created.month
             monthgradecount[month-1] += 1
             avggrade[month-1] += avg
-            datamain[month-1] = avggrade[month-1]/monthgradecount[month-1]
+            if(month >= 7):
+                datamain[month-7] = avggrade[month-1]/monthgradecount[month-1]
+            else: 
+                datamain[month+5] = avggrade[month-1]/monthgradecount[month-1]
 
     # Calculate average for each subject
     subjects = request.user.profile.subject_set.all()
@@ -239,8 +241,8 @@ def subject(request, sub):
     nodata = []
     labelsgrade = ["Criterion A", "Criterion B", "Criterion C",
                    "Criterion D", "Grade Average", "Subject Average"]
-    labels = ["January", "Febuary", "March", "April", "May", "June",
-              "July", "August", "September", "October", "November", "December"]
+    labels = ["July", "August", "September", "October", "November",
+              "December", "January", "Febuary", "March", "April", "May", "June", ]
     subject = request.user.profile.subject_set.all().get(subjectname=sub)
     # Calculate average for each month
     for grade in subject.grade_set.all():
@@ -251,7 +253,10 @@ def subject(request, sub):
         month = grade.created.month
         monthgradecount[month-1] += 1
         avggrade[month-1] += avg
-        datasubject[month-1] = avggrade[month-1]/monthgradecount[month-1]
+        if month >= 7:
+            datasubject[month-7] = avggrade[month-1]/monthgradecount[month-1]
+        else:
+            datasubject[month+5] = avggrade[month-1]/monthgradecount[month-1]
 
     grade = subject.grade_set.all().last()
     datagrade[0] = grade.criterionA
