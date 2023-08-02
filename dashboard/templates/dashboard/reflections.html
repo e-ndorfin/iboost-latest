@@ -20,13 +20,13 @@
                         <div class="bg-light p-5" style="border-radius: 50px;">
                             <div style="color:black;">
                                 <div class="h3">Add Reflection</div>
-                                <div class="row">
+                                <div class="row p-2">
                                     <div class="col-3">
                                         <div class="h5">Title:</div>
                                     </div>
                                     <div class="col-9">{{reflectionform.title}}</div>
                                 </div>
-                                <div class="row">
+                                <div class="row p-2">
                                     <div class="col-3">
                                         <div class="h5">Reflection:</div>
                                     </div>
@@ -40,7 +40,7 @@
                                         {{reflectionform.bestatl}}
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row p-2">
                                     <div class="col-4">
                                         <div class="h5">Worst Skill:</div>
                                     </div>
@@ -48,7 +48,7 @@
                                         {{reflectionform.worstatl}}
                                     </div>
                                 </div>
-                                <div class="row" style="display: none;">
+                                <div class="row p-2" style="display: none;">
                                     {{reflectionform.profile}}
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col-lg-6">
                     <div class="h5">Your Best ATL Skill</div>
                     <div class="border rounded">
                         <canvas class="p-3" id="bestatlradarchart"></canvas>
@@ -132,7 +132,7 @@
                         const chart_bestradar = new Chart(ctx_bestradar, config_bestradar)
                     </script>
                 </div>
-                <div class="col-6">
+                <div class="col-lg-6">
                     <div class="h5">Your Worst ATL Skill</div>
                     <div class="border rounded">
                         <canvas class="p-3" id="worstatlradarchart"></canvas>
@@ -173,6 +173,21 @@
             </div>
         </div>
     </div>
+    <script>
+        var selects = document.getElementsByTagName("select");
+        var textareas = document.getElementsByTagName("textarea");
+
+        for (var i = 0; i < 2; i++) {
+            selects[i].className += "form-control p-2";
+            selects[i].style.borderRadius = "10px";
+        }
+
+        for (var area in textareas) {
+            textareas[area].className += "form-control p-2";
+            textareas[area].style.width = "100%";
+            textareas[area].style.resize = "none";
+        }
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function(){
             profile = document.getElementById("profile").textContent
