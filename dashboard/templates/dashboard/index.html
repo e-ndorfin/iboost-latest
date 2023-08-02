@@ -192,10 +192,11 @@
 					<div class="border rounded">
 						<canvas class="p-3" id="performanceradarchart"></canvas>
 					</div>
+					<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 					<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
 					<script>
 						const ctx_radar = document.getElementById('performanceradarchart').getContext('2d');
-						var config_radar = {
+						config_radar = {
 							type: 'radar',              //s define chart type
 							data: {
 								datasets: [{
@@ -207,27 +208,30 @@
 								}],
 								labels: {{ labelsradar|safe}},          // labels defined in views.py
 							},
-							options: {
+							options:{
 								scale:{
-									r:{
-										ticks:{
-											backgroundColor:'white'
-										},
-										grid:{
-											color:'white'
-										},
-										pointLabels:{
-											color:'white'
-										}
-										
+								r:{
+									ticks:{
+										color: 'white',
+										backdropColor: 'transparent'
+									},
+									grid:{
+										color:'white'
+									},
+									pointLabels:{
+										color:'white'
+									},
+									lables:{
+										color:'white'
+									}								
 
-									}
-								},
+								}
+							},
 								legend:{
 									display:false
-								},
+									},
 								responsive:true,
-							}
+							},
 						};
 						const chart_radar = new Chart(ctx_radar, config_radar)
 					</script>
