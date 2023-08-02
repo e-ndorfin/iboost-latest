@@ -66,11 +66,11 @@
             </div>
         </div>
         <div class="row m-3">
-            <div class="col-8 p-3">
-                <div class="h3">Recent Grades</div>
+            <div class="col p-3">
                 <div class="row p-4 border bordcol rounded">
                     <div class="col-7">
-                        <div class="container">
+                        <div class="h4">Recent Grades</div>
+                        <div class="container p-3">
                             <canvas id="gradebarchart"></canvas>
                         </div>
                         <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
@@ -111,12 +111,13 @@
                         <div class="row">
                             <div class="col-10"><div class="h4">Reflection</div></div>
                         </div>
+                        <h5>{{nodata.0}}</h3>
                         {{srrs.0}}
                         <br>
                     </div>
                 </div>
             </div>
-            <div class="col-4 p-3">
+            <!-- <div class="col-4 p-3">
                 <div class="row p-4 border bordcol rounded">
                     <div class="col">
                         <div class="h5">What do we do with this box?</div>
@@ -124,7 +125,7 @@
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse nesciunt laboriosam perferendis tenetur laborum, illum placeat fuga pariatur amet quae, quia accusantium iusto adipisci eveniet unde accusamus animi velit. Aspernatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt quasi, eius ipsa assumenda amet quia vitae? Odit modi, molestiae doloremque quos neque commodi eaque quibusdam quod dolor voluptatum repellendus velit?
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <div id="criterionavg" class="d-none">{{criterionavg}}</div>

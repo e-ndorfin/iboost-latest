@@ -16,6 +16,8 @@ class Profile(models.Model):
 class Subject(models.Model):
     # Database fields
     # User has a "One to Many" relationship with Subject, as one User can have multiple subjects,while the opposite is not the case
+    class Meta:
+        unique_together = ('subjectname', 'profile')
     subjectname = models.CharField(max_length=100, null=True)
     profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE)
     subjectavg = models.DecimalField(
