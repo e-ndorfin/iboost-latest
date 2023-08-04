@@ -1,6 +1,6 @@
 # iBoost
 
-High school project looking to improve experience and learning of IB students, one grade at a time. 
+High school project looking to promote reflective learning and grades tracking for IB (International Baccalaureate) students, one grade at a time. 
 
 ## Getting started 
 Clone the repository then run the following commands with whatever Python version you have: 
