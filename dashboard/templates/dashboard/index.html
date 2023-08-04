@@ -62,7 +62,7 @@
 			<div class="col-lg-8">
 				<h1>Welcome, <strong id="student">{{request.user}}</strong>.</h1>
 			</div>
-			<div class="d-flex mb-2 col-lg-4 justify-content-lg-end align-items-center justify-content-start">
+			<div class="d-flex my-2 col-lg-4 justify-content-lg-end align-items-center justify-content-center">
 				<div class="addgrades">
 					<button class="btn mx-1 edit1" type="button"
 						onclick="addgrades('mainbody','addgrades');">Add
@@ -120,12 +120,16 @@
 						        },
 								options: {                            // optional parameters - more can be found in the chart.js documentation 
 									scales: {
-										yAxes: [{
+										xAxis: {
+											display: true, 
+										}, 
+										yAxis: {
 											display: true,
 											ticks: {
 												beginAtZero: true   // minimum y axes will be 0.
 											}
-										}]
+											 
+										}
 									},
 									responsive: true,               // ensures the chart adjusts with window size 
 								}
@@ -284,10 +288,6 @@
 				</div>
 			</div>
 		</div>
-
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-		crossorigin="anonymous"></script>
 	<script>
 		var form_fields = document.getElementsByTagName("input"); //Find input fields and put placeholders on them
 		var selects = document.getElementsByTagName("select");
@@ -332,7 +332,6 @@
 		}};
 	</script>
 	{% endblock content %}
-	<!-- </div> -->
 </body>
 
 </html>
