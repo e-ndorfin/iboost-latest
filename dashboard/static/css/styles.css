@@ -163,8 +163,9 @@ background: #818181;
 } */
 
 .mainbody {
-	background: #1a1a23;
-	color: white;
+	background: white;
+	color: black;
+	/* #1a1a23 */
 }
 
 .recentperf {

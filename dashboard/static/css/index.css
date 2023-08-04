@@ -26,7 +26,7 @@
 
 .addgrades {
     position: static;
-    background: #1a1a23;
+    background: white;
 }
 
 .gradeforms {
@@ -39,7 +39,7 @@
     top: 25px;
     right: 25px;
     font-size: 3rem;
-    color: white;
+    color: black;
 }
 
 .bi-x:hover {

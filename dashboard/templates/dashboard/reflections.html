@@ -6,6 +6,7 @@
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="{% static 'css/reflections.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
     <script src="{% static 'frontend/addreflection.js' %}"></script>
 </head>
 
@@ -67,11 +68,10 @@
                     <div class="col-10">
                         <div id="profile" style="display: none;">{{request.user.profile}}</div>
                         <div class="h3">Reflections</div>
-                        <hr>
                         <h3>{{nodata.0}}</h3>
                     </div>
-                    <div class="col-2">
-                        <button class="btn-light form-control" onclick="addreflection('mainbody','addreflection')">Add Reflection</button>
+                    <div class="col-2 edit1">
+                        <div onclick="addreflection('mainbody','addreflection')">Add Reflection</div>
                     </div>
                 </div>
                 <div class="container-fluid p-3">

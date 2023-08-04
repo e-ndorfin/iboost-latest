@@ -1,11 +1,6 @@
 .grades-container {
     /* background: #1a1a23; */
-    background: rgb(24, 23, 37);
-    background: linear-gradient(
-        90deg,
-        rgba(24, 23, 37, 1) 0%,
-        rgba(40, 40, 40, 1) 100%
-    );
+    background-color: white;
 }
 
 .subject {
@@ -18,7 +13,7 @@
 }
 
 .subject-text {
-    color: white;
+    color: black;
     text-decoration: none;
     display: block;
     font-size: 40px;
