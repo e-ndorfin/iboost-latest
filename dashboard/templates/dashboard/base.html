@@ -45,10 +45,10 @@
                             style="max-width: 10em"
                     /></a>
                     <button
-                        class="navbar-toggler"
+                        class="navbar-toggler btn"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#navmenu"
+                        data-bs-target="#navmenu" aria-expanded="false" aria-controls="navmenu"
                     >
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -73,14 +73,17 @@
                                 >
                             </li>
                             <li class="nav-item">
-                                <a href="{% url 'profile' %}" class="nav-link"
-                                    >Profile</a
-                                >
-                            </li>
-                            <li class="nav-item">
                                 <a href="{% url 'interviewarchive' %}" class="nav-link"
                                     >Archives</a
                                 >
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'profile' %}" class="nav-link"
+                                    >Account</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'logout' %}" class="nav-link">Log out</a>
                             </li>
                         </ul>
                     </div>

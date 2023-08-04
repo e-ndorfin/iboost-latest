@@ -73,8 +73,18 @@ def index(request):
     # Calculate average for each month
     for i in range(len(request.user.profile.subject_set.all())):
         for grade in request.user.profile.subject_set.all()[i].grade_set.all():
+            avgdiv = 4
+            #Check if theres a 0
+            if grade.criterionA == 0:
+                avgdiv -= 1
+            if grade.criterionB == 0:
+                avgdiv -= 1
+            if grade.criterionC == 0:
+                avgdiv -= 1
+            if grade.criterionD == 0:
+                avgdiv -= 1 
             avg = (grade.criterionA+grade.criterionB +
-                   grade.criterionC+grade.criterionD)/4
+                   grade.criterionC+grade.criterionD)/avgdiv
             grade.avg = avg
             grade.save()
             month = grade.created.month
@@ -246,8 +256,18 @@ def subject(request, sub):
     subject = request.user.profile.subject_set.all().get(subjectname=sub)
     # Calculate average for each month
     for grade in subject.grade_set.all():
+        avgdiv = 4
+        #Check if theres a 0
+        if grade.criterionA == 0:
+            avgdiv -= 1
+        if grade.criterionB == 0:
+            avgdiv -= 1
+        if grade.criterionC == 0:
+            avgdiv -= 1
+        if grade.criterionD == 0:
+            avgdiv -= 1 
         avg = (grade.criterionA+grade.criterionB +
-               grade.criterionC+grade.criterionD)/4
+               grade.criterionC+grade.criterionD)/avgdiv
         grade.avg = avg
         grade.save()
         month = grade.created.month
