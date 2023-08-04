@@ -19,7 +19,7 @@
 
 .edit1:hover {
   background: #11e497;
-  border-radius: 3px;
+  border-radius: 10px;
   color: black;
   cursor: pointer;
 }
@@ -39,7 +39,7 @@
 
 .edit2:hover {
   background: #11e497;
-  border-radius: 10px;
+  border-radius: 3px;
   color: black;
   width: 13em;
   cursor: pointer;

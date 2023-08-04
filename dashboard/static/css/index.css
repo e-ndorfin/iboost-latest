@@ -50,7 +50,7 @@
 
 .edit1 {
     background: #444447;
-    border-radius: 3px;
+    border-radius: 10px;
     width: 11em;
     color: white;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -63,7 +63,7 @@
   
   .edit1:hover {
     background: #11e497;
-    border-radius: 3px;
+    border-radius: 10px;
     color: black;
     cursor: pointer;
   }
