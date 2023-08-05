@@ -101,7 +101,7 @@
 		<div class="container-fluid px-2 overflow-hidden">
 			<div class=" row mt-4 gx-2">
 				<div class="col-lg-8 p-2">
-					<div class="p-3 border bordcol-overrides rounded">
+					<div class="p-3 border bordcol-overrides rounded divboxm">
 						<div class="container">
 							<canvas id="mainchart"></canvas>
 						</div>
@@ -139,8 +139,8 @@
 					</div>
 				</div>
 				<div class="col-lg-4 p-2">
-					<div class="p-3 border bordcol-overrides rounded">
-						<p class="lead text-light">Your Worst Performance</p>
+					<div class="p-3 border bordcol-overrides rounded divboxm">
+						<p class="font-weight-bold lead d-block">Your Worst Performance</p>
 						Subject: {{bestworst.0.subject}}
 						<br>
 						Grade: {{bestworst.0}}
@@ -191,7 +191,7 @@
 		<div class="container-fluid px-2 overflow-hidden">
 			<div class=" row gx-2">
 				<div class="col-lg-8 p-2">
-					<div class="border rounded p-3">
+					<div class="border rounded p-3 divboxm">
 						<p class="h5">Performance</p>
 						<canvas class="p-3" id="performanceradarchart"></canvas>
 					</div>
@@ -235,7 +235,7 @@
 					</div>
 				</div> -->
 				<div class="col-lg-4 p-2">
-					<div class="p-3 border bordcol-overrides rounded">
+					<div class="p-3 border bordcol-overrides rounded divboxm">
 						<p class="font-weight-bold lead d-block">Your Best Performance</p>
 						{% with bestworst|last as last %}
 						<div>

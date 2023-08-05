@@ -163,7 +163,8 @@ background: #818181;
 } */
 
 .mainbody {
-	background: white;
+	background-image: linear-gradient(180deg, rgb(255, 255, 255), rgb(222, 229, 229));
+	/* background: white; */
 	color: black;
 	/* #1a1a23 */
 }
@@ -211,4 +212,8 @@ background: #818181;
 .gradeforms {
 	border-radius: 50px;
 	width: 100%;
+}
+
+.divboxm{
+	background-color: #f7f9fc;
 }

@@ -1,16 +1,16 @@
 .accordion-item {
-    background-color: white;
+    background-color: #f7f9fc;
 }
 
 .accordion-button:not(.collapsed) {
-    background-color: white;
+    background-color: #f7f9fc;
     color: black;
     font-size: 0.8em;
     fill: black;
 }
 
 .accordion-button {
-    background-color: white;
+    background-color: #f7f9fc;
     color: black;
     font-size: 0.8em;
     fill: black;

@@ -76,7 +76,7 @@
                 </div>
                 <div class="container-fluid p-3">
                     {% for srr in srrs %}
-                        <div class="border rounded p-3 mb-3">
+                        <div class="border rounded p-3 mb-3 divboxm">
                             <div class="row">
                                 <div class="col-9">
                                     <div class="h5">{{srr.title}}</div>
@@ -96,7 +96,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="h5">Your Best ATL Skill</div>
-                    <div class="border rounded">
+                    <div class="border rounded divboxm">
                         <canvas class="p-3" id="bestatlradarchart"></canvas>
                     </div>
                     <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
@@ -134,7 +134,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="h5">Your Worst ATL Skill</div>
-                    <div class="border rounded">
+                    <div class="border rounded divboxm">
                         <canvas class="p-3" id="worstatlradarchart"></canvas>
                     </div>
                     <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
