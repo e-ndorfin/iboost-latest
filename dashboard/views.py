@@ -279,15 +279,16 @@ def subject(request, sub):
             datasubject[month+5] = avggrade[month-1]/monthgradecount[month-1]
 
     grade = subject.grade_set.all().last()
-    datagrade[0] = grade.criterionA
-    datagrade[1] = grade.criterionB
-    datagrade[2] = grade.criterionC
-    datagrade[3] = grade.criterionD
-    datagrade[4] = float(grade.avg)
-    datagrade[5] = float(grade.subject.subjectavg)
-    datagrades.append(datagrade.copy())
-    for srr in grade.srr_set.all():
-        srrs.append(srr.srr)
+    if(grade != None):
+        datagrade[0] = grade.criterionA
+        datagrade[1] = grade.criterionB
+        datagrade[2] = grade.criterionC
+        datagrade[3] = grade.criterionD
+        datagrade[4] = float(grade.avg)
+        datagrade[5] = float(grade.subject.subjectavg)
+        datagrades.append(datagrade.copy())
+        for srr in grade.srr_set.all():
+            srrs.append(srr.srr)
 
     # Find worst criterion:
     num = 1
