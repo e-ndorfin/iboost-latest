@@ -1,1 +1,1 @@
-web gunicorn iboost-latest.wsgi:application --log-file -
+web gunicorn dashboard:application --log-file -
