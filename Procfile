@@ -1,0 +1,1 @@
+web gunicorn IBoost.wsgi:application --log-file -
