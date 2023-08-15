@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <button type="button" class="btn btn-light rounded" data-bs-toggle="modal" data-bs-target="#joinClassModal"">
+                Join Class
+            </button>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="joinClassModal" tabindex="-1" aria-labelledby="joinClassModalLabel" aria-hidden="true"
+            style="color: black;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="joinClassModalLabel">Join Class</h5>
+                        <button type="button" id="joinClassButton" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="console.log('hi');"></button>
+                    </div>
+                    <div class="modal-body">
+                        {{joinclassform.klass}}
+                        <!-- {{joinclassform.profile}} -->
+                        <!-- <div style="display:none;">{{joinclassform.profile}}</div> -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" value="Save Changes" name="Save Changes" class="btn btn-primary btn-sm p-2" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{% extends 'dashboard/base.html' %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+        <script src="{% static 'frontend/addgrades.js' %}"></script>
+    </head>
+    <div>
+        <div class="container-fluid mainbody col-md-10 p-5" id="mainbody"> 
+            <form method="POST">
+                {% csrf_token %}
+                <!-- Modal -->
+                <div class="modal-body">
+                    {{joinclassform.klass}}
+                    <!-- {{joinclassform.profile}} -->
+                    <!-- <div style="display:none;">{{joinclassform.profile}}</div> -->
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                    >
+                        Close
+                    </button>
+                    <input
+                        type="submit"
+                        value="Save Changes"
+                        name="Save Changes"
+                        class="btn btn-primary btn-sm p-2"
+                    />
+                </div>
+            </form>
+        </div>
+    </body>
+    {% endblock %}
+</html>
