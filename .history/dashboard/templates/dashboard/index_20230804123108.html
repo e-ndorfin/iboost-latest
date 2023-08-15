@@ -1,0 +1,343 @@
+{% extends 'dashboard/base.html' %} {% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+	<script src="{% static 'frontend/addgrades.js' %}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.min.js"></script>
+</head>
+
+<body onload="profileSelect()"">
+	<div class="container-fluid col-md-10 p-4 addgrades" id="addgrades" style="display: none;">
+		<i class="bi bi-x" onclick="removegrades('mainbody','addgrades');"></i>
+		<div class="p-5 d-flex justify-content-center" style="height: 80%;">
+			<form method="POST">
+				{% csrf_token %}
+				<div class="row">
+					<div class="col-xl-6 p-4 d-flex justify-content-center">
+						<div class="bg-light col-lg-4 col-md-5 col-sm-6 p-5 gradeforms">
+							<div class="row">
+								<div class="col-6" style="color: black;">
+									<p class="h2 strong">Grades</p>
+									<p class="h5 strong">Use the boxes to input scores for each criterion</p>
+								</div>
+								<div class="col-6 p-3">
+									{{gradeform.subject}}
+									{{gradeform.criterionA}}
+									{{gradeform.criterionB}}
+									{{gradeform.criterionC}}
+									{{gradeform.criterionD}}
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-6 p-4 d-flex justify-content-center">
+						<div class="bg-light col-lg-4 col-md-5 col-sm-6 p-5 gradeforms">
+							<div style="color: black;">
+								<p class="h2">Input Student Reflection Record</p>
+								<div class="h5">Reflection Title</div>
+								{{srrform.title}}
+								<div class="h5">Reflection</div>
+								{{srrform.srr}}
+								<div class="h5">Best ATL</div>
+								{{srrform.bestatl}}
+								<div class="h5">Worst ATL</div>
+								{{srrform.worstatl}}
+								<div style="display: none;">{{srrform.profile}}</div>
+								<input type="submit" value="Continue" name="continue"
+									class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2"
+									style="width: 100%;" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="container-fluid mainbody col-md-10 p-5" id="mainbody">
+		<div class="row">
+			<div class="col-lg-8">
+				<h1>Welcome, <strong id="student">{{request.user}}</strong>.</h1>
+			</div>
+			<div class="d-flex my-2 col-lg-4 justify-content-lg-end align-items-center justify-content-center">
+				<div class="addgrades">
+					<button class="btn mx-1 edit1" type="button"
+						onclick="addgrades('mainbody','addgrades');">Add
+						Grades</button>
+				</div>
+				<div class="p-4"></div>
+				<form method="POST">
+					{% csrf_token %}
+					<div>
+						<div type="button" data-bs-toggle="modal" data-bs-target="#joinClassModal" class="edit1">
+				            Join Class
+						</div>
+					</div>
+					<!-- Modal -->
+					<div class="modal fade" id="joinClassModal" tabindex="-1" aria-labelledby="joinClassModalLabel" aria-hidden="true"
+						style="color: black;">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="joinClassModalLabel">Join Class</h5>
+									<button type="button" id="joinClassButton" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									{{joinclassform.klass}}
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+									<input type="submit" value="Save Changes" name="Save Changes" class="btn btn-primary btn-sm p-2" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="container-fluid px-2 overflow-hidden">
+			<div class=" row mt-4 gx-2">
+				<div class="col-lg-8 p-2">
+					<div class="p-3 border bordcol-overrides rounded">
+						<div class="container">
+							<canvas id="mainchart"></canvas>
+						</div>
+						<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+						<script>
+							const ctx_main = document.getElementById('mainchart').getContext('2d');
+							var config_main = {
+								type: 'line',              //s define chart type
+								data: {
+									datasets: [{
+										label: 'OA',
+										data: {{ data| safe }},    // data defined in views.py
+										borderColor: 'rgb(255,255,255)',         
+						            }],
+									labels: {{ labels | safe }}          // labels defined in views.py
+						        },
+								options: {                            // optional parameters - more can be found in the chart.js documentation 
+									scales: {
+										xAxis: [{
+											color: "#FFFFFF"
+											// align: 'center'
+										}], 
+										yAxis: [{
+											display: true,
+											ticks: {
+												beginAtZero: true   // minimum y axes will be 0.
+											}
+											 
+										}]
+									},
+									responsive: true,               // ensures the chart adjusts with window size 
+								}
+						    };
+							const chart_main = new Chart(ctx_main, config_main)
+						</script>
+					</div>
+				</div>
+				<div class="col-lg-4 p-2">
+					<div class="p-3 border bordcol-overrides rounded">
+						<p class="lead text-light">Your Worst Performance</p>
+						Subject: {{bestworst.0.subject}}
+						<br>
+						Grade: {{bestworst.0}}
+						<br>
+						<hr>
+						<div class="container">
+							<canvas id="worstbarchart"></canvas>
+						</div>
+						<hr>
+						{{nodata.0}}
+						{{srrs.0}}
+						<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+						<script>
+							const ctx_worst = document.getElementById('worstbarchart').getContext('2d');
+							var config_worst = {
+								type: 'bar',              //s define chart type
+								data: {
+									datasets: [{
+										label: 0,
+										data: {{ dataworst| safe }},    // data defined in views.py
+									backgroundColor: ['rgba(54, 162, 235, 0.5)', 'rgba(255, 205, 86, 0.5)', 'rgba(75, 192, 192, 0.5)', 'rgba(255, 99, 132, 0.5)', 'rgba(153, 102, 255, 0.5)', 'rgba(255,255,255, 0.5)'],
+									borderColor: ['rgba(54, 162, 235)', 'rgba(255, 205, 86)', 'rgba(75, 192, 192)', 'rgba(255, 99, 132)', 'rgba(153, 102, 255)', 'rgba(120,119,119)'],
+									borderWidth: 2,
+									}],
+									labels: {{labelsworst | safe }}          // labels defined in views.py
+								},
+								options: {                            // optional parameters - more can be found in the chart.js documentation 
+									scales: {
+										yAxes: [{
+											display: true,
+											ticks: {
+												beginAtZero: true   // minimum y axes will be 0.
+											}
+										}]
+									},
+									legend: {
+										display: false
+									},
+									responsive: true,               // ensures the chart adjusts with window size 
+								}
+							};
+							const chart_worst = new Chart(ctx_worst, config_worst)
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid px-2 overflow-hidden">
+			<div class=" row gx-2">
+				<div class="col-lg-8 p-2">
+					<div class="border rounded p-3">
+						<p class="h5">Performance</p>
+						<canvas class="p-3" id="performanceradarchart"></canvas>
+					</div>
+					<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+					<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+					<script>
+						const ctx_radar = document.getElementById('performanceradarchart').getContext('2d');
+						const config_radar = {
+							type: 'radar',              //s define chart type
+							data: {
+								datasets: [{
+									data: {{ dataradar| safe }},    // data defined in views.py
+									backgroundColor: ['rgba(54, 162, 235, 0.5)'],
+									borderColor: ['rgba(54, 162, 235)'],
+									borderWidth: 2,
+									pointBorderColor: '#fff',
+								}],
+								labels: {{ labelsradar|safe}},          // labels defined in views.py
+							},
+							options:{
+								scale:{
+									r:{
+										angleLines: {
+											color: 'white'
+										}
+									}
+								},
+								legend:{
+									display:false
+									},
+								responsive:true,
+							},
+						};
+						const chart_radar = new Chart(ctx_radar, config_radar)
+					</script>
+				</div>
+				<!-- <div class="col-3 p-2">
+					<p class="h5">Recent Test</p>
+					<div class="p-3 border bordcol-overrides rounded">
+						<p class="lead text-light"></p>
+					</div>
+				</div> -->
+				<div class="col-lg-4 p-2">
+					<div class="p-3 border bordcol-overrides rounded">
+						<p class="font-weight-bold lead d-block">Your Best Performance</p>
+						{% with bestworst|last as last %}
+						<div>
+							Subject: {{bestworst.1.subject}}
+							<br>
+							Grade: {{bestworst.1}}
+							<hr>
+							<div class="container">
+								<canvas id="bestbarchart"></canvas>
+							</div>
+							<hr>
+							{{nodata.0}}
+							{{srrs.1}}
+							<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+							<script>
+								const ctx_best = document.getElementById('bestbarchart').getContext('2d');
+								var config_best = {
+									type: 'bar',              //s define chart type
+									data: {
+										datasets: [{
+											label: 0,
+											data: {{ databest|safe }},    // data defined in views.py
+											backgroundColor: ['rgba(54, 162, 235, 0.5)', 'rgba(255, 205, 86, 0.5)', 'rgba(75, 192, 192, 0.5)', 'rgba(255, 99, 132, 0.5)', 'rgba(153, 102, 255, 0.5)', 'rgba(255,255,255, 0.5)'],
+											borderColor: ['rgba(54, 162, 235)', 'rgba(255, 205, 86)', 'rgba(75, 192, 192)', 'rgba(255, 99, 132)', 'rgba(153, 102, 255)', 'rgba(120,119,119)'],
+											borderWidth: 2,
+							            }],
+										labels: {{labelsbest | safe}}          // labels defined in views.py
+							        },
+									options: {                            // optional parameters - more can be found in the chart.js documentation 
+										scales: {
+											yAxes: [{
+												display: true,
+												ticks: {
+													beginAtZero: true   // minimum y axes will be 0.
+												}
+											}]
+										},
+										legend: {
+											display: false
+										},
+										responsive: true,               // ensures the chart adjusts with window size 
+									}
+								};
+								const chart_best = new Chart(ctx_best, config_best)
+							</script>
+						</div>
+						<div id="profile" style="display: none;">{{request.user.profile}}</div>
+						{% endwith %}
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+		crossorigin="anonymous"></script>
+	<script>
+		var form_fields = document.getElementsByTagName("input"); //Find input fields and put placeholders on them
+		var selects = document.getElementsByTagName("select");
+		var textareas = document.getElementsByTagName("textarea");
+		var joinclass = document.getElementById('id_klass');
+
+		joinclass.className += "form-select p-4 my-3";
+		joinclass.style.borderRadius = "20px";
+
+		for (var field in form_fields) {
+			form_fields[field].className += "form-control p-2 my-3";
+			form_fields[field].min = 0;
+			form_fields[field].max = 8;
+		}
+
+		for (var i = 0; i < 4; i++) {
+				selects[i].className += "form-control p-2 my-3";
+				selects[i].style.borderRadius = "10px";
+			}
+		
+		for (var area in textareas){
+			textareas[area].className += "form-control p-2";
+			textareas[area].style.width = "100%";
+			textareas[area].style.resize = "none";
+		}
+
+		var classnamefield = document.getElementById('id_klass');
+			classnamefield.className += "form-select p-4 my-3";
+			classnamefield.style.borderRadius = "20px";
+	</script>
+	<script>
+		function profileSelect(){
+			var profile = document.getElementById("profile").textContent;
+			var profileselect = document.getElementById("id_profile");
+			for (var i = 0; i < profileselect.options.length; i++) {
+				if (profileselect.options[i].textContent == profile) {
+					profileselect.selectedIndex = i;
+				} else {
+					// profileselect.options[i].selected = false;
+					continue; 
+				}
+		}};
+	</script>
+	{% endblock content %}
+	<!-- </div> -->
+</body>
+
+</html>

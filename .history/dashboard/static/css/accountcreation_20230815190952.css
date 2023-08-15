@@ -1,0 +1,29 @@
+/* .form-group {
+	background: grey;
+} */
+
+h1#login-text {
+    font-size: 1rem;
+    color: white;
+}
+
+body:before {
+    display: none;
+}
+
+.register-box {
+    padding-bottom: none;
+}
+
+#fieldset-group fieldset:not(:first-of-type) {
+    display: none;
+}
+
+fieldset {
+    position: relative;
+    width: 100%;
+}
+
+#register-btns {
+    max-width: 50%;
+}

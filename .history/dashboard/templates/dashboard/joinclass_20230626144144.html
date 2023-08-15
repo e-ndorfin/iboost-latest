@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <form method="POST">
+            {% csrf_token %}
+            <!-- Modal -->
+            <div class="modal-body">
+                {{joinclassform.klass}}
+                <!-- {{joinclassform.profile}} -->
+                <!-- <div style="display:none;">{{joinclassform.profile}}</div> -->
+            </div>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                >
+                    Close
+                </button>
+                <input
+                    type="submit"
+                    value="Save Changes"
+                    name="Save Changes"
+                    class="btn btn-primary btn-sm p-2"
+                />
+            </div>
+        </form>
+    </body>
+</html>

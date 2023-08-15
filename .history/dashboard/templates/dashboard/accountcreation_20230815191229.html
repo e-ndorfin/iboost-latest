@@ -1,0 +1,230 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+	<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/accountcreation.css' %}" />
+	<title>Sign-Up</title>
+	<style>
+		
+	</style>
+</head>
+
+<body>
+	{% block content %}
+	<div class="d-flex bg-main justify-content-center align-items-center" style="height: 100vh">
+		<div class="bg-light col-lg-4 col-md-6 col-sm-8 register-box m-4 py-2" style="border-radius: 50px">
+			<div class="d-flex container login-form align-items-center justify-content-center" id="regcontainer">
+				<div style="width: 100%">
+					<div id="fieldset-group">
+						<form method="POST" id="reg">
+							{% csrf_token %}
+							<!-- First page -->
+							<fieldset id="regpage" class="form-page">
+								<div class="my-4 d-flex justify-content-center">
+									<img src="{% static 'img/logo.png' %}" alt="IBOOST"
+										class="img-fluid p-4 align-self-center"
+										style="max-width: 15em; filter: invert(100%)" />
+								</div>
+								<div class="form-group rounded-pill">
+									{{form.username}}
+								</div>
+								<div class="form-group rounded-pill">{{form.email}}</div>
+								<div class="form-group rounded-pill">{{form.password1}}</div>
+								<div class="form-group rounded-pill">{{form.password2}}</div>
+								<h6 class="" id="login-text">
+									Have an account? <a href="{% url 'login' %}">Log in.</a>
+								</h6>
+								<div class="d-flex justify-content-center">
+									<input type="button" id="register-btns" value="Continue" name="button"
+										onclick="next(); removeRepetitiveSubjects();"
+										class="btn btn-primary rounded-pill btn-block btn-sm continue mt-4 p-2" />
+								</div>
+							</fieldset>
+							<!-- Second page -->
+							<fieldset class="p-3 form-page" id="subjectselect">
+								<div class="container-fluid m-0 p-0">
+									<div class="row">
+										<div class="col-10">
+											<div class="h2 mt-2" style="font-weight: 600">Step 1.</div>
+											<div class="lead mb-4">Select Subjects</div>
+										</div>
+										<div class="col-2">
+											<button class="btn rounded-pill btn-block btn-sm"
+												onclick="prev('subjectselect')">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+													fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+													<path fill-rule="evenodd"
+														d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+												</svg>
+											</button>
+										</div>
+									</div>
+								</div>
+								<div class="subject-set container mb-4">
+									<div class="row g-2">
+										{{formset.management_form}}
+										<div class="col-md-6">
+											{% for form in formset|slice:":3" %}
+											{{form.subjectname}}
+											{% endfor %}
+										</div>
+										<div class="col-md-6">
+											{% for form in formset|slice:"3:" %}
+											{{form.subjectname}}
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+								<div class="d-flex justify-content-center">
+									<input type="button" value="Continue" name="continue" id="register-btns"
+										onclick="next(); undisable();"
+										class="btn btn-primary rounded-pill btn-block btn-sm mt-4 p-2" />
+								</div>
+							</fieldset>
+
+							<fieldset class="p-3 form-page" id="submitset">
+								<div class="container-fluid m-0 p-0">
+									<div class="row">
+										<div class="col-10">
+											<div class="h2 mt-2" style="font-weight: 600">Step 2.</div>
+											<div class="lead mb-4">Set Your Goals</div>
+										</div>
+										<div class="col-2">
+											<button class="btn rounded-pill btn-block btn-sm"
+												onclick="prev('submitset'); removeRepetitiveSubjects();">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+													fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+													<path fill-rule="evenodd"
+														d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+												</svg>
+											</button>
+										</div>
+									</div>
+								</div>
+								<div class="subject-set container mb-4">
+									<div class="row">
+										<input id="goal-one" type="text" name="password" class="form-control p-4 my-3"
+											placeholder="I would like to improve..." style="border-radius: 20px" />
+									</div>
+									<div class="row">
+										<input id="goal-two" type="text" name="password" class="form-control p-4 my-3"
+											placeholder="I will do this through..." style="border-radius: 20px" />
+									</div>
+									<div class="row">
+										<input id="goal-three" type="text" name="password" class="form-control p-4 my-3"
+											placeholder="I hope to achieve this by..." style="border-radius: 20px" />
+									</div>
+								</div>
+								<input type="submit" value="Register Account" name="submit" id="submit register-btns"
+									class="btn btn-info rounded-pill btn-block btn-sm continue p-2"
+									onsubmit="undisable();" />
+							</fieldset>
+						</form>
+						<script>
+							const form = document.getElementById('reg');
+							form.addEventListener('keypress', function(e) {
+							  if (e.keyCode === 13) {
+								e.preventDefault();
+							  }
+							});
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+		crossorigin="anonymous">
+	</script>
+	<script src="{% static 'frontend/accountcreation.js' %}"></script>
+	<script>
+		//Query All input fields
+		var form_fields = document.getElementsByTagName("input"); //Find input fields and put placeholders on them
+		form_fields[1].placeholder = "Username..";
+		form_fields[2].placeholder = "Email..";
+		form_fields[3].placeholder = "Enter password...";
+		form_fields[4].placeholder = "Re-enter Password...";
+
+		var subject_fields = document.getElementsByTagName("select");
+
+		for (var field in form_fields) {
+			if (
+				form_fields[field].type != "submit" &&
+				form_fields[field].type != "button" &&
+				field < 5
+			) {
+				form_fields[field].className += "form-control p-4";
+				form_fields[field].style.borderRadius = "20px";
+			}
+		}
+
+		for (var field in subject_fields) {
+			subject_fields[field].className += "form-select p-3 my-3";
+			subject_fields[field].style.borderRadius = "20px";
+		}
+
+		// Code to detect repetitive subjects 
+		function removeRepetitiveSubjects(){ 
+			var dropdowns = document.querySelectorAll(".subject-select");
+			var selected = [];
+
+			dropdowns.forEach(function(dropdown, index) {
+				var selectedValue = dropdown.value;
+				selected.push(selectedValue);
+
+				dropdown.addEventListener("change", function() {
+					selected[index] = this.value; 
+					dropdowns.forEach(function(otherDropdown) {
+					if (otherDropdown !== dropdown) {
+						otherDropdown.querySelectorAll("option").forEach(function(option) {
+						if (selected.includes(option.value)){ 
+							option.disabled = true;
+							option.style.color = "grey"; 
+						} else {
+							option.disabled = false;
+							option.style.color = "black"; 
+						}
+						});
+					}
+					});
+				});
+			});
+		}
+
+		function undisable(){
+			var dropdowns = document.querySelectorAll(".subject-select");
+			var selected = [];
+
+			dropdowns.forEach(function (dropdown, index) {
+				var selectedValue = dropdown.value;
+				selected.push(selectedValue);
+				dropdowns.forEach(function (otherDropdown) {
+					if (otherDropdown !== dropdown) {
+						otherDropdown.querySelectorAll("option").forEach(function (option) {
+							if (selected.includes(option.value)) {
+								option.disabled = false;
+							}
+						});
+					}
+				});
+			});
+		}
+	
+
+	</script>
+	{% endblock content %}
+</body>
+
+</html>
