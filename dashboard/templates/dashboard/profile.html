@@ -118,6 +118,24 @@
 			</div> -->
 		</div>
 	</div>
+    <div class="container-fluid mt-4 px-2 overflow-hidden">
+        <h2>Your classes:</h2>
+        <div class="row p-3">
+            {% for klass in classes %}
+            <div class="col-xl-4 col-sm-6 p-2">
+                <a
+                    class="classbox"
+                    style="width: 90%"
+                >
+                    <div
+                        class="d-flex justify-content-center h3 classbtd"
+                    >
+                        {{klass.classname}}
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+    </div>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"

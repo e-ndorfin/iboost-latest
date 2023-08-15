@@ -1,14 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-
+from dashboard.models import *
 
 class Profile(models.Model):
     # Database Fields
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     username = models.CharField(max_length=30, null=True)
     email = models.CharField(max_length=200, null=True)
-
     def __str__(self):
         return self.username
 
