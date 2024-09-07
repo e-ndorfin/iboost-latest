@@ -1,6 +1,6 @@
 # iBoost
 
-High school project looking to promote reflective learning and grades tracking for IB (International Baccalaureate) students, one grade at a time. 
+Django-based webapp looking to promote reflective learning and grades tracking for IB (International Baccalaureate) students via a centralized grades database and better student-teacher interaction. 
 
 ## Getting started 
 Clone the repository then run the following commands with whatever Python version you have: 
