@@ -1,4 +1,5 @@
 django-chartjs==2.3.0
 Django==4.2.2
 django-allauth==0.54.0
+django-on-heroku==1.1.2
 gunicorn==20.0.4
